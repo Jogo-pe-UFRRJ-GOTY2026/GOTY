@@ -1,0 +1,21 @@
+{
+  "name": "game",
+
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+
+  "workspaceFolder": "/workspace",
+
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "postCreateCommand": "apt install -y libncurses-dev",
+"customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools"
+      ]
+    }
+  },
+
+  "remoteUser": "root"
+}
