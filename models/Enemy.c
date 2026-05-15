@@ -1,4 +1,4 @@
-#include "hashtable.h"
+#include "../data_structures/hashtable.h"
 #include <stdlib.h>
 #include "Enemy.h"
 
@@ -8,7 +8,7 @@ Enemy* enemy_create(int vida, int dano)
 
     e->vida = vida;
     e->dano = dano;
-    e->ataques = hashmap_create();
+    e->ataques = hash_table_init();
 
     return e;
 }
@@ -23,7 +23,7 @@ void enemy_take_damage(Enemy* enemy, int dmg)
 
 void enemy_destroy(Enemy* enemy)
 {
-    hashmap_destroy(enemy->ataques);
+    hash_table_free(enemy->ataques);
 
     free(enemy);
 }

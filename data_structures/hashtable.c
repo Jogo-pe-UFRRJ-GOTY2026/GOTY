@@ -95,7 +95,7 @@ bool hash_table_update(hash_table *ht,const char *key, void* val, size_t element
         // vamo buscar em 3, 8, 13, ... até dar a volta no hashmap
 
         Item* item = ht->hash_table[index];
-        if(isNULL(item)) continue;
+        if(item==NULL) continue;
         // ================ Primeiro caso, entrada vazia
         if(item->status == EMPTY) 
         {
@@ -134,7 +134,7 @@ void* hash_table_get(hash_table *ht, const char *key)
         // uint64_t index = quadratic_probing(hash_index,i,ht->capacity);
         uint64_t index = (index_base + index_step * i) % ht->capacity;
         Item *item = ht->hash_table[index];
-        if(isNULL(item)) continue;;
+        if(item==NULL) continue;;
         if (item->status == EMPTY)
         {
             return NULL;
@@ -160,7 +160,7 @@ bool hash_table_delete(hash_table *ht, const char *key)
         uint64_t index = (index_base + index_step * i) % ht->capacity;
 
         Item *item = ht->hash_table[index];
-        if(isNULL(item)) continue;
+        if(item==NULL) continue;
 
         if (item->status == EMPTY)
             return false;

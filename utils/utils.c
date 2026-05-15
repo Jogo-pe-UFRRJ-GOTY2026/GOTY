@@ -20,7 +20,7 @@ int generate_damage_roll()
 {
     srand(time(NULL));
 
-    return rand()%20 + 5;
+    return (rand()%20 + 1);
 }
 
 void exit_with_error(Exceptions ex)
