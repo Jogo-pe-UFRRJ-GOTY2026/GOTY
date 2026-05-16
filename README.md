@@ -6,4 +6,7 @@ ncurses
 3. git add .    e  git commit -m "texto": *salva as alterações locais feitas*
 4. git push : *manda as alterações para o github*
 
-5. make: *Por causa do makefile, ele iria compilar, rodar e excluir o executavel*
+5. make: *Por causa do makefile, ele iria compilar, rodar e excluir o executavel*⠀	
+
+
+

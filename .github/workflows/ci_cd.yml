@@ -1,16 +1,16 @@
-name: CI - Compilar Código
+# name: CI - Compilar Código
 
-on:
-  pull_request:
-  push:
-    branches: ["main","master"]   # Ao realizar push no github, ele irá rodar o que tem nos jobs
+# on:
+#   pull_request:
+#   push:
+#     branches: ["main","master"]   # Ao realizar push no github, ele irá rodar o que tem nos jobs
 
-jobs:
-  build:
-    runs-on: ubuntu-latest        # Na ultima versão do ubuntu
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest        # Na ultima versão do ubuntu
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Compile C code
-        run: make
+#       - name: Compile C code
+#         run: make

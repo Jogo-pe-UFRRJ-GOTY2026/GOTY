@@ -1,18 +1,26 @@
 #ifndef UTILS_H
 #define UTILS_H
+#include <stdbool.h>
 
 typedef enum Exceptions
 {
-    AllocationError=1,
-    KeyError,
-    NotImplementedError,
-    IndexError,
-    OverflowError
+    Exception_AllocationError = 1,
+    Exception_KeyError,
+    Exception_NotImplementedError,
+    Exception_IndexError,
+    Exception_OverflowError
 } Exceptions;
 
-int generate_damage_roll();
-
+int gerar_rolagem_dano();
+bool gerar_chance_de_evasao_do_inimigo();
 void exit_with_error(Exceptions ex);
+
+typedef enum Direcao {
+    ESQUERDA,
+    DIREITA,
+    BAIXO,
+    CIMA
+} Direcao;
 
 #define len(arr) (sizeof(arr)/sizeof(arr[0]))
 

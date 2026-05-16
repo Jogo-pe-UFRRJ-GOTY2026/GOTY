@@ -1,12 +1,12 @@
 CC = gcc  # define o compilador
 CFLAGS = -Wall
-LIBS = -lncurses
+LIBS = -fms-extensions -lncurses
 
 #define os arquivos a serem compilados
 SRC = main.c 						\
-      models/enemy.c 				\
-      models/player.c 				\
-	  models/Atack.c              \
+      models/Enemy.c 				\
+      models/Player.c 				\
+	  models/Attack.c              \
       data_structures/hashtable.c	\
 	  data_structures/arraylist.c	\
 	  
