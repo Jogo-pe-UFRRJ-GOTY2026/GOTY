@@ -4,12 +4,6 @@
 #include "Inventario.h"
 #include "Ataque.h"
 
-typedef enum Classe{
-    Mago, 
-    Guerreiro,
-    Arqueiro,
-
-} Classe;
 
 typedef enum Genero
 {
@@ -19,7 +13,6 @@ typedef enum Genero
 } Genero;
 
 typedef struct Atributos{
-    int vida;
     int forca;
     int agilidade;
     int inteligencia;
@@ -34,6 +27,7 @@ typedef struct Position{
 typedef struct Player{
     char nome[100];
     int level;
+    int vida;
     int defesa;
     int karma;
     Genero genero;

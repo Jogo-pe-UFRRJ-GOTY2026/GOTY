@@ -3,7 +3,7 @@
 
 #include "../utils/utils.h"
 
-void move(Player *player, Direcao direcao /*, int limite_esquerda, int limite_direita,int limite_cima, int limite_baixo*/)
+void move(Player *player, Direcao direcao) /*, int limite_esquerda, int limite_direita,int limite_cima, int limite_baixo*/
 {
     switch(direcao)
     {

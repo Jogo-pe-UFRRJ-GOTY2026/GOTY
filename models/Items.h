@@ -7,8 +7,11 @@ typedef enum TipoConsumivel
     ALIMENTO
 } TipoConsumivel;
 
+
 typedef struct Consumivel
 {
+    char descricao[50];
+    char nome[30];
     int vida;
     int bonus;
     TipoConsumivel tipo;
