@@ -33,6 +33,13 @@ typedef struct Arma
     TipoDano tipo;
 } Arma;
 
+typedef struct Armadura
+{
+    char descricao[50];
+    char nome[30];
+    int defesa;
+} Armadura;
+
 Arma *criar_arma(char nome[], char descricao[], int dano, TipoDano tipo);
 
 #endif

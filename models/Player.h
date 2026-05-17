@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <stddef.h>
+#include <stdbool.h>
 #include "Inventario.h"
 #include "Ataque.h"
 
@@ -39,6 +40,6 @@ typedef struct Player{
 
 void mover(Player *player, Inimigo *inimigo);
 void tomar_dano(Player *player, AtaqueInimigo *atack);
-void atacar_inimigo(Player *player, Inimigo *inimigo);
+bool atacar_inimigo(Player *player, Inimigo *inimigo);
 
 #endif

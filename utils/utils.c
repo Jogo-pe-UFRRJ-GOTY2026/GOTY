@@ -7,11 +7,11 @@ const char* get_error_message(Exceptions ex)
 {
     switch(ex)
     {
-        case AllocationError: return "Falha ao alocar recurso com malloc ou calloc";
-        case KeyError: return "Falha ao acessar chave em um hashmap";
-        case NotImplementedError: return "Falha, função não implementada";
-        case IndexError: return "Falha ao acessar indice de array";
-        case OverflowError: return "Falha ao realizar operação aritmitica, acontecimento de Overflow";
+        case Exception_AllocationError: return "Falha ao alocar recurso com malloc ou calloc";
+        case Exception_KeyError: return "Falha ao acessar chave em um hashmap";
+        case Exception_NotImplementedError: return "Falha, função não implementada";
+        case Exception_IndexError: return "Falha ao acessar indice de array";
+        case Exception_OverflowError: return "Falha ao realizar operação aritmitica, acontecimento de Overflow";
         default: "Aconteceu um erro:";break;
     }
 }

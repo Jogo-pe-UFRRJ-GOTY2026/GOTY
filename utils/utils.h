@@ -12,7 +12,7 @@ typedef enum Exceptions
 } Exceptions;
 
 int gerar_rolagem_dano();
-bool gerar_chance_de_evasao_do_inimigo();
+int gerar_chance_de_evasao_do_inimigo();
 void exit_with_error(Exceptions ex);
 
 typedef enum Direcao {
