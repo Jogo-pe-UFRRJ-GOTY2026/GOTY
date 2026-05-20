@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "Inventario.h"
-#include "Ataque.h"
+#include "Inimigo.h"
 
 
 typedef enum Genero
@@ -32,7 +32,7 @@ typedef struct Player{
     int defesa;
     int karma;
     Genero genero;
-    Inventario inventario;
+    Inventario* inventario;
     Position posicao;
     Atributos atributos;
     size_t NumeroAndar;

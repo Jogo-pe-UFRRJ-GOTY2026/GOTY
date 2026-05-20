@@ -19,7 +19,8 @@ typedef enum Direcao {
     ESQUERDA,
     DIREITA,
     BAIXO,
-    CIMA
+    CIMA,
+    DIRECAO_INVALIDA
 } Direcao;
 
 #define len(arr) (sizeof(arr)/sizeof(arr[0]))

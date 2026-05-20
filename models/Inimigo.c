@@ -1,7 +1,6 @@
 #include "../data_structures/hashtable.h"
 #include "../data_structures/arraylist.h"
 #include "Inimigo.h"
-#include "Ataque.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -11,7 +10,6 @@ Inimigo *inimigo_criar(int vida, char nome[])
 
     strcpy(inimigo->nome, nome);
     inimigo->vida = vida;
-    inimigo->ataques = arraylist_init(AtaqueInimigo);
 
     return inimigo;
 }

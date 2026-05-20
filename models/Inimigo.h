@@ -7,9 +7,27 @@
 typedef struct Inimigo
 {
     int vida;
-    ArrayList* ataques;
+    AtaqueInimigo ataques[5];
     char nome[40];
 } Inimigo;
+
+typedef enum TipoAtaque
+{
+    LINHA,
+    AREA,
+    PONTO,
+    ESFERA,
+    DISPERSAO,
+} TipoAtaque;
+
+typedef struct AtaqueInimigo
+{
+    int x;
+    int y;
+    int dano;
+    int hit_box;
+    TipoAtaque tipo_ataque;
+} AtaqueInimigo;
 
 Inimigo *inimigo_criar(int vida, char nome[]);
 
