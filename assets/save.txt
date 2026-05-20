@@ -18,10 +18,16 @@ NumeroAndar
 
 [Arma]
 
+
+
 [Armadura]
+capacete
 peitoral
-luva
+grevas
 botas
 
 [Consumiveis]
-nome:
+potion
+
+
+[Bosses]

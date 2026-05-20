@@ -38,7 +38,7 @@ typedef struct Player{
     size_t NumeroAndar;
 } Player;
 
-void mover(Player *player, Inimigo *inimigo);
+void mover_player(Player *player, Direcao direcao, int limite_esquerda, int limite_direita, int limite_cima, int limite_baixo);
 void tomar_dano(Player *player, AtaqueInimigo *atack);
 bool atacar_inimigo(Player *player, Inimigo *inimigo);
 

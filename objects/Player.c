@@ -8,7 +8,7 @@
 
 
 
-void move_player(Player *player, Direcao direcao, int limite_esquerda, int limite_direita,int limite_cima, int limite_baixo)
+void mover_player(Player *player, Direcao direcao, int limite_esquerda, int limite_direita,int limite_cima, int limite_baixo)
 {
     switch(direcao)
     {
@@ -71,7 +71,9 @@ Player* create_player(char nome[100], Genero genero)
     player->level=1;
     player->defesa=0;
 
-    player->defesa += get_defesa(player->inventario->armadura, "peitoral");
-    player->defesa += get_defesa(player->inventario->armadura, "luva");
-    player->defesa += get_defesa(player->inventario->armadura, "bota");
+    player->defesa += player->inventario->armadura->capacete.defesa;
+    player->defesa += player->inventario->armadura->peitoral.defesa;
+    player->defesa += player->inventario->armadura->grevas.defesa;
+    player->defesa += player->inventario->armadura->botas.defesa;
+
 }

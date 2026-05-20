@@ -1,8 +1,6 @@
 #ifndef INIMIGO_H
 #define INIMIGO_H
 
-#include "../data_structures/hashtable.h"
-#include "../data_structures/arraylist.h"
 
 typedef struct Inimigo
 {
@@ -18,7 +16,9 @@ typedef enum TipoAtaque
     PONTO,
     ESFERA,
     DISPERSAO,
+    BULLET, 
 } TipoAtaque;
+
 
 typedef struct AtaqueInimigo
 {
