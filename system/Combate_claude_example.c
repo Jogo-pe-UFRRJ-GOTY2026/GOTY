@@ -18,7 +18,7 @@
  */
 
 #include "Combate_claude_example.h"
-#include "Ataque.h"
+#include "Combate.h"
 #include "../utils/utils.h"
 #include "../data_structures/arraylist.h"
 
