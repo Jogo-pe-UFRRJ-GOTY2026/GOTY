@@ -58,7 +58,10 @@ bool atacar_inimigo(Player *player, Inimigo *inimigo)
     return true;
 }
 
-
+void tomar_dano(Player *player, AtaqueInimigo *atack)
+{
+    //player->vida -= seila;
+}
 
 Player* criar_player(char nome[100], Genero genero)
 {

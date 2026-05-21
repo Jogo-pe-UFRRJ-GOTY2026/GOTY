@@ -16,8 +16,8 @@ typedef enum Genero
 
 typedef struct Atributos{
     int forca;
-    int agilidade;
-    int inteligencia;
+    int defesa;
+    int sorte;
     int vitalidade;
 } Atributos;
 
