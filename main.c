@@ -15,6 +15,7 @@ void menu_inicial(bool *deveria_carregar_salvamento);
 int main()
 {
     setlocale(LC_ALL, ""); // Permite printar caracteres unicode
+    srand(time(NULL)); //randomiza a seed do jogo.
 
     Player *player;
     int AndarSalvo;
@@ -156,7 +157,9 @@ void menu_inicial(bool *deveria_carregar_salvamento)
             {
             case INICIAR_JOGO_NOVO:
                 *deveria_carregar_salvamento = false;
+
                 // Player = Prologo(); ???
+                
                 delwin(menu_win);
                 return;
             case CONTINUAR_JOGO:

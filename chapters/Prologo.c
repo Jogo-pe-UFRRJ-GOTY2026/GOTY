@@ -8,7 +8,7 @@
 
 Player* Prologo()
 {
-
+    
     /// bla bla bla bla bla
 
     WINDOW* criacao_personagem_window = newwin(0,0,0,0);

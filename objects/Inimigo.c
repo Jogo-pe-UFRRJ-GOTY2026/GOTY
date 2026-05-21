@@ -17,12 +17,13 @@ AtaqueInimigo* criar_ataque(TipoAtaque tipo, int dano, int hitbox)
     return ataque;
 }
 
-Inimigo *inimigo_criar(int vida, char nome[])
+Inimigo *inimigo_criar(int vida, char nome[], int mercy)
 {
     Inimigo *inimigo = malloc(sizeof(Inimigo));
 
     strcpy(inimigo->nome, nome);
     inimigo->vida = vida;
+    inimigo->mercy = mercy;
 
     return inimigo;
 }

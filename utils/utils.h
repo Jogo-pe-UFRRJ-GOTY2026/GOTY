@@ -27,6 +27,7 @@ typedef enum Exceptions
 
 int gerar_rolagem_dano();
 int gerar_chance_de_evasao_do_inimigo();
+int gerar_rolagem_mercy();
 void exit_with_error(Exceptions ex);
 
 typedef enum Direcao {
