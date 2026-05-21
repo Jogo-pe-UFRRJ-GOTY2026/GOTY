@@ -3,7 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include "objects/Player.h"
-#include "chapters/Capitulos.h"
+#include "chapters/CAPITULO.h"
 #include "system/Save.h"
 #include "utils/utils.h"
 
@@ -156,6 +156,7 @@ void menu_inicial(bool *deveria_carregar_salvamento)
             {
             case INICIAR_JOGO_NOVO:
                 *deveria_carregar_salvamento = false;
+                // Player = Prologo(); ???
                 delwin(menu_win);
                 return;
             case CONTINUAR_JOGO:
@@ -182,8 +183,7 @@ void menu_inicial(bool *deveria_carregar_salvamento)
 
                 for (int i = 3; i >= 1; i--) {
                     char aviso_encerramento[50];
-                    sprintf(aviso_encerramento,
-                            "《 Fechando jogo em %d segundos 》", i);
+                    sprintf(aviso_encerramento, "《 Fechando jogo em %d segundos 》", i);
 
                     // limpa a linha anterior
                     wmove(menu_win, altura_tela - 10, 0); //reposiciona o cursor
