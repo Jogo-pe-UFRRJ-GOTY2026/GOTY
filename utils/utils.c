@@ -20,14 +20,14 @@ char* get_error_message(Exceptions ex)
 
 int gerar_rolagem_dano()
 {
-    srand(time(NULL));// isso daqui não precisa tá só dentro da main.c?
+    // srand(time(NULL)); isso daqui não precisa tá só dentro da main.c?
 
     return (rand()%20 + 1);
 }
 
 int gerar_rolagem_mercy()
 {
-    srand(time(NULL)); // isso daqui não precisa tá só dentro da main.c?
+    // srand(time(NULL)); isso daqui não precisa tá só dentro da main.c?
 
     return (rand()%15 + 1);
 
@@ -35,7 +35,7 @@ int gerar_rolagem_mercy()
 
 int gerar_chance_de_evasao_do_inimigo()
 {
-    srand(time(NULL));// isso daqui não precisa tá só dentro da main.c?
+    // srand(time(NULL)); isso daqui não precisa tá só dentro da main.c?
 
     return (rand() % 100 + 1);
 }
