@@ -21,7 +21,7 @@ bool ataque_colidiu(Player *player, AtaqueInimigo* Ataque);
 
 void spawn_atack(AtaqueInimigo *Ataque);
 
-bool round()
+bool rodada()
 {
     // fala do boss
     // 1 sequencia de um ataque especifico
@@ -44,7 +44,7 @@ WINDOW* criar_arena_de_batalha(int altura,int comprimento,int y_comeco, int x_co
     return newwin(altura, comprimento, y_comeco, x_comeco);
 }
 
-WINDOW *criar_menu_batalha(int altura, int comprimento, int y_comeco, int x_comeco)
+WINDOW *criar_menu_batalha( int y_comeco, int x_comeco)
 {
     int altura=10;
     int comprimento = 60;

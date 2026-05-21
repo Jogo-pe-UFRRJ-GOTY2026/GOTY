@@ -1,9 +1,11 @@
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
+#include <ncurses.h>
 #include "utils.h"
 
 
-const char* get_error_message(Exceptions ex)
+char* get_error_message(Exceptions ex)
 {
     switch(ex)
     {
@@ -12,7 +14,7 @@ const char* get_error_message(Exceptions ex)
         case Exception_NotImplementedError: return "Falha, função não implementada";
         case Exception_IndexError: return "Falha ao acessar indice de array";
         case Exception_OverflowError: return "Falha ao realizar operação aritmitica, acontecimento de Overflow";
-        default: "Aconteceu um erro:";break;
+        default: return "Aconteceu um erro:";break;
     }
 }
 
@@ -32,7 +34,16 @@ int gerar_chance_de_evasao_do_inimigo()
 
 void exit_with_error(Exceptions ex)
 {
-    perror(get_message(ex));
+    perror(get_error_message(ex));
     exit(1);
 }
 
+void iniciar_cores()
+{
+    // Para criar cores mais costomizadas, ver  init_color, e can_change_color() que retorna true se o terminal suporta essa costumizacao
+    const int STANDARD_BACKGROUND = -1;
+    // init_pair(id, cor_foreground ,cor_background)
+    init_pair(COR_OPCAO_SELECIONADA, COLOR_YELLOW, STANDARD_BACKGROUND);
+    init_pair(COR_NOME, COLOR_CYAN, STANDARD_BACKGROUND);
+    init_pair(COR_NOME, COLOR_RED, STANDARD_BACKGROUND);
+}

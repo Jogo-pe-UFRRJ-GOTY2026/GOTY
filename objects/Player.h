@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "Inventario.h"
 #include "Inimigo.h"
+#include "../utils/utils.h"
 
 
 typedef enum Genero

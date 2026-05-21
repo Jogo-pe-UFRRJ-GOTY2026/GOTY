@@ -1,3 +1,5 @@
+#ifndef COMBATE_H
+#define COMBATE_H
 
 typedef enum Estagio_atual_combate{
     FASE_DIALOGO,
@@ -8,3 +10,5 @@ typedef enum Estagio_atual_combate{
 } EstagioCombate;
 
 void init_combat();
+
+#endif

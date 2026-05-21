@@ -35,7 +35,7 @@ typedef struct Arma
 
 typedef struct ParteArmadura
 {
-    char descricao[50];
+    char descricao[150];
     char nome[30];
     int defesa;
 } ParteArmadura;

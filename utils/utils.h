@@ -2,6 +2,20 @@
 #define UTILS_H
 #include <stdbool.h>
 
+typedef enum opcao_selecionada
+{
+    INICIAR_JOGO_NOVO,
+    CONTINUAR_JOGO,
+    ABRIR_CONFIGURACOES,
+    FECHAR_JOGO,
+    TOTAL_OPCOES
+} opcao_selecionada;
+
+typedef enum{
+    COR_OPCAO_SELECIONADA=1,
+    COR_VIDA,
+    COR_NOME,
+} Cores;
 typedef enum Exceptions
 {
     Exception_AllocationError = 1,
@@ -22,6 +36,8 @@ typedef enum Direcao {
     CIMA,
     DIRECAO_INVALIDA
 } Direcao;
+
+void iniciar_cores();
 
 #define len(arr) (sizeof(arr)/sizeof(arr[0]))
 

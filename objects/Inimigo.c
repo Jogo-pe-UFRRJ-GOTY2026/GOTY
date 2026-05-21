@@ -1,8 +1,21 @@
-#include "../data_structures/hashtable.h"
-#include "../data_structures/arraylist.h"
 #include "Inimigo.h"
+#include "../utils/utils.h"
 #include <stdlib.h>
 #include <string.h>
+
+AtaqueInimigo* criar_ataque(TipoAtaque tipo, int dano, int hitbox)
+{
+    AtaqueInimigo* ataque = malloc(sizeof(AtaqueInimigo));
+    if(ataque==NULL)
+        exit_with_error(Exception_AllocationError);
+
+    ataque->tipo_ataque=tipo;
+    ataque->dano=dano;
+    ataque->hit_box=hitbox;
+
+
+    return ataque;
+}
 
 Inimigo *inimigo_criar(int vida, char nome[])
 {

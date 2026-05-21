@@ -2,7 +2,7 @@
   "name": "game",
 
   "build": {
-    "dockerfile": "../Dockerfile"
+    "dockerfile": "../dockerfile"
   },
 
   "workspaceFolder": "/workspace",

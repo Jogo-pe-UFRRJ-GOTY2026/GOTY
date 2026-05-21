@@ -1,12 +1,20 @@
 CC = gcc  # define o compilador
 CFLAGS = -Wall
-LIBS = -fms-extensions -lncurses
+LIBS = -fms-extensions -lncursesw
+
+
+# necessario para printar unicode
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
 
 #define os arquivos a serem compilados
 SRC = main.c 						\
-      models/Enemy.c 				\
-      models/Player.c 				\
-	  models/Attack.c              \
+      objects/Inimigo.c 			\
+      objects/Inventario.c 			\
+      objects/Player.c 				\
+      system/Save.c 				\
+      system/Combate.c 				\
+	  utils/utils.c                 \
       data_structures/hashtable.c	\
 	  data_structures/arraylist.c	\
 	  
@@ -27,8 +35,9 @@ endif
 all:
 	$(CC) $(SRC) -o $(OUT) $(LIBS)
 
-run: $(OUT)
+run: all
 	$(OUT)
 
 clean:
-	$(DELETE) $(OUT) $(CLEAR)
+	$(DELETE) $(OUT) 
+	$(CLEAR)

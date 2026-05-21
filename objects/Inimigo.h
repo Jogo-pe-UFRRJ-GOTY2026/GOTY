@@ -1,14 +1,6 @@
 #ifndef INIMIGO_H
 #define INIMIGO_H
 
-
-typedef struct Inimigo
-{
-    int vida;
-    AtaqueInimigo ataques[5];
-    char nome[40];
-} Inimigo;
-
 typedef enum TipoAtaque
 {
     LINHA,
@@ -16,9 +8,8 @@ typedef enum TipoAtaque
     PONTO,
     ESFERA,
     DISPERSAO,
-    BULLET, 
+    BULLET,
 } TipoAtaque;
-
 
 typedef struct AtaqueInimigo
 {
@@ -28,6 +19,18 @@ typedef struct AtaqueInimigo
     int hit_box;
     TipoAtaque tipo_ataque;
 } AtaqueInimigo;
+
+typedef struct Inimigo
+{
+    int vida;
+    AtaqueInimigo ataques[5];
+    char nome[40];
+} Inimigo;
+
+
+
+
+
 
 Inimigo *inimigo_criar(int vida, char nome[]);
 
