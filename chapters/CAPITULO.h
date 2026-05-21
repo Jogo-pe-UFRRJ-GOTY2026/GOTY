@@ -1,5 +1,5 @@
-#ifndef CAPITULOS_H
-#define CAPITULOS_H
+#ifndef CAPITULO_H
+#define CAPITULO_H
 
 #include "../objects/Player.h"
 #include <stdbool.h>
