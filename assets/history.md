@@ -21,16 +21,16 @@ https://www.asciiart.eu/buildings-and-places
 
 
 - Bosses
-Tutorial. 
-1. Hollow
-2. 
+Tutorial. Hollow
+1. Hollow Knight
+2. Mage
 3. Centaur
-4. 
-5. 
+4. Warden
+5. Mirror
 6. Demon
 7. Cerberus
 8. Dragon
-9. Reaper -> seila pensa em lore
-10. Angel Reaper ->pq sim, a arte é foda
+9. The Fallen King     
+10. Reaper 
 
 

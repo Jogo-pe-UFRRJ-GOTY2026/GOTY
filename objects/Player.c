@@ -76,4 +76,5 @@ Player* criar_player(char nome[100], Genero genero)
     player->defesa += player->inventario->armadura->grevas.defesa;
     player->defesa += player->inventario->armadura->botas.defesa;
 
+    return player;
 }
