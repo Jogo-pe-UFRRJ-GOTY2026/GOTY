@@ -111,10 +111,11 @@ void menu_inicial(bool *deveria_carregar_salvamento)
 
             if (opcao == selecionada)
             {
-                x = (largura_tela - strlen(opcoes[opcao]) + 2) / 2;            // recalcula para considerar os ⦗    ⦘
                 wattron(menu_win, COLOR_PAIR(COR_OPCAO_SELECIONADA) | A_BOLD); // Ativa um atributo na janela passada, nesse caso, a cor e o negrito
-                mvwprintw(menu_win, y, x - 4, "➢");                            // 4 Caracteres antes do texto
-                mvwprintw(menu_win, y, x, "⦗%s⦘", opcoes[opcao]);
+                mvwprintw(menu_win, y, x - 6, "➢");                            // 6 Caracteres antes do texto
+                mvwprintw(menu_win, y, x - 2, "⦗");                            // 6 Caracteres antes do texto
+                mvwprintw(menu_win, y, x, "%s", opcoes[opcao]);
+                mvwprintw(menu_win, y, x + strlen(opcoes[opcao]), " ⦘");                             // 6 Caracteres antes do texto
                 wattroff(menu_win, COLOR_PAIR(COR_OPCAO_SELECIONADA) | A_BOLD); // Desativa um atributo na janela passada, nesse caso, a cor e o negrito
             }
             else
@@ -185,8 +186,8 @@ void menu_inicial(bool *deveria_carregar_salvamento)
                             "《 Fechando jogo em %d segundos 》", i);
 
                     // limpa a linha anterior
-                    wmove(menu_win, altura_tela - 10, 0);
-                    wclrtoeol(menu_win);
+                    wmove(menu_win, altura_tela - 10, 0); //reposiciona o cursor
+                    wclrtoeol(menu_win);                  //apaga do cursor ate o fim da lina end of line
 
                     // imprime centralizado
                     mvwprintw(menu_win, altura_tela - 10, (largura_tela - strlen(aviso_encerramento)) / 2, "%s", aviso_encerramento);
@@ -202,7 +203,7 @@ void menu_inicial(bool *deveria_carregar_salvamento)
                 endwin();
 
                 return;
-                        default:
+            default:
                 break;
             }
 
