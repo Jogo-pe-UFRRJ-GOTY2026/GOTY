@@ -1,6 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include <stdbool.h>
+#include <ncurses.h>
 
 typedef enum opcao_selecionada
 {
@@ -16,27 +17,35 @@ typedef enum{
     COR_VIDA,
     COR_NOME,
 } Cores;
+
 typedef enum Exceptions
 {
     Exception_AllocationError = 1,
     Exception_KeyError,
     Exception_NotImplementedError,
     Exception_IndexError,
-    Exception_OverflowError
+    Exception_OverflowError,
+    Exception_FileNotFound
 } Exceptions;
-int escolher_ataque();
-int gerar_rolagem_dano();
-int gerar_chance_de_evasao_do_inimigo();
-int gerar_rolagem_mercy();
-void exit_with_error(Exceptions ex);
 
-typedef enum Direcao {
+typedef enum Direcao
+{
     ESQUERDA,
     DIREITA,
     BAIXO,
     CIMA,
     DIRECAO_INVALIDA
 } Direcao;
+
+
+void desenhar_sprite(WINDOW* win, const char* nome_arquivo, int y_inicial, int x_inicial);
+int escolher_ataque();
+int gerar_rolagem_dano();
+int gerar_chance_de_evasao_do_inimigo();
+int gerar_rolagem_mercy();
+void exit_with_error(Exceptions ex);
+
+
 
 void iniciar_cores();
 

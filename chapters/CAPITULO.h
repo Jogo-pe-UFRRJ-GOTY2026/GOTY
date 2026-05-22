@@ -5,6 +5,7 @@
 #include <stdbool.h>
 
 Player* Prologo();
+Player *Tela_criacao();
 
 bool Capitulo1(Player *player);
 bool Capitulo2(Player *player);

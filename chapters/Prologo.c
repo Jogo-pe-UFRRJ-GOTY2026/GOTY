@@ -8,26 +8,20 @@
 #include "../objects/Inventario.h"
 
 
-
-
-bool Tela_criacao();
-
-    Player *Prologo()
+Player* Prologo()
 {
-    
-    /// bla bla bla bla bla
-    Tela_criacao();
 
-
-
-
-
-    
+    Player* player = Tela_criacao();
+    return player;
 }
 
 
 
-bool Tela_criacao()
+
+
+
+
+Player* Tela_criacao()
 {
     int altura_tela, largura_tela;
     getmaxyx(stdscr, altura_tela, largura_tela);
@@ -101,8 +95,25 @@ bool Tela_criacao()
         mvwprintw(criacao_personagem_window, 31, start_x, "|                                                            |");
         mvwprintw(criacao_personagem_window, 32, start_x, "+------------------------------------------------------------+");
 
-        wrefresh(criacao_personagem_window);
 
+
+
+        // Desenhando o sprite
+
+        switch(genero_selecionado)
+        {
+            case Masculino:
+                desenhar_sprite(criacao_personagem_window, "assets/sprites/player/sprite_masculino_terminalfix.txt", 18, 85);
+                break;
+            case Feminino:
+                desenhar_sprite(criacao_personagem_window, "assets/sprites/player/sprite_feminino_terminalfix.txt", 18, 85);
+                break;
+            default:
+                break; 
+        }
+
+
+        wrefresh(criacao_personagem_window);
 
         // TRATANDO DO INPUT
         tecla = wgetch(criacao_personagem_window); // pega o caracter
@@ -112,7 +123,7 @@ bool Tela_criacao()
         }
         else if (tecla == KEY_DOWN)
         {
-            if (genero_selecionado == Outro)
+            if (genero_selecionado == Feminino)
                 genero_selecionado = Masculino;
             else
                 genero_selecionado += 1;
@@ -120,7 +131,7 @@ bool Tela_criacao()
         else if (tecla == KEY_UP)
         {
             if (genero_selecionado == Masculino)
-                genero_selecionado = Outro;
+                genero_selecionado = Feminino;
             else
                 genero_selecionado -= 1;
         }

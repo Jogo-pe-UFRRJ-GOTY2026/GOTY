@@ -10,8 +10,7 @@
 typedef enum Genero
 {
     Masculino,
-    Feminino,
-    Outro
+    Feminino
 } Genero;
 
 // typedef struct Atributos{
