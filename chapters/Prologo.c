@@ -11,8 +11,8 @@
 Player* Prologo()
 {
 
-    Player* player = Tela_criacao();
-    return player;
+
+    return Tela_criacao();
 }
 
 
@@ -103,10 +103,10 @@ Player* Tela_criacao()
         switch(genero_selecionado)
         {
             case Masculino:
-                desenhar_sprite(criacao_personagem_window, "assets/sprites/player/sprite_masculino_terminalfix.txt", 18, 85);
+                desenhar_sprite(criacao_personagem_window, "assets/sprites/player/sprite_masculino_terminalfix.txt", 17, 85);
                 break;
             case Feminino:
-                desenhar_sprite(criacao_personagem_window, "assets/sprites/player/sprite_feminino_terminalfix.txt", 18, 85);
+                desenhar_sprite(criacao_personagem_window, "assets/sprites/player/sprite_feminino_terminalfix.txt", 17, 85);
                 break;
             default:
                 break; 
@@ -155,6 +155,7 @@ Player* Tela_criacao()
 
 
     }
+    delwin(Tela_criacao);
     Player* player = criar_player(nome, genero_selecionado);
     return player;
 }
