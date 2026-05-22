@@ -1,5 +1,4 @@
 #include "Inventario.h"
-#include "../data_structures/hashtable.h"
 #include "../utils/utils.h"
 #include <stdlib.h>
 #include <string.h>
