@@ -1,6 +1,5 @@
 #ifndef INVENTARIO_H
 #define INVENTARIO_H
-#include "../data_structures/hashtable.h"
 
 typedef enum TipoConsumivel
 {
@@ -51,9 +50,9 @@ typedef struct Armadura
 
 
 typedef struct Inventario{
-    Armadura* armadura;
-    Arma* arma;
-    hash_table* consumiveis;
+    Armadura armadura;
+    Arma arma;
+    Consumivel consumiveis[4];
 } Inventario;
 
 
@@ -61,9 +60,8 @@ typedef struct Inventario{
 
 
 
-Inventario* init_inventario();
-Arma *criar_arma(char nome[], char descricao[], int dano, TipoDano tipo);
-int get_defesa(Inventario *inv, const char *slot);
+Inventario init_inventario();
+Arma criar_arma(char nome[], char descricao[], int dano, TipoDano tipo);
 
 
 #endif

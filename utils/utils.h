@@ -25,7 +25,7 @@ typedef enum Exceptions
     Exception_NotImplementedError,
     Exception_IndexError,
     Exception_OverflowError,
-    Exception_FileNotFound
+    Exception_FileReadWriteError
 } Exceptions;
 
 typedef enum Direcao

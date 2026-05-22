@@ -5,15 +5,10 @@
 #include <string.h>
 
 
-Inventario* init_inventario()
+Inventario init_inventario()
 {
-    Inventario* inventario = malloc(sizeof(Inventario));
-    if (inventario == NULL)
-        exit_with_error(Exception_AllocationError);
+    Inventario inventario;
 
-    inventario->armadura= malloc(sizeof(Armadura));
-    if(inventario->armadura==NULL)
-        exit_with_error(Exception_AllocationError);
 
     ParteArmadura peitoral, capacete, grevas, bota;
         
@@ -34,32 +29,28 @@ Inventario* init_inventario()
         strcpy(bota.nome, "Botas Gastas");
 
     
-    inventario->armadura->capacete=capacete;
-    inventario->armadura->peitoral=peitoral;
-    inventario->armadura->grevas=grevas;
-    inventario->armadura->botas=bota;
+    inventario.armadura.capacete=capacete;
+    inventario.armadura.peitoral=peitoral;
+    inventario.armadura.grevas=grevas;
+    inventario.armadura.botas=bota;
 
 
-inventario->arma = criar_arma("Espada de Ferro Fraco", "Feita de ferro comum, sem reforço. Aguenta poucos golpes antes de perder o fio.", 4, CORTE);
+    inventario.arma = criar_arma("Espada de Ferro Fraco", "Feita de ferro comum, sem reforço. Aguenta poucos golpes antes de perder o fio.", 4, CORTE);
     
 
-    inventario->consumiveis = hash_table_init();
-    if (inventario->consumiveis == NULL)
-        exit_with_error(Exception_AllocationError);
 
     return inventario;
 }
 
-Arma *criar_arma(char nome[], char descricao[], int dano, TipoDano tipo)
+Arma criar_arma(char nome[], char descricao[], int dano, TipoDano tipo)
 {
-    Arma *arma = malloc(sizeof(Arma));
-    if (arma == NULL)
-        exit_with_error(Exception_AllocationError);
+    Arma arma;
 
-    strcpy(arma->nome, nome);
-    strcpy(arma->descricao, descricao);
-    arma->dano = dano;
-    arma->tipo = tipo;
+
+    strcpy(arma.nome, nome);
+    strcpy(arma.descricao, descricao);
+    arma.dano = dano;
+    arma.tipo = tipo;
 
     return arma;
 }

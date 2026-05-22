@@ -33,13 +33,13 @@ typedef struct Player{
     int defesa;
     int karma;
     Genero genero;
-    Inventario* inventario;
+    Inventario inventario;
     Position posicao;
     // Atributos atributos;
     size_t NumeroAndar;
 } Player;
 
-Player* criar_player(char nome[50], Genero genero);
+Player *criar_player(const char *nome, Genero genero);
 void mover_player(Player *player, Direcao direcao, int limite_esquerda, int limite_direita, int limite_cima, int limite_baixo);
 void tomar_dano(Player *player, AtaqueInimigo *atack);
 bool atacar_inimigo(Player *player, Inimigo *inimigo);

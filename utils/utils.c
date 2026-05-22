@@ -12,7 +12,7 @@ char* get_error_message(Exceptions ex)
         case Exception_AllocationError: return "Falha ao alocar recurso com malloc ou calloc";
         case Exception_KeyError: return "Falha ao acessar chave em um hashmap";
         case Exception_NotImplementedError: return "Falha, função não implementada";
-        case Exception_FileNotFound: return "Falha, erro ao ler arquivo do sprite";
+        case Exception_FileReadWriteError: return "Falha, erro ao ler arquivo do sprite";
         case Exception_IndexError: return "Falha ao acessar indice de array";
         case Exception_OverflowError: return "Falha ao realizar operação aritmitica, acontecimento de Overflow";
         default: return "Aconteceu um erro:";break;
@@ -61,7 +61,7 @@ void desenhar_sprite(WINDOW *win, const char *nome_arquivo, int y_inicial, int x
 {
     FILE *f = fopen(nome_arquivo, "r");
     if(f==NULL)
-        perror(get_error_message(Exception_FileNotFound));
+        perror(get_error_message(Exception_FileReadWriteError));
 
     char linha[200];
     int i =0;

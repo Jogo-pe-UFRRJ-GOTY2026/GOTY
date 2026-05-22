@@ -5,8 +5,6 @@
 #include "../objects/Player.h"
 
 
-
-
 Player* carregar_salvamento();
 bool salvar_jogo(Player* player);
 

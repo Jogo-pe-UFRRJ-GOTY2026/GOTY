@@ -53,20 +53,24 @@ bool atacar_inimigo(Player *player, Inimigo *inimigo)
     if (gerar_chance_de_evasao_do_inimigo() > 95)
         return false;
 
-    inimigo_tomar_dano(inimigo, gerar_rolagem_dano() + player->inventario->arma->dano);
+    inimigo_tomar_dano(inimigo, gerar_rolagem_dano() + player->inventario.arma.dano);
 
     return true;
 }
 
 void tomar_dano(Player *player, AtaqueInimigo *atack)
 {
-    player->vida -= atack->dano * (1-(player->defesa/100)); // se defesa for 5, -5% de dano
+    player->vida -= atack->dano * (1.0f-(player->defesa/100.0f)); // se defesa for 5, -5% de dano
 }
 
-Player* criar_player(char nome[50], Genero genero)
+Player* criar_player(const char* nome, Genero genero)
 {
     Player* player = malloc(sizeof(Player));
-    strncpy(player->nome,nome, sizeof(player->nome));
+    if(player==NULL)
+    {
+        exit_with_error(Exception_AllocationError);
+    }
+    strncpy(player->nome,nome, sizeof(player->nome)-1);
     player->genero=genero;
     player->inventario=init_inventario();
     player->karma=0;
@@ -74,10 +78,10 @@ Player* criar_player(char nome[50], Genero genero)
     player->level=1;
     player->defesa=0;
 
-    player->defesa += player->inventario->armadura->capacete.defesa;
-    player->defesa += player->inventario->armadura->peitoral.defesa;
-    player->defesa += player->inventario->armadura->grevas.defesa;
-    player->defesa += player->inventario->armadura->botas.defesa;
+    player->defesa += player->inventario.armadura.capacete.defesa;
+    player->defesa += player->inventario.armadura.peitoral.defesa;
+    player->defesa += player->inventario.armadura.grevas.defesa;
+    player->defesa += player->inventario.armadura.botas.defesa;
 
     return player;
 }

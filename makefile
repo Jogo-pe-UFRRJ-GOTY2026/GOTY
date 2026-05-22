@@ -1,5 +1,9 @@
 CC = gcc  # define o compilador
+
 CFLAGS = -Wall
+
+
+
 LIBS = -fms-extensions -lncursesw
 
 
@@ -23,14 +27,31 @@ SRC = main.c 						\
       data_structures/hashtable.c	\
 	  data_structures/arraylist.c	\
 	  
+
+
+TEST_SRC = 	tests/tests_main.c		\
+			system/Save.c 			\
+			objects/Player.c 		\
+      		objects/Inventario.c 	\
+    		objects/Inimigo.c 	 	\
+	 		utils/utils.c           \
+
+
+
+
+
+
+
 #define o nome do executavel
 
 ifeq ($(OS),Windows_NT)	# WINDOWS
     OUT = C:/temp/game.exe
+	TEST_OUT = /tmp/game_test.exe
 	DELETE = del
 	CLEAR = ;cls
 else 					# LINUX
     OUT = /tmp/game
+	TEST_OUT = /tmp/game_test
 	DELETE = rm -f
 	CLEAR = && clear
 endif
@@ -46,3 +67,7 @@ run: all
 clean:
 	$(DELETE) $(OUT) 
 	$(CLEAR)
+
+test:
+	$(CC) $(TEST_SRC) -o $(TEST_OUT) $(LIBS)
+	$(TEST_OUT)
