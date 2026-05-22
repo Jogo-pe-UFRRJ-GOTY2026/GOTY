@@ -56,18 +56,12 @@ int main()
         case Andar0:
             player = Prologo();
         case Andar1:
-        case Andar2:
-        case Andar3:
             Capitulo1(player);
-        case Andar4:
-        case Andar5:
-        case Andar6:
+        case Andar2:
             Capitulo2(player);
-        case Andar7:
-        case Andar8:
-        case Andar9:
+        case Andar3:
             Capitulo3(player);
-        case Andar10:
+        case Andar4:
             Capitulo4(player);
     }
 

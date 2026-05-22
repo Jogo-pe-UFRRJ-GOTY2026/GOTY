@@ -7,50 +7,17 @@
 #include "../objects/Inimigo.h"
 #include "../objects/Inventario.h"
 
+void  Introducao();
 
 Player* Prologo()
 {
-    int altura, largura;
-    getmaxyx(stdscr, altura, largura);
 
-    WINDOW* tela_apresentacao=newwin(0,0,0,0);
-    char* texto[]={"Torre torre torre", "torrada feita com manteiga", " em uma galaxia muito distante"};
-    for(int i=0;i<3;i++) //troca o 3 pelo numero de strings no texto
-    {
-        mvwprintw(tela_apresentacao,2, largura/3,"%s" ,texto[i] );
-
-        for(int x=5;x<118;x++) mvwprintw(tela_apresentacao, 5,x,"-");
-        for(int x=5;x<118;x++) mvwprintw(tela_apresentacao, 40,x,"-");
-
-        for(int y=5;y<111;y++)
-        {
-            if(y==5) mvwprintw(tela_apresentacao, y,3,"+");
-            else mvwprintw(tela_apresentacao, y,3,"|");
-        } 
-
-        for(int y=5;y<111;y++)
-        {
-            if(y==5) mvwprintw(tela_apresentacao, y,118,"+");
-            else mvwprintw(tela_apresentacao, y,118,"|");
-        } 
-
-        desenhar_sprite(tela_apresentacao, "assets/sprites/buildings/tower.txt", 6, 4);
-
-
-
-        wrefresh(tela_apresentacao);
-        napms(2000); //espera 2 segundos
-    }
-
-
-
-
-
-    delwin(tela_apresentacao);
+    Introducao();
 
 
 
     return Tela_criacao();
+
 }
 
 
@@ -58,7 +25,9 @@ Player* Prologo()
 
 
 
-
+// ================================================================================= //
+//                              Criação de personagem                                // 
+// ================================================================================= //
 Player* Tela_criacao()
 {
     int altura_tela, largura_tela;
@@ -99,8 +68,8 @@ Player* Tela_criacao()
         mvwprintw(criacao_personagem_window, 15, (largura_tela / 3)-5, "╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝");
 
         mvwprintw(criacao_personagem_window, 20, start_x, "+------------------------------------------------------------+");
-        mvwprintw(criacao_personagem_window, 21, start_x, "|                                                            |");
-        mvwprintw(criacao_personagem_window, 22, start_x, "|   Nome: %s", nome);
+        mvwprintw(criacao_personagem_window, 21, start_x, "|   ... Você acorda                                          |");
+        mvwprintw(criacao_personagem_window, 22, start_x, "|   Digite seu nome: %s", nome);
         mvwprintw(criacao_personagem_window, 22, start_x+61, "|");
 
         mvwprintw(criacao_personagem_window, 23, start_x, "|                                                            |");
@@ -196,4 +165,46 @@ Player* Tela_criacao()
     delwin(criacao_personagem_window);
     Player* player = criar_player(nome, genero_selecionado);
     return player;
+}
+
+
+
+// ================================================================================= //
+//                              Introdução da história                               // 
+// ================================================================================= //
+void  Introducao()
+{
+    int altura, largura;
+    getmaxyx(stdscr, altura, largura);
+
+    WINDOW* tela_apresentacao=newwin(0,0,0,0);
+    char* texto[]={"Dizem que existe uma saída...", "Dizem que ela fica no topo...", "Mas ninguém volta para confirmar."};
+    for(int i=0;i<3;i++) //troca o 3 pelo numero de strings no texto
+    {
+        mvwprintw(tela_apresentacao,2, largura/3,"%s" ,texto[i] );
+
+        for(int x=5;x<118;x++) mvwprintw(tela_apresentacao, 5,x,"-");
+        for(int x=5;x<118;x++) mvwprintw(tela_apresentacao, 40,x,"-");
+
+        for(int y=5;y<111;y++)
+        {
+            if(y==5) mvwprintw(tela_apresentacao, y,3,"+");
+            else mvwprintw(tela_apresentacao, y,3,"|");
+        } 
+
+        for(int y=5;y<111;y++)
+        {
+            if(y==5) mvwprintw(tela_apresentacao, y,118,"+");
+            else mvwprintw(tela_apresentacao, y,118,"|");
+        } 
+
+        desenhar_sprite(tela_apresentacao, "assets/sprites/buildings/tower.txt", 6, 4);
+
+
+
+        wrefresh(tela_apresentacao);
+        napms(2000); //espera 2 segundos
+    }
+    delwin(tela_apresentacao);
+
 }

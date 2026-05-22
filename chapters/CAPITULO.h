@@ -11,20 +11,16 @@ bool Capitulo1(Player *player);
 bool Capitulo2(Player *player);
 bool Capitulo3(Player *player);
 bool Capitulo4(Player *player);
+bool Capitulo5(Player *player);
 
 typedef enum
 {
-    Andar0,
+    Andar0, //Prologo
     Andar1,
     Andar2,
     Andar3,
     Andar4,
     Andar5,
-    Andar6,
-    Andar7,
-    Andar8,
-    Andar9,
-    Andar10
 } Andar;
 
 #endif

@@ -60,13 +60,13 @@ bool atacar_inimigo(Player *player, Inimigo *inimigo)
 
 void tomar_dano(Player *player, AtaqueInimigo *atack)
 {
-    //player->vida -= seila;
+    player->vida -= atack->dano * (1-(player->defesa/100)); // se defesa for 5, -5% de dano
 }
 
 Player* criar_player(char nome[50], Genero genero)
 {
     Player* player = malloc(sizeof(Player));
-    strcpy(player->nome,nome);
+    strncpy(player->nome,nome, sizeof(player->nome));
     player->genero=genero;
     player->inventario=init_inventario();
     player->karma=0;
