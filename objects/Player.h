@@ -14,12 +14,12 @@ typedef enum Genero
     Outro
 } Genero;
 
-typedef struct Atributos{
-    int forca;
-    int agilidade;
-    int inteligencia;
-    int vitalidade;
-} Atributos;
+// typedef struct Atributos{
+//     int forca;
+//     int agilidade;
+//     int inteligencia;
+//     int vitalidade;
+// } Atributos;
 
 typedef struct Position{
     int x;
@@ -27,7 +27,7 @@ typedef struct Position{
 } Position;
 
 typedef struct Player{
-    char nome[100];
+    char nome[50];
     int level;
     int vida;
     int defesa;
@@ -35,11 +35,11 @@ typedef struct Player{
     Genero genero;
     Inventario* inventario;
     Position posicao;
-    Atributos atributos;
+    // Atributos atributos;
     size_t NumeroAndar;
 } Player;
 
-Player* criar_player(char nome[100], Genero genero);
+Player* criar_player(char nome[50], Genero genero);
 void mover_player(Player *player, Direcao direcao, int limite_esquerda, int limite_direita, int limite_cima, int limite_baixo);
 void tomar_dano(Player *player, AtaqueInimigo *atack);
 bool atacar_inimigo(Player *player, Inimigo *inimigo);

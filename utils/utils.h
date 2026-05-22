@@ -24,7 +24,7 @@ typedef enum Exceptions
     Exception_IndexError,
     Exception_OverflowError
 } Exceptions;
-
+int escolher_ataque();
 int gerar_rolagem_dano();
 int gerar_chance_de_evasao_do_inimigo();
 int gerar_rolagem_mercy();
