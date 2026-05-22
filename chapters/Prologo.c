@@ -10,6 +10,44 @@
 
 Player* Prologo()
 {
+    int altura, largura;
+    getmaxyx(stdscr, altura, largura);
+
+    WINDOW* tela_apresentacao=newwin(0,0,0,0);
+    char* texto[]={"Torre torre torre", "torrada feita com manteiga", " em uma galaxia muito distante"};
+    for(int i=0;i<3;i++) //troca o 3 pelo numero de strings no texto
+    {
+        mvwprintw(tela_apresentacao,2, largura/3,"%s" ,texto[i] );
+
+        for(int x=5;x<118;x++) mvwprintw(tela_apresentacao, 5,x,"-");
+        for(int x=5;x<118;x++) mvwprintw(tela_apresentacao, 40,x,"-");
+
+        for(int y=5;y<111;y++)
+        {
+            if(y==5) mvwprintw(tela_apresentacao, y,3,"+");
+            else mvwprintw(tela_apresentacao, y,3,"|");
+        } 
+
+        for(int y=5;y<111;y++)
+        {
+            if(y==5) mvwprintw(tela_apresentacao, y,118,"+");
+            else mvwprintw(tela_apresentacao, y,118,"|");
+        } 
+
+        desenhar_sprite(tela_apresentacao, "assets/sprites/buildings/tower.txt", 6, 4);
+
+
+
+        wrefresh(tela_apresentacao);
+        napms(2000); //espera 2 segundos
+    }
+
+
+
+
+
+    delwin(tela_apresentacao);
+
 
 
     return Tela_criacao();
