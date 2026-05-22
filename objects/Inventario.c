@@ -30,7 +30,7 @@ Inventario* init_inventario()
         strcpy(grevas.nome, "Grevas Simples");
 
         bota.defesa = 1;
-        strcpy(bota.descricao, "Botas usadas com sola desgastada. Ainda servem para atravessar os corredores da Torre.");
+        strcpy(bota.descricao, "Botas usadas com sola desgastada. Ainda servem para subir os andares da Torre.");
         strcpy(bota.nome, "Botas Gastas");
 
     

@@ -17,7 +17,7 @@ void iniciar_combate(Player* player, char tecla_pressionada)
     //mover_player(player, get_direcao(tecla_pressionada));
 }
 
-bool ataque_colidiu(Player *player, AtaqueInimigo* Ataque);
+bool ataque_colidiu(Player *player, AtaqueInimigo *Ataque);
 
 void spawn_atack(AtaqueInimigo *Ataque);
 

@@ -21,6 +21,7 @@ typedef enum Genero
 //     int vitalidade;
 // } Atributos;
 
+
 typedef struct Position{
     int x;
     int y;

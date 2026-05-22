@@ -8,6 +8,8 @@
 #include "chapters/CAPITULO.h"
 #include "system/Save.h"
 #include "utils/utils.h"
+#include <time.h>
+#include <stdlib.h>
 
 // make :  compila o codigo
 // make run : roda o codigo
@@ -114,9 +116,9 @@ void menu_inicial(bool *deveria_carregar_salvamento)
             {
                 wattron(menu_win, COLOR_PAIR(COR_OPCAO_SELECIONADA) | A_BOLD); // Ativa um atributo na janela passada, nesse caso, a cor e o negrito
                 mvwprintw(menu_win, y, x - 6, "➢");                            // 6 Caracteres antes do texto
-                mvwprintw(menu_win, y, x - 2, "⦗");                            // 6 Caracteres antes do texto
+                mvwprintw(menu_win, y, x - 2, "⦗");                            // 2 Caracteres antes do texto
                 mvwprintw(menu_win, y, x, "%s", opcoes[opcao]);
-                mvwprintw(menu_win, y, x + strlen(opcoes[opcao]), " ⦘");                             // 6 Caracteres antes do texto
+                mvwprintw(menu_win, y, x + strlen(opcoes[opcao]), " ⦘");                             // 2 Caracteres antes do texto
                 wattroff(menu_win, COLOR_PAIR(COR_OPCAO_SELECIONADA) | A_BOLD); // Desativa um atributo na janela passada, nesse caso, a cor e o negrito
             }
             else
