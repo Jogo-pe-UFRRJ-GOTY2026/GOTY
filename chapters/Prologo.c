@@ -155,7 +155,7 @@ Player* Tela_criacao()
 
 
     }
-    delwin(Tela_criacao);
+    delwin(criacao_personagem_window);
     Player* player = criar_player(nome, genero_selecionado);
     return player;
 }

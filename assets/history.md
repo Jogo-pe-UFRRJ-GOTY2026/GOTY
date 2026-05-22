@@ -13,7 +13,7 @@ Toda dor extrema deixa marcas:
 * genocídios;
 * promessas quebradas.
 
-Essas memórias se acumulam abaixo da realidade e formam uma estrutura viva:
+Essas memórias se acumulam abaixo da veú da realidade fisica e formam uma estrutura:
 
 # A TORRE
 
@@ -37,9 +37,7 @@ A torre possui 10 andares porque existem:
 
 # O PROTAGONISTA
 
-## Nome
 
-O protagonista nunca recebe nome oficial.
 
 ## Prologo
 
