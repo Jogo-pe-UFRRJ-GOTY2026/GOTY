@@ -63,7 +63,7 @@ void tomar_dano(Player *player, AtaqueInimigo *atack)
     //player->vida -= seila;
 }
 
-Player* criar_player(char nome[100], Genero genero)
+Player* criar_player(char nome[50], Genero genero)
 {
     Player* player = malloc(sizeof(Player));
     strcpy(player->nome,nome);
@@ -80,4 +80,10 @@ Player* criar_player(char nome[100], Genero genero)
     player->defesa += player->inventario->armadura->botas.defesa;
 
     return player;
+}
+
+void free_player(Player *player)
+{
+    free(player);
+
 }

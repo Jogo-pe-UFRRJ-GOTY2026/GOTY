@@ -15,6 +15,11 @@ SRC = main.c 						\
       system/Save.c 				\
       system/Combate.c 				\
 	  utils/utils.c                 \
+	  chapters/Prologo.c            \
+	  chapters/Capitulo1.c          \
+	  chapters/Capitulo2.c          \
+	  chapters/Capitulo3.c          \
+	  chapters/Capitulo4.c          \
       data_structures/hashtable.c	\
 	  data_structures/arraylist.c	\
 	  

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <ncurses.h>
 #include <locale.h>
+#include <time.h>
+#include <stdlib.h>
 #include <string.h>
 #include "objects/Player.h"
 #include "chapters/CAPITULO.h"
@@ -38,38 +40,36 @@ int main()
     bool deveria_carregar_salvamento = false;
 
     menu_inicial(&deveria_carregar_salvamento);
+    if(deveria_carregar_salvamento)
+    {
+            player = carregar_salvamento();
+            //AndarSalvo = player->NumeroAndar;
+    }
+    else
+    {
+        Player* player = NULL;
+        AndarSalvo=0;
+    }
 
-    // if(deveria_carregar_salvamento)
-    // {
-    //         player = carregar_salvamento();
-    //         //AndarSalvo = player->NumeroAndar;
-    // }
-    // else
-    // {
-    //     Player* player = NULL;
-    //     AndarSalvo=0;
-    // }
-
-    // Não sei como vou fazer isso ainda
-    // switch(AndarSalvo)
-    // {
-    //     case Andar0:
-    //         player = Prologo(tecla);
-    //     case Andar1:
-    //     case Andar2:
-    //     case Andar3:
-    //         Capitulo1(player, tecla);
-    //     case Andar4:
-    //     case Andar5:
-    //     case Andar6:
-    //         Capitulo2(player, tecla);
-    //     case Andar7:
-    //     case Andar8:
-    //     case Andar9:
-    //         Capitulo3(player, tecla);
-    //     case Andar10:
-    //         Capitulo4(player, tecla);
-    // }
+    switch(AndarSalvo)
+    {
+        case Andar0:
+            player = Prologo();
+        case Andar1:
+        case Andar2:
+        case Andar3:
+            Capitulo1(player);
+        case Andar4:
+        case Andar5:
+        case Andar6:
+            Capitulo2(player);
+        case Andar7:
+        case Andar8:
+        case Andar9:
+            Capitulo3(player);
+        case Andar10:
+            Capitulo4(player);
+    }
 
     getch();
 

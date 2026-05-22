@@ -6,10 +6,10 @@
 
 Player* Prologo();
 
-bool Capitulo1(Player *player, char tecla_pressionada);
-bool Capitulo2(Player *player, char tecla_pressionada);
-bool Capitulo3(Player *player, char tecla_pressionada);
-bool Capitulo4(Player *player, char tecla_pressionada);
+bool Capitulo1(Player *player);
+bool Capitulo2(Player *player);
+bool Capitulo3(Player *player);
+bool Capitulo4(Player *player);
 
 typedef enum
 {

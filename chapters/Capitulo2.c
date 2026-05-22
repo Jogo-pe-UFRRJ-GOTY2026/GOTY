@@ -3,8 +3,8 @@
 #include "../objects/Player.h"
 #include "../objects/Inimigo.h"
 #include "../objects/Inventario.h"
-
-bool Capitulo2(Player *player, char tecla_pressionada)
+#include "CAPITULO.h"
+bool Capitulo2(Player *player)
 {
     // vou estar testando o combate aqui
 }

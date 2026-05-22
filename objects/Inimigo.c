@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-AtaqueInimigo* criar_ataque(TipoAtaque tipo, int dano, int hitbox)
+AtaqueInimigo *criar_ataque(TipoAtaque tipo, int dano, int hitbox)
 {
     AtaqueInimigo* ataque = malloc(sizeof(AtaqueInimigo));
     if(ataque==NULL)
@@ -13,18 +13,22 @@ AtaqueInimigo* criar_ataque(TipoAtaque tipo, int dano, int hitbox)
     ataque->dano=dano;
     ataque->hit_box=hitbox;
 
-
     return ataque;
 }
 
-Inimigo *inimigo_criar(int vida, char nome[], int mercy)
+Inimigo *inimigo_criar(int vida, char nome[], char sprite_location[], AtaqueInimigo *ataques[5], int mercy)
 {
     Inimigo *inimigo = malloc(sizeof(Inimigo));
 
     strcpy(inimigo->nome, nome);
     inimigo->vida = vida;
     inimigo->mercy = mercy;
-
+    strcpy(inimigo->sprite, sprite_location);
+    for (int i = 0; i < 5; i++)
+    {
+        inimigo->ataques[i] = (*ataques[i]);
+        free(ataques[i]);
+    }
     return inimigo;
 }
 

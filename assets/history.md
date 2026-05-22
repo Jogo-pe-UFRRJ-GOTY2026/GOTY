@@ -22,15 +22,14 @@ https://www.asciiart.eu/buildings-and-places
 
 - Bosses
 Tutorial. Hollow
-1. Hollow Knight
-2. Mage
-3. Centaur
-4. Warden
-5. Mirror
-6. Demon
-7. Cerberus
-8. Dragon
-9. The Fallen King     
-10. Reaper 
+1. Mage
+2. Centaur
+3. Demon
+4. Cerberus
+5. The Fallen King ou o Reaper 
 
+
+-4. Warden
+-8. Dragon
+-5. Mirror
 
