@@ -14,7 +14,7 @@
 // make :  compila o codigo
 // make run : roda o codigo
 // make clean: exclui o executavel e limpa o terminal
-void menu_inicial(bool *deveria_carregar_salvamento);
+Player *menu_inicial();
 
 int main()
 {
@@ -36,25 +36,17 @@ int main()
 
     iniciar_cores(); // Inicializa os pares de cores definidos na funcao
 
-    char tecla;
-    bool deveria_carregar_salvamento = false;
 
-    menu_inicial(&deveria_carregar_salvamento);
-    if(deveria_carregar_salvamento)
-    {
-            player = carregar_salvamento();
-            //AndarSalvo = player->NumeroAndar;
-    }
-    else
-    {
-        Player* player = NULL;
-        AndarSalvo=0;
-    }
 
+    player = menu_inicial();
+    if(player==NULL)
+    {
+        printf("Jogo encerrado");
+        return 0;
+    }
     switch(AndarSalvo)
     {
-        case Andar0:
-            player = Prologo();
+
         case Andar1:
             Capitulo1(player);
         case Andar2:
@@ -71,8 +63,9 @@ int main()
     return 0;
 }
 
-void menu_inicial(bool *deveria_carregar_salvamento)
+Player* menu_inicial()
 {
+    Player *player;
     int tecla;
     int altura_tela, largura_tela;
     getmaxyx(stdscr, altura_tela, largura_tela); // retornam o comprimento e largura maxima do terminal no momento, respectivamente o maximo de linhas e colunas da matriz
@@ -152,16 +145,28 @@ void menu_inicial(bool *deveria_carregar_salvamento)
             switch (selecionada)
             {
             case INICIAR_JOGO_NOVO:
-                *deveria_carregar_salvamento = false;
 
-                // Player = Prologo(); ???
+                player = Prologo(); 
                 
                 delwin(menu_win);
-                return;
+                return player;
             case CONTINUAR_JOGO:
-                *deveria_carregar_salvamento = true;
-                delwin(menu_win);
-                return;
+                player = carregar_salvamento();
+                if(player==NULL)
+                {
+                    char aviso_carregamento[] = "《 Arquivo de salvamento excluido, corrompido ou inexistente 》";
+                    wattron(menu_win, COLOR_PAIR(COR_OPCAO_SELECIONADA) | A_BOLD);
+                    mvwprintw(menu_win, altura_tela - 10, (largura_tela - strlen(aviso_carregamento)) / 2, "%s", aviso_carregamento);
+
+                    wattroff(menu_win, COLOR_PAIR(COR_OPCAO_SELECIONADA) | A_BOLD);
+                    wrefresh(menu_win);
+
+                    napms(2000); // espera dois segundos
+                    selecionada = INICIAR_JOGO_NOVO;
+                    break;
+                }
+                else
+                    return player;
             case ABRIR_CONFIGURACOES:
                 char aviso_configuracoes[] = "《 Menu de configurações não implementado 》";
                 wattron(menu_win, COLOR_PAIR(COR_OPCAO_SELECIONADA) | A_BOLD);
@@ -201,7 +206,7 @@ void menu_inicial(bool *deveria_carregar_salvamento)
                 delwin(menu_win);
                 endwin();
 
-                return;
+                return NULL;
             default:
                 break;
             }

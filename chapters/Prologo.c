@@ -178,25 +178,32 @@ void  Introducao()
     getmaxyx(stdscr, altura, largura);
 
     WINDOW* tela_apresentacao=newwin(0,0,0,0);
+
+    int direita=3, esquerda=118;
+    int topo=5, base=40;
+
     char* texto[]={"Dizem que existe uma saída...", "Dizem que ela fica no topo...", "Mas ninguém volta para confirmar."};
     for(int i=0;i<3;i++) //troca o 3 pelo numero de strings no texto
     {
         mvwprintw(tela_apresentacao,2, largura/3,"%s" ,texto[i] );
 
-        for(int x=5;x<118;x++) mvwprintw(tela_apresentacao, 5,x,"-");
-        for(int x=5;x<118;x++) mvwprintw(tela_apresentacao, 40,x,"-");
+        for(int x=direita+1;x<esquerda;x++) mvwprintw(tela_apresentacao, topo,x,"-");
+        for(int x=direita+1;x<esquerda;x++) mvwprintw(tela_apresentacao, base,x,"-");
 
-        for(int y=5;y<111;y++)
+        for (int y = topo; y <= base; y++)
         {
-            if(y==5) mvwprintw(tela_apresentacao, y,3,"+");
-            else mvwprintw(tela_apresentacao, y,3,"|");
+            if(y==topo || y==base)
+            {
+                mvwprintw(tela_apresentacao, y,direita,"+");
+                mvwprintw(tela_apresentacao, y, esquerda, "+");
+            }
+            else
+            {
+                mvwprintw(tela_apresentacao, y,direita,"|");
+                mvwprintw(tela_apresentacao, y, esquerda, "|");
+            }
         } 
 
-        for(int y=5;y<111;y++)
-        {
-            if(y==5) mvwprintw(tela_apresentacao, y,118,"+");
-            else mvwprintw(tela_apresentacao, y,118,"|");
-        } 
 
         desenhar_sprite(tela_apresentacao, "assets/sprites/buildings/tower.txt", 6, 4);
 

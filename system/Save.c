@@ -13,14 +13,14 @@ Player* carregar_salvamento()
     FILE *save_file = fopen("saves/player_save.bin", "rb");
     if(save_file==NULL)
     {
-        perror("Test Error: Erro ao ler arquivo de salvamento");
+        //perror("Test Error: Erro ao ler arquivo de salvamento");
         return NULL;
     }
 
     Player* player = malloc(sizeof(Player));
     if(player==NULL)
     {
-        perror("Test Error: Erro ao alocar estrutura player");
+        //perror("Test Error: Erro ao alocar estrutura player");
         fclose(save_file);
         return NULL;
     }
@@ -28,7 +28,7 @@ Player* carregar_salvamento()
     // ponteiro para os dados, tamanho de cada elemento, quantidade de elementos, arquivo
     if(fread(player, sizeof(Player), NUM_OF_ELEMENTS, save_file)!=NUM_OF_ELEMENTS)
     {
-        perror("Test Error: Erro ao ler estrutura player do arquivo de salvamento");
+        //perror("Test Error: Erro ao ler estrutura player do arquivo de salvamento");
         free(player);
         fclose(save_file);
         return NULL;
