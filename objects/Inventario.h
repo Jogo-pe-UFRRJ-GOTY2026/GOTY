@@ -64,7 +64,10 @@ typedef struct Inventario{
 
 
 Inventario init_inventario();
-Arma criar_arma(char nome[], char descricao[], int dano, int vida, TipoDano tipo, Atributos atributosarma);
+Arma criar_arma_Cap1(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
+Arma criar_arma_Cap2(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
+Arma criar_arma_Cap3(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
+Arma criar_arma_Cap4(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
 
 
 #endif

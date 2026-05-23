@@ -74,12 +74,14 @@ Arma criar_arma_Cap1(char nome[], char descricao[], int dano, int vida, TipoDano
     strcpy(arma.descricao, descricao);
 
     // Pequena variação para não ficar sempre igual
-    arma.dano = dano + 1 + (rand() % 3); // +0 até +2
+    //arma.dano = dano + 1 + (rand() % 3); // +0 até +2 DPS COLOCA ISSO TIVE QUE PODER FAZER PRA TESTAR
 
+    arma.dano = dano;
     arma.tipo = tipo;
+    arma.vida = vida;
 
     // Vida razoável para início de jogo
-    arma.vida = vida + (rand() % 6); // +0 até +5
+    //arma.vida = vida + (rand() % 6); // +0 até +5
 
     // Atributos balanceados para Capítulo 1
     arma.atributosarma.defesa = rand() % 2; // 0 ou 1

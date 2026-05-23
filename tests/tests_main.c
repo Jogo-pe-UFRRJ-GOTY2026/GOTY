@@ -47,7 +47,7 @@ Player *MockPlayer()
 
     player->NumeroAndar = 3;
 
-    player->inventario.arma = criar_arma("Espada de Teste", "Mocking", 999, CORTE);
+    player->inventario.arma = criar_arma_Cap1("Espada de Teste", "Mocking", 999, 0, CORTE);
     return player;
 }
 
