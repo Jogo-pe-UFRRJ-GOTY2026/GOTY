@@ -7,6 +7,7 @@
 Arma criar_arma_Cap1(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
 Arma criar_arma_Cap2(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
 Arma criar_arma_Cap3(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
+Arma criar_arma_Cap4(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
 
 Inventario init_inventario()
 {
@@ -130,6 +131,29 @@ Arma criar_arma_Cap3(char nome[], char descricao[], int dano, int vida, TipoDano
     arma.atributosarma.defesa = 2 + (rand() % 4); // 2 até 5
     arma.atributosarma.forca = 6 + (rand() % 6); // 6 até 11
     arma.atributosarma.sorte = 1 + (rand() % 4); // 1 até 4
+
+    return arma;
+}
+
+Arma criar_arma_Cap4(char nome[], char descricao[], int dano, int vida, TipoDano tipo)
+{
+    Arma arma;
+
+    strcpy(arma.nome, nome);
+    strcpy(arma.descricao, descricao);
+
+    // Armas do fim do jogo
+    arma.dano = dano + 12 + (rand() % 8); // +12 até +19
+
+    arma.tipo = tipo;
+
+    // Durabilidade muito alta
+    arma.vida = vida + 20 + (rand() % 16); // +20 até +35
+
+    // Atributos fortes
+    arma.atributosarma.defesa = 4 + (rand() % 5); // 4 até 8
+    arma.atributosarma.forca = 10 + (rand() % 8); // 10 até 17
+    arma.atributosarma.sorte = 3 + (rand() % 5); // 3 até 7
 
     return arma;
 }
