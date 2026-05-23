@@ -5,20 +5,13 @@
 #include "Inventario.h"
 #include "Inimigo.h"
 #include "../utils/utils.h"
-
+#include "Atributos.h"
 
 typedef enum Genero
 {
     Masculino,
     Feminino
 } Genero;
-
-// typedef struct Atributos{
-//     int forca;
-//     int agilidade;
-//     int inteligencia;
-//     int vitalidade;
-// } Atributos;
 
 
 typedef struct Position{
@@ -30,12 +23,11 @@ typedef struct Player{
     char nome[50];
     int level;
     int vida;
-    int defesa;
     int karma;
     Genero genero;
     Inventario inventario;
     Position posicao;
-    // Atributos atributos;
+    Atributos atributos;
     size_t NumeroAndar;
 } Player;
 
