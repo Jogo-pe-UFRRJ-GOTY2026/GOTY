@@ -22,10 +22,10 @@ Inimigo *MockInimigo()
         criar_ataque(BULLET, 3, "🟎", 1, VERTICAL)};
 
     Sprite_size size;
-    size.x=54;
-    size.y=16;
+    size.x=43;
+    size.y=28;
 
-    Inimigo *inimigo = criar_inimigo(100, "Dragon", "assets/sprites/bosses/dragon.txt",size, 40);
+    Inimigo *inimigo = criar_inimigo(100, "Fallen King", "assets/sprites/bosses/fallen_king.txt",size, 40);
 
     for(int i=0;i<3;i++)
     {

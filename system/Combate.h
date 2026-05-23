@@ -11,6 +11,8 @@ typedef struct CombateUI{
     WINDOW* area_boss;
     WINDOW* area_esquiva;
     WINDOW* area_menu;
+    WINDOW* area_nome_boss;
+    WINDOW* area_dialogos;
 } CombateUI;
 
 typedef enum OpcoesMenuCombate
@@ -37,6 +39,7 @@ bool ataque_colidiu(Player *player, AtaqueInimigo *Ataque);
 void spawn_atack(AtaqueInimigo *Ataque);
 void renderizar_combate_ui(CombateUI* ui, Player* player);
 void limpar_combate(CombateUI *ui, Inimigo *inimigo);
+void renderizar_nome_estilizado(WINDOW *area_nome_boss, const char *nome);
 bool rodada();
 
 #endif

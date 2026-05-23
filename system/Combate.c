@@ -1,22 +1,30 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ncurses.h>
+#include <string.h>
 #include "Combate.h"
 #include "../objects/Inimigo.h"
 #include "../objects/Player.h"
 #include "../utils/utils.h"
 
-
+#define equals(str1, str2) (strcmp(str1,str2)==0)
 void iniciar_combate(Player* player, Inimigo* inimigo)
 {
     CombateUI ui;
-    int max_x=getmaxy(stdscr);
+    int max_x=getmaxx(stdscr);
     int esquiva_max_y, esquiva_max_x;
 
-    //BOSS
-    mvprintw(2,(max_x/2)-10,"%s", inimigo->nome);
-    ui.area_boss = newwin(inimigo->sprite_size.y + 2, inimigo->sprite_size.x + 2, 5, 0);
+
+    // NOME BOSS
+    ui.area_nome_boss = newwin(3, strlen(inimigo->nome) + 40 + inimigo->sprite_size.x, 0, 30);
+    renderizar_nome_estilizado(ui.area_nome_boss,inimigo->nome);
+
+    
+    // BOSS
+    ui.area_boss = newwin(inimigo->sprite_size.y + 5, inimigo->sprite_size.x + 2, 5, 0);
     desenhar_sprite(ui.area_boss, inimigo->sprite, 1, 1);
+
+
 
     //DODGE AREA E PLAYER
     ui.area_esquiva = newwin(16,56, 6, inimigo->sprite_size.x+20);
@@ -26,10 +34,13 @@ void iniciar_combate(Player* player, Inimigo* inimigo)
     player->posicao.y=esquiva_max_y/2;
 
 
-
+    // MENU
     ui.area_menu = newwin(20,56, 22,inimigo->sprite_size.x+20);
-
     renderizar_combate_ui(&ui, player);
+
+
+
+
 
     wgetch(ui.area_esquiva);
 
@@ -59,17 +70,19 @@ void renderizar_menu_combate(WINDOW *area_menu, Player* player, OpcoesMenuCombat
     // Desenha a barra de vida
     mvwprintw(area_menu,1,15,"[");
     int porcentagem_vida=(player->vida_max/player->vida*10);
+    wattron(area_menu, COLOR_PAIR(COR_VIDA));
     for (int x = 16, i = 0; i < porcentagem_vida; i++, x++)
         mvwprintw(area_menu, 1, x, "█");
-    mvwprintw(area_menu,1,26,"]");
+    wattroff(area_menu, COLOR_PAIR(COR_VIDA));
+    mvwprintw(area_menu, 1, 26, "]");
 
-    mvwprintw(area_menu,1, 35, "Lv.%d", player->level);
+    mvwprintw(area_menu,1, 50, "Lv.%d", player->level);
 
 
-    desenhar_botao(area_menu, "1.ATACAR", 3, 2, opcao_hovered == ATACAR);
-    desenhar_botao(area_menu, "2.ITENS", 3, 35, opcao_hovered == ITENS);
-    desenhar_botao(area_menu, "3.MERCY", 6, 2, opcao_hovered == MERCY);
-    desenhar_botao(area_menu, "4.DESISTIR", 6, 35, opcao_hovered == DESISTIR);
+    desenhar_botao(area_menu, "1.ATACAR", 3, 4, opcao_hovered == ATACAR);
+    desenhar_botao(area_menu, "2.ITENS", 3, 37, opcao_hovered == ITENS);
+    desenhar_botao(area_menu, "3.MERCY", 6, 4, opcao_hovered == MERCY);
+    desenhar_botao(area_menu, "4.DESISTIR", 6, 37, opcao_hovered == DESISTIR);
 }
 
 
@@ -85,11 +98,11 @@ void renderizar_menu_combate(WINDOW *area_menu, Player* player, OpcoesMenuCombat
 void renderizar_combate_ui(CombateUI* ui, Player* player)
 {
     box(ui->area_boss,0,0);
-
     box(ui->area_esquiva,0,0);
     desenhar_jogador(ui->area_esquiva, player);
     renderizar_menu_combate(ui->area_menu, player, INVALIDA);
 
+    wrefresh(ui->area_nome_boss);
     wrefresh(ui->area_boss);
     wrefresh(ui->area_esquiva);
     wrefresh(ui->area_menu);
@@ -117,5 +130,50 @@ bool rodada()
     // fala do boss
 
 }
+
+void renderizar_nome_estilizado(WINDOW* area_nome_boss, const char* nome)
+{
+    int meio = (getmaxx(area_nome_boss) / 2) - 10 - strlen(nome);
+    wattron(area_nome_boss, COLOR_PAIR(COR_NOME_BOSS) | A_BOLD);
+
+    if(equals("Fallen King",nome))
+    {
+        mvwprintw(area_nome_boss, 0, meio, "██████ ▄▄▄  ▄▄    ▄▄    ▄▄▄▄▄ ▄▄  ▄▄   ██ ▄█▀ ▄▄ ▄▄  ▄▄  ▄▄▄▄", nome);
+        mvwprintw(area_nome_boss, 1, meio, "██▄▄  ██▀██ ██    ██    ██▄▄  ███▄██   ████   ██ ███▄██ ██ ▄▄", nome);
+        mvwprintw(area_nome_boss, 2, meio, "██    ██▀██ ██▄▄▄ ██▄▄▄ ██▄▄▄ ██ ▀██   ██ ▀█▄ ██ ██ ▀██ ▀███▀", nome);
+    }
+    if (equals("Hollow Knigth", nome))
+    {
+        mvwprintw(area_nome_boss, 0, meio, "██  ██  ▄▄▄  ▄▄    ▄▄     ▄▄▄  ▄▄   ▄▄   ██ ▄█▀ ▄▄  ▄▄ ▄▄  ▄▄▄▄ ▄▄ ▄▄ ▄▄▄▄▄▄", nome);
+        mvwprintw(area_nome_boss, 1, meio, "██████ ██▀██ ██    ██    ██▀██ ██ ▄ ██   ████   ███▄██ ██ ██ ▄▄ ██▄██   ██   ", nome);
+        mvwprintw(area_nome_boss, 2, meio, "██  ██ ▀███▀ ██▄▄▄ ██▄▄▄ ▀███▀  ▀█▀█▀    ██ ▀█▄ ██ ▀██ ██ ▀███▀ ██ ██   ██   ", nome);
+    }
+    if (equals("Cerberus", nome))
+    {
+        mvwprintw(area_nome_boss, 0, meio, "▄█████ ▄▄▄▄▄ ▄▄▄▄  ▄▄▄▄  ▄▄▄▄▄ ▄▄▄▄  ▄▄ ▄▄  ▄▄▄▄", nome);
+        mvwprintw(area_nome_boss, 1, meio, "██     ██▄▄  ██▄█▄ ██▄██ ██▄▄  ██▄█▄ ██ ██ ███▄▄", nome);
+        mvwprintw(area_nome_boss, 2, meio, "▀█████ ██▄▄▄ ██ ██ ██▄█▀ ██▄▄▄ ██ ██ ▀███▀ ▄▄██▀ ", nome);
+    }
+    if (equals("Demon", nome))
+    {
+        mvwprintw(area_nome_boss, 0, meio, "████▄  ▄▄▄▄▄ ▄▄   ▄▄  ▄▄▄  ▄▄  ▄▄", nome);
+        mvwprintw(area_nome_boss, 1, meio, "██  ██ ██▄▄  ██▀▄▀██ ██▀██ ███▄██", nome);
+        mvwprintw(area_nome_boss, 2, meio, "████▀  ██▄▄▄ ██   ██ ▀███▀ ██ ▀██", nome);
+    }
+    if (equals("Dragon", nome))
+    {
+        mvwprintw(area_nome_boss, 0, meio, "████▄  ▄▄▄▄   ▄▄▄   ▄▄▄▄  ▄▄▄  ▄▄  ▄▄", nome);
+        mvwprintw(area_nome_boss, 1, meio, "██  ██ ██▄█▄ ██▀██ ██ ▄▄ ██▀██ ███▄██", nome);
+        mvwprintw(area_nome_boss, 2, meio, "████▀  ██ ██ ██▀██ ▀███▀ ▀███▀ ██ ▀██", nome);
+    }
+    if (equals("Centaur", nome))
+    {
+        mvwprintw(area_nome_boss, 0, meio, "▄█████ ▄▄▄▄▄ ▄▄  ▄▄ ▄▄▄▄▄▄ ▄▄▄  ▄▄ ▄▄ ▄▄▄▄", nome);
+        mvwprintw(area_nome_boss, 1, meio, "██     ██▄▄  ███▄██   ██  ██▀██ ██ ██ ██▄█▄", nome);
+        mvwprintw(area_nome_boss, 2, meio, "▀█████ ██▄▄▄ ██ ▀██   ██  ██▀██ ▀███▀ ██ ██", nome);
+    }
+    wattroff(area_nome_boss, COLOR_PAIR(COR_NOME_BOSS) | A_BOLD);
+}
+
 
 void limpar_combate(CombateUI *ui, Inimigo *inimigo);

@@ -53,8 +53,8 @@ void iniciar_cores()
     const int STANDARD_BACKGROUND = -1;
     // init_pair(id, cor_foreground ,cor_background)
     init_pair(COR_OPCAO_SELECIONADA, COLOR_YELLOW, STANDARD_BACKGROUND);
-    init_pair(COR_NOME, COLOR_CYAN, STANDARD_BACKGROUND);
-    init_pair(COR_NOME, COLOR_RED, STANDARD_BACKGROUND);
+    init_pair(COR_VIDA, COLOR_RED, STANDARD_BACKGROUND);
+    init_pair(COR_NOME_BOSS, COLOR_WHITE, STANDARD_BACKGROUND);
 }
 
 void desenhar_sprite(WINDOW *win, const char *nome_arquivo, int y_inicial, int x_inicial)
