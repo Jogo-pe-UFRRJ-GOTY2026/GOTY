@@ -29,6 +29,7 @@ typedef struct Position{
 typedef struct Player{
     char nome[50];
     int level;
+    int vida_max;
     int vida;
     int defesa;
     int karma;
@@ -38,6 +39,7 @@ typedef struct Player{
     // Atributos atributos;
     size_t NumeroAndar;
 } Player;
+
 
 Player *criar_player(const char *nome, Genero genero);
 void mover_player(Player *player, Direcao direcao, int limite_esquerda, int limite_direita, int limite_cima, int limite_baixo);

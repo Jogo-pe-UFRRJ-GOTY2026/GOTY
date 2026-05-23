@@ -76,6 +76,8 @@ Player* criar_player(const char* nome, Genero genero)
     player->karma=0;
     player->NumeroAndar=0;
     player->level=1;
+    player->vida=30;
+    player->vida_max=30;
     player->defesa=0;
 
     player->defesa += player->inventario.armadura.capacete.defesa;

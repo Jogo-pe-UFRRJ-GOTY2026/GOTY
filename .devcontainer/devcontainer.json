@@ -1,6 +1,6 @@
 {
   "name": "game",
-
+  "runArgs": ["--name","pe-game"],
   "build": {
     "dockerfile": "../dockerfile"
   },

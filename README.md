@@ -17,8 +17,7 @@ ncurses
 
 
 
+<!-- docker ps -->
+<!-- docker exec -it <container_name or id> /bin/bash -->
 
-Pode me auxiliar na realização do menu inicial, eu gostaria de usar essa seta: ➢
-A opção selecionada no momento deve ficar highlighted com uma cor clara, e a seta seria bom ficar piscando
-adicione explicações do codigo escrito uma vez que nao estou habituado com o uso da ncurses, nao altee muita a estrutura e deixa o arquivo principal "bloated" de coisas, utilize funcoes se for necessario para ficar mais legivel
 
