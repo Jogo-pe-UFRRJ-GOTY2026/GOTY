@@ -29,14 +29,7 @@ typedef enum Exceptions
     Exception_FileReadWriteError
 } Exceptions;
 
-typedef enum Direcao
-{
-    ESQUERDA,
-    DIREITA,
-    BAIXO,
-    CIMA,
-    DIRECAO_INVALIDA
-} Direcao;
+
 
 
 void desenhar_sprite(WINDOW* win, const char* nome_arquivo, int y_inicial, int x_inicial);

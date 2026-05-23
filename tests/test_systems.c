@@ -15,17 +15,17 @@
 
 Inimigo *MockInimigo()
 {
-
+    //exemplo da criação ataques
     AtaqueInimigo ataques[] = {
         criar_ataque(LINHA, 10, "⟱▔", 4, HORIZONTAL),
         criar_ataque(BULLET, 2, "🗡", 1, VERTICAL),
-        criar_ataque(BULLET, 3, "🟎", 1, VERTICAL)};
+        criar_ataque(BULLET, 3, "🟎", 1, HORIZONTAL)};
 
     Sprite_size size;
-    size.x=43;
-    size.y=28;
+    size.x=33;
+    size.y=20;
 
-    Inimigo *inimigo = criar_inimigo(100, "Fallen King", "assets/sprites/bosses/fallen_king.txt",size, 40);
+    Inimigo *inimigo = criar_inimigo(100, "Hollow Knight", "assets/sprites/bosses/hollow.txt",size, 40);
 
     for(int i=0;i<3;i++)
     {

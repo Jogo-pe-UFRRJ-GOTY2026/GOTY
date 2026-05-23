@@ -1,13 +1,15 @@
 #ifndef INIMIGO_H
 #define INIMIGO_H
+#include <stdbool.h>
 
 typedef enum TipoAtaque
 {
     LINHA,
-    AREA,
+    AREA,//Retangulo
     ESFERA,
-    DISPERSAO,
     BULLET,
+    PAREDE,
+    LASER,
 } TipoAtaque;
 typedef enum DirecaoAtaque
 {
@@ -22,10 +24,13 @@ typedef struct AtaqueInimigo
     int x;
     int y;
     int dano;
+    int vel_horizontal;
+    int vel_vertical;
     char ataque_sprite[32];
     int hit_box;
     DirecaoAtaque direcao;
     TipoAtaque tipo_ataque;
+    bool ativo;
 } AtaqueInimigo;
 
 typedef struct sprite_size{

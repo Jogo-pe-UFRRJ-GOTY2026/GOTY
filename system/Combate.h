@@ -35,8 +35,8 @@ typedef enum Estagio_atual_combate
 
 void desenhar_jogador(WINDOW *area_esquiva, Player *player);
 void iniciar_combate(Player *player,Inimigo* inimigo);
-bool ataque_colidiu(Player *player, AtaqueInimigo *Ataque);
-void spawn_atack(AtaqueInimigo *Ataque);
+bool ataque_colidiu(Player *player, AtaqueInimigo* Ataque);
+void spawn_atack(AtaqueInimigo* Ataque);
 void renderizar_combate_ui(CombateUI* ui, Player* player);
 void limpar_combate(CombateUI *ui, Inimigo *inimigo);
 void renderizar_nome_estilizado(WINDOW *area_nome_boss, const char *nome);
