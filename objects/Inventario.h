@@ -1,5 +1,6 @@
 #ifndef INVENTARIO_H
 #define INVENTARIO_H
+#include "Atributos.h"
 
 typedef enum TipoConsumivel
 {
@@ -11,7 +12,7 @@ typedef struct Consumivel
 {
     char descricao[50];
     char nome[30];
-    int vida;
+    int curaVida;
     int bonus;
     TipoConsumivel tipo;
 } Consumivel;
@@ -28,7 +29,9 @@ typedef struct Arma
 {
     char descricao[50];
     char nome[30];
+    int vida; // VIDA A MAIS QUE A ARMA PODE DAR PARA O PLAYER;
     int dano;
+    Atributos atributosarma;
     TipoDano tipo;
 } Arma;
 
@@ -36,7 +39,9 @@ typedef struct ParteArmadura
 {
     char descricao[150];
     char nome[30];
-    int defesa;
+    int vida; // VIDA A MAIS QUE A ARMADURA PODE DAR PARA O PLAYER;
+    Atributos atributosarmadura;
+
 } ParteArmadura;
 
 typedef struct Armadura
@@ -46,8 +51,6 @@ typedef struct Armadura
     ParteArmadura grevas;
     ParteArmadura botas;
 } Armadura;
-
-
 
 typedef struct Inventario{
     Armadura armadura;
@@ -61,7 +64,10 @@ typedef struct Inventario{
 
 
 Inventario init_inventario();
-Arma criar_arma(char nome[], char descricao[], int dano, TipoDano tipo);
+Arma criar_arma_Cap1(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
+Arma criar_arma_Cap2(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
+Arma criar_arma_Cap3(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
+Arma criar_arma_Cap4(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
 
 
 #endif

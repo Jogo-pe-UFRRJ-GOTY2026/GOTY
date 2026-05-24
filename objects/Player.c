@@ -5,6 +5,7 @@
 #include "Inimigo.h"
 #include "Inventario.h"
 #include "../utils/utils.h"
+#include "Atributos.h"
 
 #define between(val, start, end) (start<=val && val<=end)
 void mover_player(Player *player, DeltaDirecao delta_direcao, int lim_esquerda, int lim_direita, int lim_cima, int lim_baixo)
@@ -53,7 +54,7 @@ bool atacar_inimigo(Player *player, Inimigo *inimigo)
 
 void tomar_dano(Player *player, AtaqueInimigo *atack)
 {
-    player->vida -= atack->dano * (1.0f-(player->defesa/100.0f)); // se defesa for 5, -5% de dano
+    player->vida -= atack->dano * (1.0f-(player->atributos.defesa/100.0f)); // se defesa for 5, -5% de dano
 }
 
 Player* criar_player(const char* nome, Genero genero)
@@ -69,14 +70,39 @@ Player* criar_player(const char* nome, Genero genero)
     player->karma=0;
     player->NumeroAndar=0;
     player->level=1;
-    player->vida=30;
-    player->vida_max=30;
-    player->defesa=0;
+    player->vida_max=20;
+    player->vida = 20;
 
-    player->defesa += player->inventario.armadura.capacete.defesa;
-    player->defesa += player->inventario.armadura.peitoral.defesa;
-    player->defesa += player->inventario.armadura.grevas.defesa;
-    player->defesa += player->inventario.armadura.botas.defesa;
+    //ATRIBUTOS BASE
+    player->atributos.defesa= 5;
+    player->atributos.forca= 5;
+    player->atributos.sorte= 5;
+
+    // PEGA O ATRIBUTO BASE DO PLAYER, E SOMA COM OS ATRIBUTOS DA ARMADURA E ARMA QUE O PLAYER ESTA EQUIPADO
+    player->vida += player->inventario.armadura.capacete.vida;
+    player->vida += player->inventario.armadura.peitoral.vida;
+    player->vida += player->inventario.armadura.grevas.vida;
+    player->vida += player->inventario.armadura.botas.vida;
+
+    player->vida += player->inventario.arma.vida;
+    player->atributos.forca += player->inventario.arma.atributosarma.forca;
+    player->atributos.defesa += player->inventario.arma.atributosarma.defesa;
+    player->atributos.sorte += player->inventario.arma.atributosarma.sorte;
+
+    player->atributos.defesa += player->inventario.armadura.capacete.atributosarmadura.defesa;
+    player->atributos.defesa += player->inventario.armadura.peitoral.atributosarmadura.defesa;
+    player->atributos.defesa += player->inventario.armadura.grevas.atributosarmadura.defesa;
+    player->atributos.defesa += player->inventario.armadura.botas.atributosarmadura.defesa;
+
+    player->atributos.forca += player->inventario.armadura.capacete.atributosarmadura.forca;
+    player->atributos.forca += player->inventario.armadura.peitoral.atributosarmadura.forca;
+    player->atributos.forca += player->inventario.armadura.grevas.atributosarmadura.forca;
+    player->atributos.forca += player->inventario.armadura.botas.atributosarmadura.forca;
+
+    player->atributos.sorte += player->inventario.armadura.capacete.atributosarmadura.sorte;
+    player->atributos.sorte += player->inventario.armadura.peitoral.atributosarmadura.sorte;
+    player->atributos.sorte += player->inventario.armadura.grevas.atributosarmadura.sorte;
+    player->atributos.sorte += player->inventario.armadura.botas.atributosarmadura.sorte;
 
     return player;
 }

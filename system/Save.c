@@ -5,6 +5,8 @@
 #include "../objects/Player.h"
 #include "../objects/Inventario.h"
 #include "../utils/utils.h"
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #define NUM_OF_ELEMENTS 1
 Player* carregar_salvamento()
@@ -41,7 +43,7 @@ Player* carregar_salvamento()
 
 bool salvar_jogo(Player *player)
 {
-
+    mkdir("saves", 0777);
     FILE* save_file = fopen("saves/player_save.bin", "wb");
     if(save_file==NULL)
     {
