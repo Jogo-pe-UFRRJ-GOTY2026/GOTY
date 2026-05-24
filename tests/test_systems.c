@@ -18,7 +18,7 @@ Inimigo *MockInimigo()
     //exemplo da criação ataques
     AtaqueInimigo ataques[] = {
         criar_ataque(LINHA, 10, "⟱▔", 4, HORIZONTAL),
-        criar_ataque(BULLET, 2, "🗡", 1, VERTICAL),
+        criar_ataque(BULLET, 2, "†", 1, VERTICAL),
         criar_ataque(BULLET, 3, "🟎", 1, HORIZONTAL)};
 
     Sprite_size size;

@@ -2,6 +2,7 @@
 #include "../utils/utils.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite, int hitbox, DirecaoAtaque direcao)
 {
@@ -11,8 +12,9 @@ AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite,
     ataque.dano=dano;
     ataque.hit_box=hitbox;
     //printf("\n\n%s\n\n", ataque_sprite);
-    strncpy(ataque.ataque_sprite,ataque_sprite, sizeof(ataque_sprite)-1);
+    strncpy(ataque.ataque_sprite,ataque_sprite, sizeof(ataque.ataque_sprite)-1);
     ataque.direcao=direcao;
+    ataque.ativo=false;
 
     return ataque;
 }

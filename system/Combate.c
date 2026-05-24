@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
+#include <stdio.h>
 #include <ncurses.h>
 #include <math.h>
 #include <string.h>
@@ -7,9 +9,11 @@
 #include "../objects/Inimigo.h"
 #include "../objects/Player.h"
 #include "../utils/utils.h"
-
+#include <unistd.h>
 #define equals(str1, str2) (strcmp(str1,str2)==0)
-void iniciar_combate(Player* player, Inimigo* inimigo)
+#define ataques_na_tela 32
+
+         void iniciar_combate(Player *player, Inimigo *inimigo)
 {
     CombateUI ui;
     int max_x=getmaxx(stdscr);
@@ -17,7 +21,7 @@ void iniciar_combate(Player* player, Inimigo* inimigo)
 
 
     // NOME BOSS
-    ui.area_nome_boss = newwin(3, strlen(inimigo->nome) + 40 + inimigo->sprite_size.x, 0, 30);
+    ui.area_nome_boss = newwin(3, strlen(inimigo->nome) + 60 + inimigo->sprite_size.x, 0, 20);
     renderizar_nome_estilizado(ui.area_nome_boss,inimigo->nome);
 
     
@@ -43,16 +47,64 @@ void iniciar_combate(Player* player, Inimigo* inimigo)
 
     keypad(ui.area_esquiva, TRUE);
     wtimeout(ui.area_esquiva, 16);
+
+    int frame=0;
+    AtaqueInimigo ataques_ativos[ataques_na_tela];
+    for(int i=0;i<ataques_na_tela;i++)
+    {
+        ataques_ativos[i].ativo = false;
+    }
+    // fprintf(stderr, "--- ataques_ativos[0] ---\n");
+    // fprintf(stderr, "ativo:          %d\n", ataques_ativos[0].ativo);
+    // fprintf(stderr, "tipo_ataque:    %d\n", ataques_ativos[0].tipo_ataque); // BULLET=3
+    // fprintf(stderr, "direcao:        %d\n", ataques_ativos[0].direcao);     // VERTICAL=1
+    // fprintf(stderr, "x:              %d\n", ataques_ativos[0].x);
+    // fprintf(stderr, "y:              %d\n", ataques_ativos[0].y);              // deve ser 3
+    // fprintf(stderr, "vel_horizontal: %d\n", ataques_ativos[0].vel_horizontal); // deve ser 0
+    // fprintf(stderr, "vel_vertical:   %d\n", ataques_ativos[0].vel_vertical);   // deve ser 1
+    // fprintf(stderr, "dano:           %d\n", ataques_ativos[0].dano);           // deve ser 2
+    // fprintf(stderr, "hit_box:        %d\n", ataques_ativos[0].hit_box);        // deve ser 1
+    // fprintf(stderr, "ataque_sprite:  %s\n", ataques_ativos[0].ataque_sprite);  // deve ser "^"
+    // fprintf(stderr, "-------------------------\n");
+
+
+
     while(inimigo->vida>0 && player->vida>0)
     {
+        
 
         werase(ui.area_esquiva);
         box(ui.area_esquiva, 0, 0);
-        desenhar_jogador(ui.area_esquiva, player);
-        mover_player(player, get_delta_direcao(ui.area_esquiva), 1, esquiva_max_x-2 , 1, esquiva_max_y-2);
-        wrefresh(ui.area_esquiva);
-        
+       // desenhar_ataque(ui.area_esquiva, &ataques_ativos[0]);
+        //atualizar_ataque(ui.area_esquiva, &ataques_ativos[0]);
+        if(frame%60==0) //1 ataques por cada 60 frames é muito?
+        {
+            for(int i=0;i<ataques_na_tela;i++)
+            {
+                if(!ataques_ativos[i].ativo)
+                {
+                    ataques_ativos[i] = inimigo->ataques[1]; //testar so o bullet
+                    spawnar_ataque(&ataques_ativos[i], ui.area_esquiva);
 
+                    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < ataques_na_tela; i++)
+        {
+            if (ataques_ativos[i].ativo)
+            {
+                desenhar_ataque(ui.area_esquiva, &ataques_ativos[i]);
+                atualizar_ataque(ui.area_esquiva, &ataques_ativos[i], frame );
+                frame = 0; // não continuar aumento igual louco
+            }
+        }
+        //mvwprintw(ui.area_esquiva, player->posicao.y +2, player->posicao.x - 5, "teste mano"); // debug
+        //assert(strcmp("^", ataques_ativos[0].ataque_sprite) == 0);
+        desenhar_jogador(ui.area_esquiva, player);
+        mover_player(player, get_delta_direcao(ui.area_esquiva), 1, esquiva_max_x - 2, 1, esquiva_max_y - 2);
+        wrefresh(ui.area_esquiva);
     }
 
 }
@@ -74,9 +126,8 @@ bool ataque_colidiu(Player *player, AtaqueInimigo* Ataque)
         case LINHA:
             if(Ataque->direcao == HORIZONTAL)
                 return (abs(pl_y - atq_y)<=hitbox);
-            if(Ataque->direcao == VERTICAL);
+            if(Ataque->direcao == VERTICAL)
                 return (abs(pl_y - atq_y) <= hitbox);
-            break;
         case AREA:
             break;
 
@@ -93,12 +144,50 @@ bool ataque_colidiu(Player *player, AtaqueInimigo* Ataque)
             break;
     }
 }
-void spawnar_ataque(AtaqueInimigo* Ataque)
+void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
 {
+    int max_x, max_y;
+    getmaxyx(area_esquiva, max_y,max_x);
+    atq->ativo = true;
 
+    switch(atq->tipo_ataque)
+    {
+        case BULLET:
+            if (atq->direcao == HORIZONTAL)
+            {
+                atq->vel_horizontal = 1;
+                atq->vel_vertical = 0;
+                atq->y = rand() % (max_y - 2) + 1;
+                atq->x = 1;
+            }
+            if(atq->direcao==VERTICAL)
+            {
+                atq->vel_horizontal=0;
+                atq->vel_vertical=1;
+                atq->x = rand() % (max_x-2)+1;
+                atq->y = 1;
+            }
+    }  
 }
-void atualizar_ataque(AtaqueInimigo*)
+
+void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq, int frame_atual)
 {
+    if(frame_atual%60!=0) return;   //vamo mover de 3 em 3 frames
+    atq->x += atq->vel_horizontal;
+    atq->y += atq->vel_vertical;
+
+    // Se o ataque esta fora da tela
+    if (0 >= atq->x || atq->x >= getmaxx(area_esquiva)-1 || (0 >= atq->y || atq->y >= getmaxy(area_esquiva)-1))
+    {
+        atq->ativo = false;
+    }
+     
+}
+
+void desenhar_ataque(WINDOW* area_esquiva, AtaqueInimigo* atq)
+{
+    if (atq->ativo)
+         mvwprintw(area_esquiva, atq->y, atq->x, "%s", atq->ataque_sprite);
 
 }
 
@@ -186,7 +275,7 @@ void renderizar_nome_estilizado(WINDOW* area_nome_boss, const char* nome)
         mvwprintw(area_nome_boss, 1, meio, "██▄▄  ██▀██ ██    ██    ██▄▄  ███▄██   ████   ██ ███▄██ ██ ▄▄", nome);
         mvwprintw(area_nome_boss, 2, meio, "██    ██▀██ ██▄▄▄ ██▄▄▄ ██▄▄▄ ██ ▀██   ██ ▀█▄ ██ ██ ▀██ ▀███▀", nome);
     }
-    if (equals("Hollow Knigth", nome))
+    if (equals("Hollow Knight", nome))
     {
         mvwprintw(area_nome_boss, 0, meio, "██  ██  ▄▄▄  ▄▄    ▄▄     ▄▄▄  ▄▄   ▄▄   ██ ▄█▀ ▄▄  ▄▄ ▄▄  ▄▄▄▄ ▄▄ ▄▄ ▄▄▄▄▄▄", nome);
         mvwprintw(area_nome_boss, 1, meio, "██████ ██▀██ ██    ██    ██▀██ ██ ▄ ██   ████   ███▄██ ██ ██ ▄▄ ██▄██   ██   ", nome);
