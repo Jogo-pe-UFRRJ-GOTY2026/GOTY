@@ -2,6 +2,7 @@
 #define PLAYER_H
 #include <stddef.h>
 #include <stdbool.h>
+#include <ncurses.h>
 #include "Inventario.h"
 #include "Inimigo.h"
 #include "../utils/utils.h"
@@ -14,6 +15,14 @@ typedef enum Genero
 } Genero;
 
 
+
+typedef struct DeltaDirecao
+{
+    int dx;
+    int dy;
+} DeltaDirecao;
+
+
 typedef struct Position{
     int x;
     int y;
@@ -22,6 +31,7 @@ typedef struct Position{
 typedef struct Player{
     char nome[50];
     int level;
+    int vida_max;
     int vida;
     int karma;
     Genero genero;
@@ -31,9 +41,11 @@ typedef struct Player{
     size_t NumeroAndar;
 } Player;
 
+
 Player *criar_player(const char *nome, Genero genero);
-void mover_player(Player *player, Direcao direcao, int limite_esquerda, int limite_direita, int limite_cima, int limite_baixo);
+void mover_player(Player *player, DeltaDirecao direcao, int limite_esquerda, int limite_direita, int limite_cima, int limite_baixo);
 void tomar_dano(Player *player, AtaqueInimigo *atack);
 bool atacar_inimigo(Player *player, Inimigo *inimigo);
+DeltaDirecao get_delta_direcao(WINDOW *win);
 
 #endif

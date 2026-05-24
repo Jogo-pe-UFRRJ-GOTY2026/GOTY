@@ -7,44 +7,37 @@
 #include "../utils/utils.h"
 #include "Atributos.h"
 
-
-
-void mover_player(Player *player, Direcao direcao, int limite_esquerda, int limite_direita,int limite_cima, int limite_baixo)
+#define between(val, start, end) (start<=val && val<=end)
+void mover_player(Player *player, DeltaDirecao delta_direcao, int lim_esquerda, int lim_direita, int lim_cima, int lim_baixo)
 {
-    switch(direcao)
-    {
-        case ESQUERDA:
-            if(player->posicao.x-1>limite_esquerda)
-                player->posicao.x--;
-            break;
-        case DIREITA:
-            if(player->posicao.x+1<limite_direita)
-                player->posicao.x++;
-            break;
-        case BAIXO:
-            if(player->posicao.y-1>limite_baixo)
-                player->posicao.y--;
-            break;
-        case CIMA:
-            if(player->posicao.y+1<limite_cima)
-                player->posicao.y++;
-            break;
-        default:
-            break;
-    }
+    int novo_x = player->posicao.x + delta_direcao.dx;
+    int novo_y = player->posicao.y + delta_direcao.dy;
+
+    if(between(novo_x,lim_esquerda,lim_direita)) player->posicao.x = novo_x;
+    if(between(novo_y,lim_cima,lim_baixo)) player->posicao.y = novo_y;
+
 }
 
-Direcao get_direcao(char tecla_pressionada)
+DeltaDirecao get_delta_direcao(WINDOW* win)
 {
-    if(tecla_pressionada == KEY_UP    || tecla_pressionada=='w') 
-        return CIMA;
-    else if(tecla_pressionada == KEY_DOWN  || tecla_pressionada=='s') 
-        return BAIXO;
-    else if(tecla_pressionada == KEY_LEFT  || tecla_pressionada=='a') 
-        return ESQUERDA;
-    else if(tecla_pressionada == KEY_RIGHT || tecla_pressionada=='d') 
-        return DIREITA;
-    return DIRECAO_INVALIDA;
+    DeltaDirecao delta = {0, 0};
+    int tecla;
+
+    while((tecla=wgetch(win))!=ERR)
+    {
+        // y aumenta pra baixo, x para direita
+        if(tecla == KEY_UP || tecla== 'w') delta.dy--;
+        if(tecla == KEY_DOWN || tecla== 's') delta.dy++;
+        if(tecla == KEY_LEFT || tecla== 'a') delta.dx--;
+        if(tecla == KEY_RIGHT || tecla== 'd') delta.dx++;
+    }
+    // Evite acumulo excessivo no vetor de direção
+    if (delta.dx >  1) delta.dx =  1;
+    if (delta.dx < -1) delta.dx = -1;
+    if (delta.dy >  1) delta.dy =  1;
+    if (delta.dy < -1) delta.dy = -1;
+
+    return delta;
 }
 
 
@@ -77,7 +70,9 @@ Player* criar_player(const char* nome, Genero genero)
     player->karma=0;
     player->NumeroAndar=0;
     player->level=1;
+    player->vida_max=20;
     player->vida = 20;
+
     //ATRIBUTOS BASE
     player->atributos.defesa= 5;
     player->atributos.forca= 5;

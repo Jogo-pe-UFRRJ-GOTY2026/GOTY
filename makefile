@@ -28,7 +28,9 @@ SRC = main.c 						\
 
 
 TEST_SRC = 	tests/tests_main.c		\
+			tests/test_systems.c	\
 			system/Save.c 			\
+		    system/Combate.c 		\
 			objects/Player.c 		\
       		objects/Inventario.c 	\
     		objects/Inimigo.c 	 	\
@@ -63,9 +65,8 @@ run: all
 	$(OUT)
 
 clean:
-	$(DELETE) $(OUT) 
-	$(CLEAR)
+	$(DELETE) $(OUT) $(CLEAR)
 
 test:
-	$(CC) $(TEST_SRC) -o $(TEST_OUT) $(LIBS)
+	$(CC) $(TEST_SRC) -o $(TEST_OUT) $(LIBS) 
 	$(TEST_OUT)

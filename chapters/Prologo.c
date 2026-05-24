@@ -179,13 +179,13 @@ void  Introducao()
 
     WINDOW* tela_apresentacao=newwin(0,0,0,0);
 
-    int direita=3, esquerda=118;
+    int direita=40, esquerda=155;
     int topo=5, base=40;
 
     char* texto[]={"Dizem que existe uma saída...", "Dizem que ela fica no topo...", "Mas ninguém volta para confirmar."};
     for(int i=0;i<3;i++) //troca o 3 pelo numero de strings no texto
     {
-        mvwprintw(tela_apresentacao,2, largura/3,"%s" ,texto[i] );
+        mvwprintw(tela_apresentacao,2, largura/2-10,"%s" ,texto[i] );
 
         for(int x=direita+1;x<esquerda;x++) mvwprintw(tela_apresentacao, topo,x,"-");
         for(int x=direita+1;x<esquerda;x++) mvwprintw(tela_apresentacao, base,x,"-");
@@ -205,7 +205,7 @@ void  Introducao()
         } 
 
 
-        desenhar_sprite(tela_apresentacao, "assets/sprites/buildings/tower.txt", 6, 4);
+        desenhar_sprite(tela_apresentacao, "assets/sprites/buildings/tower.txt", topo+1, direita+1);
 
 
 

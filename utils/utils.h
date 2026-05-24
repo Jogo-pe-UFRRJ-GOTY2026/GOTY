@@ -12,10 +12,11 @@ typedef enum opcao_selecionada
     TOTAL_OPCOES
 } opcao_selecionada;
 
-typedef enum{
-    COR_OPCAO_SELECIONADA=1,
+typedef enum
+{
+    COR_OPCAO_SELECIONADA = 1,
     COR_VIDA,
-    COR_NOME,
+    COR_NOME_BOSS,
 } Cores;
 
 typedef enum Exceptions
@@ -28,14 +29,7 @@ typedef enum Exceptions
     Exception_FileReadWriteError
 } Exceptions;
 
-typedef enum Direcao
-{
-    ESQUERDA,
-    DIREITA,
-    BAIXO,
-    CIMA,
-    DIRECAO_INVALIDA
-} Direcao;
+
 
 
 void desenhar_sprite(WINDOW* win, const char* nome_arquivo, int y_inicial, int x_inicial);

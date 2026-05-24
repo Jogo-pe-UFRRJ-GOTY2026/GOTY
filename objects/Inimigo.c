@@ -2,33 +2,35 @@
 #include "../utils/utils.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
-AtaqueInimigo *criar_ataque(TipoAtaque tipo, int dano, int hitbox)
+AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite, int hitbox, DirecaoAtaque direcao)
 {
-    AtaqueInimigo* ataque = malloc(sizeof(AtaqueInimigo));
-    if(ataque==NULL)
-        exit_with_error(Exception_AllocationError);
+    AtaqueInimigo ataque;
 
-    ataque->tipo_ataque=tipo;
-    ataque->dano=dano;
-    ataque->hit_box=hitbox;
+    ataque.tipo_ataque=tipo;
+    ataque.dano=dano;
+    ataque.hit_box=hitbox;
+    //printf("\n\n%s\n\n", ataque_sprite);
+    strncpy(ataque.ataque_sprite,ataque_sprite, sizeof(ataque.ataque_sprite)-1);
+    ataque.direcao=direcao;
+    ataque.ativo=false;
 
     return ataque;
 }
 
-Inimigo *inimigo_criar(int vida, char nome[], char sprite_location[], AtaqueInimigo *ataques[5], int mercy)
+Inimigo *criar_inimigo(int vida, char nome[], const char *sprite_location, Sprite_size size, int mercy)
 {
     Inimigo *inimigo = malloc(sizeof(Inimigo));
+    if(inimigo==NULL)
+        perror("Foda ne cria");
 
-    strcpy(inimigo->nome, nome);
+    strncpy(inimigo->nome, nome, sizeof(inimigo->nome));
     inimigo->vida = vida;
     inimigo->mercy = mercy;
-    strcpy(inimigo->sprite, sprite_location);
-    for (int i = 0; i < 5; i++)
-    {
-        inimigo->ataques[i] = (*ataques[i]);
-        free(ataques[i]);
-    }
+    inimigo->sprite_size.x=size.x;
+    inimigo->sprite_size.y=size.y;
+    strncpy(inimigo->sprite, sprite_location, sizeof(inimigo->sprite));
     return inimigo;
 }
 
@@ -40,8 +42,3 @@ void inimigo_tomar_dano(Inimigo* inimigo, int dano)
         inimigo->vida = 0;
 }
 
-void limpar_inimigo(Inimigo* inimigo)
-{
-
-    free(inimigo);
-}
