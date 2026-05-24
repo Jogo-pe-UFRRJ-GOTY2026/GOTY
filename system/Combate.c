@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdbool.h>
-#include <assert.h>
 #include <stdio.h>
 #include <ncurses.h>
 #include <math.h>
@@ -9,11 +8,10 @@
 #include "../objects/Inimigo.h"
 #include "../objects/Player.h"
 #include "../utils/utils.h"
-#include <unistd.h>
 #define equals(str1, str2) (strcmp(str1,str2)==0)
 #define ataques_na_tela 32
 
-         void iniciar_combate(Player *player, Inimigo *inimigo)
+void iniciar_combate(Player *player, Inimigo *inimigo)
 {
     CombateUI ui;
     int max_x=getmaxx(stdscr);
