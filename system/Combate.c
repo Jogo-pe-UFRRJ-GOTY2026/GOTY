@@ -13,7 +13,7 @@
 #define equals(str1, str2) (strcmp(str1,str2)==0)
 #define ataques_na_tela 32
 
-         void iniciar_combate(Player *player, Inimigo *inimigo)
+void iniciar_combate(Player *player, Inimigo *inimigo)
 {
     CombateUI ui;
     int max_x=getmaxx(stdscr);
@@ -54,24 +54,12 @@
     {
         ataques_ativos[i].ativo = false;
     }
-    // fprintf(stderr, "--- ataques_ativos[0] ---\n");
-    // fprintf(stderr, "ativo:          %d\n", ataques_ativos[0].ativo);
-    // fprintf(stderr, "tipo_ataque:    %d\n", ataques_ativos[0].tipo_ataque); // BULLET=3
-    // fprintf(stderr, "direcao:        %d\n", ataques_ativos[0].direcao);     // VERTICAL=1
-    // fprintf(stderr, "x:              %d\n", ataques_ativos[0].x);
-    // fprintf(stderr, "y:              %d\n", ataques_ativos[0].y);              // deve ser 3
-    // fprintf(stderr, "vel_horizontal: %d\n", ataques_ativos[0].vel_horizontal); // deve ser 0
-    // fprintf(stderr, "vel_vertical:   %d\n", ataques_ativos[0].vel_vertical);   // deve ser 1
-    // fprintf(stderr, "dano:           %d\n", ataques_ativos[0].dano);           // deve ser 2
-    // fprintf(stderr, "hit_box:        %d\n", ataques_ativos[0].hit_box);        // deve ser 1
-    // fprintf(stderr, "ataque_sprite:  %s\n", ataques_ativos[0].ataque_sprite);  // deve ser "^"
-    // fprintf(stderr, "-------------------------\n");
-
 
 
     while(inimigo->vida>0 && player->vida>0)
     {
         
+        frame++;
 
         werase(ui.area_esquiva);
         box(ui.area_esquiva, 0, 0);
@@ -98,9 +86,15 @@
             {
                 desenhar_ataque(ui.area_esquiva, &ataques_ativos[i]);
                 atualizar_ataque(ui.area_esquiva, &ataques_ativos[i]);
-                frame++;
                 //atualizar_ataque(ui.area_esquiva, &ataques_ativos[i], frame );
                 //frame = 0; // não continuar aumento igual louco
+                if (ataque_colidiu(player, &ataques_ativos[i]))
+                {
+                    //player->vida -= ataques_ativos[i].dano;
+                    tomar_dano(player, &ataques_ativos[i]);
+                    ataques_ativos[i].ativo = false;  // ataque some ao acertar
+                    renderizar_combate_ui(&ui, player); // atualiza HP no menu
+                }
             }
         }
         //mvwprintw(ui.area_esquiva, player->posicao.y +2, player->posicao.x - 5, "teste mano"); // debug
@@ -130,7 +124,7 @@ bool ataque_colidiu(Player *player, AtaqueInimigo* Ataque)
             if(Ataque->direcao == HORIZONTAL)
                 return (abs(pl_y - atq_y)<=hitbox);
             if(Ataque->direcao == VERTICAL)
-                return (abs(pl_y - atq_y) <= hitbox);
+                return (abs(pl_x - atq_x) <= hitbox);
         case AREA:
             break;
 
@@ -141,8 +135,10 @@ bool ataque_colidiu(Player *player, AtaqueInimigo* Ataque)
             break;
 
         case LASER:
-            break;
-
+            if(Ataque->direcao == VERTICAL)
+                return abs(pl_x - atq_x) <= hitbox;
+            if(Ataque->direcao == HORIZONTAL)
+                return abs(pl_y - atq_y) <= hitbox;
         default:
             break;
     }
@@ -162,6 +158,7 @@ void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
                 atq->vel_vertical = 0;
                 atq->y = rand() % (max_y - 2) + 1;
                 atq->x = 1;
+                break;
             }
             if(atq->direcao==VERTICAL)
             {
@@ -169,26 +166,46 @@ void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
                 atq->vel_vertical=1;
                 atq->x = rand() % (max_x-2)+1;
                 atq->y = 1;
+                break;
+            }
+        case LINHA:
+            // cobre largura toda, desce devagar
+            if(atq->direcao == VERTICAL)
+            {
+                atq->vel_horizontal = 0;
+                atq->vel_vertical = 1;
+                atq->x = 1;
+                atq->y = 1;
+                break;
+            }
+            if(atq->direcao == HORIZONTAL)
+            {
+                atq->vel_horizontal = 0;
+                atq->vel_vertical = 1;
+                atq->x = 1;
+                atq->y = 1;             
+                break;
+            }
+        case LASER:
+            if(atq->direcao == VERTICAL)
+            {
+                atq->vel_horizontal = 0;
+                atq->vel_vertical = 0;
+                atq->x = rand() % (max_x - 2) + 1;
+                atq->y = 1;
+                break;
+            }
+            if(atq->direcao == HORIZONTAL)
+            {
+                atq->vel_horizontal = 0;
+                atq->vel_vertical = 0;
+                atq->x = 1;
+                atq->y = rand() % (max_y - 2) + 1;
+                break;
             }
     }
-    //PMI
-    atq->tick_movimento = 0;
-    atq->velocidade = 5; // ajuste aqui a lentidão
 }
 
-/*void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq, int frame_atual)
-{
-    if(frame_atual%60!=0) return;   //vamo mover de 3 em 3 frames
-    atq->x += atq->vel_horizontal;
-    atq->y += atq->vel_vertical;
-
-    // Se o ataque esta fora da tela
-    if (0 >= atq->x || atq->x >= getmaxx(area_esquiva)-1 || (0 >= atq->y || atq->y >= getmaxy(area_esquiva)-1))
-    {
-        atq->ativo = false;
-    }
-     
-}*/
 
 //PMI
 void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq)
@@ -214,8 +231,22 @@ void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq)
 
 void desenhar_ataque(WINDOW* area_esquiva, AtaqueInimigo* atq)
 {
-    if (atq->ativo)
-         mvwprintw(area_esquiva, atq->y, atq->x, "%s", atq->ataque_sprite);
+    int max_x = getmaxx(area_esquiva);
+    switch (atq->tipo_ataque)
+    {
+        case LINHA:
+            // desenha da borda esquerda até a direita na linha y, tem que ajeitar isso
+            //if(atq->direcao == VERTICAL)
+
+            //if(atq->direcao == HORIZONTAL)
+                for (int x = 1; x < max_x - 1; x++)
+                    mvwprintw(area_esquiva, atq->y, x, "%s", atq->ataque_sprite);
+                break;
+
+        default:
+            mvwprintw(area_esquiva, atq->y, atq->x, "%s", atq->ataque_sprite);
+            break;
+    }
 
 }
 
@@ -246,12 +277,13 @@ void desenhar_botao(WINDOW *area_menu, const char *texto, int y, int x, bool sel
 
 void renderizar_menu_combate(WINDOW *area_menu, Player* player, OpcoesMenuCombate opcao_hovered)
 {
+    werase(area_menu);
 
     mvwprintw(area_menu, 1, 3, "HP:%d/%d", player->vida, player->vida_max);
 
     // Desenha a barra de vida
     mvwprintw(area_menu,1,15,"[");
-    int porcentagem_vida=(player->vida_max/player->vida*10);
+    int porcentagem_vida=(player->vida*10/player->vida_max);
     wattron(area_menu, COLOR_PAIR(COR_VIDA));
     for (int x = 16, i = 0; i < porcentagem_vida; i++, x++)
         mvwprintw(area_menu, 1, x, "█");

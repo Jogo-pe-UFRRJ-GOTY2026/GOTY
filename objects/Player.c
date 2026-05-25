@@ -55,6 +55,7 @@ bool atacar_inimigo(Player *player, Inimigo *inimigo)
 void tomar_dano(Player *player, AtaqueInimigo *atack)
 {
     player->vida -= atack->dano * (1.0f-(player->atributos.defesa/100.0f)); // se defesa for 5, -5% de dano
+    if(player->vida<=0) player->vida =0;
 }
 
 Player* criar_player(const char* nome, Genero genero)

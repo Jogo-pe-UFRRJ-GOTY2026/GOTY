@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite, int hitbox, DirecaoAtaque direcao)
+AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite, int hitbox, DirecaoAtaque direcao,SentidoAtaque sentido, int velocidade)
 {
     AtaqueInimigo ataque;
 
@@ -15,7 +15,8 @@ AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite,
     strncpy(ataque.ataque_sprite,ataque_sprite, sizeof(ataque.ataque_sprite)-1);
     ataque.direcao=direcao;
     ataque.ativo=false;
-
+    ataque.velocidade = velocidade;
+    ataque.tick_movimento = 0;
     return ataque;
 }
 

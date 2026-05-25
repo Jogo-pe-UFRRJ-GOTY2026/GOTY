@@ -15,9 +15,16 @@ typedef enum DirecaoAtaque
 {
     HORIZONTAL,
     VERTICAL,
-    DIAGONAL,
     PONTO
 } DirecaoAtaque;
+
+typedef enum SentidoAtaque
+{
+    DIREITA_ESQUERDA,
+    ESQUERDA_DIREITA,
+    CIMA_BAIXO,
+    BAIXO_CIMA
+} SentidoAtaque;
 
 typedef struct AtaqueInimigo
 {
@@ -30,10 +37,11 @@ typedef struct AtaqueInimigo
     int hit_box;
     DirecaoAtaque direcao;
     TipoAtaque tipo_ataque;
+    SentidoAtaque sentido;
     bool ativo;
     //PMI
     int tick_movimento;
-    int velocidade; // opcional mas recomendado
+    int velocidade; // opcional mas recomendado, quanto menor mais rapido
 } AtaqueInimigo;
 
 typedef struct sprite_size{
@@ -53,7 +61,7 @@ typedef struct Inimigo
 } Inimigo;
 
 Inimigo *criar_inimigo(int vida, char nome[], const char *sprite_location, Sprite_size size, int mercy);
-AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char *ataque_sprite, int hitbox, DirecaoAtaque direcao);
+AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char *ataque_sprite, int hitbox, DirecaoAtaque direcao,SentidoAtaque sentido, int velocidade);
 void inimigo_tomar_dano(Inimigo *inimigo, int dano);
 void inimigo_tomar_mercy(Inimigo *inimigo, int dano);
 void limpar_inimigo(Inimigo *inimigo);
