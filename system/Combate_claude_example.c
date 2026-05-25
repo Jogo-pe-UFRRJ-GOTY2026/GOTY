@@ -21,6 +21,7 @@
 #include "Combate.h"
 #include "../utils/utils.h"
 #include "../data_structures/arraylist.h"
+#include "../objects/Player.h"
 
 #include <locale.h>
 #include <math.h>
@@ -31,7 +32,7 @@
 #include <unistd.h>
 
 // ── Configuração da fase de esquiva ───────────────────────────────────
-#define ESQUIVA_FRAMES   75      // número de frames totais de esquiva
+#define ESQUIVA_FRAMES   75      // número de frames totais de esquivasystem/Combate_claude_example.c
 #define ESQUIVA_FRAME_US 66667   // duração de cada frame em µs (~15 fps)
 
 // ── Labels do menu 2×2 ────────────────────────────────────────────────
@@ -344,8 +345,9 @@ static void fase_esquiva(CombateCtx *ctx, AtaqueInimigo *atk)
     draw_inimigo(ctx);
 
     nodelay(stdscr, TRUE);   // getch() não bloqueia
-
-    for (int f = 0; f < ESQUIVA_FRAMES; f++) {
+   
+    /*for (int f = 0; f < ESQUIVA_FRAMES; f=f+(f/2)) {
+        
         draw_campo(ctx, danger);
 
         int ch = getch();
@@ -367,7 +369,7 @@ static void fase_esquiva(CombateCtx *ctx, AtaqueInimigo *atk)
         }
 
         usleep(ESQUIVA_FRAME_US);
-    }
+    }*/
 
     nodelay(stdscr, FALSE);  // volta ao modo bloqueante
 

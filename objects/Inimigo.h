@@ -31,6 +31,9 @@ typedef struct AtaqueInimigo
     DirecaoAtaque direcao;
     TipoAtaque tipo_ataque;
     bool ativo;
+    //PMI
+    int tick_movimento;
+    int velocidade; // opcional mas recomendado
 } AtaqueInimigo;
 
 typedef struct sprite_size{

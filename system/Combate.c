@@ -77,7 +77,8 @@
         box(ui.area_esquiva, 0, 0);
        // desenhar_ataque(ui.area_esquiva, &ataques_ativos[0]);
         //atualizar_ataque(ui.area_esquiva, &ataques_ativos[0]);
-        if(frame%60==0) //1 ataques por cada 60 frames é muito?
+        //PMI if(frame%60==0) //1 ataques por cada 60 frames é muito?
+        if(frame % 30 == 0)
         {
             for(int i=0;i<ataques_na_tela;i++)
             {
@@ -96,8 +97,10 @@
             if (ataques_ativos[i].ativo)
             {
                 desenhar_ataque(ui.area_esquiva, &ataques_ativos[i]);
-                atualizar_ataque(ui.area_esquiva, &ataques_ativos[i], frame );
-                frame = 0; // não continuar aumento igual louco
+                atualizar_ataque(ui.area_esquiva, &ataques_ativos[i]);
+                frame++;
+                //atualizar_ataque(ui.area_esquiva, &ataques_ativos[i], frame );
+                //frame = 0; // não continuar aumento igual louco
             }
         }
         //mvwprintw(ui.area_esquiva, player->posicao.y +2, player->posicao.x - 5, "teste mano"); // debug
@@ -167,10 +170,13 @@ void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
                 atq->x = rand() % (max_x-2)+1;
                 atq->y = 1;
             }
-    }  
+    }
+    //PMI
+    atq->tick_movimento = 0;
+    atq->velocidade = 5; // ajuste aqui a lentidão
 }
 
-void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq, int frame_atual)
+/*void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq, int frame_atual)
 {
     if(frame_atual%60!=0) return;   //vamo mover de 3 em 3 frames
     atq->x += atq->vel_horizontal;
@@ -182,6 +188,28 @@ void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq, int frame_atual)
         atq->ativo = false;
     }
      
+}*/
+
+//PMI
+void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq)
+{
+    if (!atq->ativo) return;
+
+    atq->tick_movimento++;
+
+    if (atq->tick_movimento < atq->velocidade)
+        return;
+
+    atq->tick_movimento = 0;
+
+    atq->x += atq->vel_horizontal;
+    atq->y += atq->vel_vertical;
+
+    if (0 >= atq->x || atq->x >= getmaxx(area_esquiva)-1 ||
+        0 >= atq->y || atq->y >= getmaxy(area_esquiva)-1)
+    {
+        atq->ativo = false;
+    }
 }
 
 void desenhar_ataque(WINDOW* area_esquiva, AtaqueInimigo* atq)
