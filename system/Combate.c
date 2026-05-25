@@ -43,7 +43,6 @@ void iniciar_combate(Player *player, Inimigo *inimigo)
     ui.area_menu = newwin(20,56, 22,inimigo->sprite_size.x+20);
     renderizar_combate_ui(&ui, player);
 
-    EstagioCombate estado_atual = FASE_DIALOGO1;
 
     keypad(ui.area_esquiva, TRUE);
     wtimeout(ui.area_esquiva, 16);
@@ -72,7 +71,7 @@ void iniciar_combate(Player *player, Inimigo *inimigo)
             {
                 if(!ataques_ativos[i].ativo)
                 {
-                    ataques_ativos[i] = inimigo->ataques[1]; //testar so o bullet
+                    ataques_ativos[i] = inimigo->ataques[rand() % 2 + 1]; //testar so o bullet
                     spawnar_ataque(&ataques_ativos[i], ui.area_esquiva);
 
                     break;
@@ -142,25 +141,37 @@ bool ataque_colidiu(Player *player, AtaqueInimigo* Ataque)
         default:
             break;
     }
+    return false;
 }
 void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
 {
     int max_x, max_y;
     getmaxyx(area_esquiva, max_y,max_x);
     atq->ativo = true;
+    atq->tick_movimento = 0;  // ← zera aqui
+    atq->tick_vida = 0;       // ← e aqui
 
     switch(atq->tipo_ataque)
     {
         case BULLET:
-            if (atq->direcao == HORIZONTAL)
+
+            if (atq->sentido == ESQUERDA_DIREITA)
             {
                 atq->vel_horizontal = 1;
                 atq->vel_vertical = 0;
                 atq->y = rand() % (max_y - 2) + 1;
-                atq->x = 1;
+                atq->x = 2;
                 break;
             }
-            if(atq->direcao==VERTICAL)
+            if(atq->sentido == DIREITA_ESQUERDA)
+            {
+                atq->vel_horizontal=-1;
+                atq->vel_vertical=0;
+                atq->x = max_x - 2;
+                atq->y = rand() % (max_y-2)+1;
+                break;
+            }
+            if(atq->sentido == CIMA_BAIXO)
             {
                 atq->vel_horizontal=0;
                 atq->vel_vertical=1;
@@ -168,6 +179,15 @@ void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
                 atq->y = 1;
                 break;
             }
+            if(atq->sentido == BAIXO_CIMA)
+            {
+                atq->vel_horizontal=0;
+                atq->vel_vertical=-1;
+                atq->x = rand() % (max_x-2)+1;
+                atq->y = max_y-2;
+                break;
+            }
+            break;
         case LINHA:
             // cobre largura toda, desce devagar
             if(atq->direcao == VERTICAL)
@@ -178,14 +198,23 @@ void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
                 atq->y = 1;
                 break;
             }
-            if(atq->direcao == HORIZONTAL)
+            if(atq->sentido == ESQUERDA_DIREITA)
             {
-                atq->vel_horizontal = 0;
-                atq->vel_vertical = 1;
+                atq->vel_horizontal = 1;
+                atq->vel_vertical = 0;
                 atq->x = 1;
-                atq->y = 1;             
+                atq->y = rand()%(max_y-2);             
                 break;
             }
+            if(atq->sentido == DIREITA_ESQUERDA)
+            {
+                atq->vel_horizontal = 1;
+                atq->vel_vertical = 0;
+                atq->x = max_x-2;
+                atq->y = rand()%(max_y-2);             
+                break;
+            }
+            break;
         case LASER:
             if(atq->direcao == VERTICAL)
             {
@@ -203,6 +232,7 @@ void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
                 atq->y = rand() % (max_y - 2) + 1;
                 break;
             }
+            break;
     }
 }
 
@@ -251,8 +281,10 @@ void desenhar_ataque(WINDOW* area_esquiva, AtaqueInimigo* atq)
 }
 
 
-bool rodada()
+bool rodada(/*AtaqueInimigo ataque, Player* player*/)
 {
+    EstagioCombate estado_atual = FASE_DIALOGO1;
+
     // fala do boss
     // 1 sequencia de um ataque especifico
     // ação do player

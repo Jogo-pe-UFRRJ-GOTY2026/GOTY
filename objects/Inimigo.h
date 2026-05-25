@@ -40,6 +40,7 @@ typedef struct AtaqueInimigo
     SentidoAtaque sentido;
     bool ativo;
     //PMI
+    int tick_vida;
     int tick_movimento;
     int velocidade; // opcional mas recomendado, quanto menor mais rapido
 } AtaqueInimigo;

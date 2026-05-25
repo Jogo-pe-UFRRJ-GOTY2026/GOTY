@@ -14,9 +14,11 @@ AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite,
     //printf("\n\n%s\n\n", ataque_sprite);
     strncpy(ataque.ataque_sprite,ataque_sprite, sizeof(ataque.ataque_sprite)-1);
     ataque.direcao=direcao;
+    ataque.sentido=sentido;
     ataque.ativo=false;
     ataque.velocidade = velocidade;
     ataque.tick_movimento = 0;
+    ataque.tick_vida = 0;
     return ataque;
 }
 
