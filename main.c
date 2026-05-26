@@ -46,6 +46,7 @@ int main()
     }
     switch(AndarSalvo)
     {
+        case Andar0:
 
         case Andar1:
             Capitulo1(player);
@@ -55,6 +56,8 @@ int main()
             Capitulo3(player);
         case Andar4:
             Capitulo4(player);
+        case Andar5:
+            Capitulo5(player);
     }
 
     getch();
@@ -145,10 +148,9 @@ Player* menu_inicial()
             switch (selecionada)
             {
             case INICIAR_JOGO_NOVO:
-
-                player = Prologo(); 
-                
                 delwin(menu_win);
+                player = Prologo_pt1();
+
                 return player;
             case CONTINUAR_JOGO:
                 player = carregar_salvamento();

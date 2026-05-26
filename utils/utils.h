@@ -13,13 +13,15 @@ typedef enum opcao_selecionada
     TOTAL_OPCOES
 } opcao_selecionada;
 
-typedef enum
+typedef enum cores
 {
     COR_OPCAO_SELECIONADA = 1,
     COR_VIDA,
     COR_NOME_BOSS,
-    COR_TEXTO_MORTE
+    COR_TEXTO_MORTE,
+    COR_DESTAQUE,
 } Cores;
+
 
 typedef enum Exceptions
 {
