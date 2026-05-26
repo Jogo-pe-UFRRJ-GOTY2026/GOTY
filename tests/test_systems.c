@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include "../utils/utils.h"
 #include "../objects/Player.h"
 #include "../objects/Inimigo.h"
 #include "../objects/Inventario.h"
@@ -56,8 +56,9 @@ void simular_combate()
 {
     Player *player=MockPlayer();
     Inimigo* inimigo=MockInimigo();
+    mostrar_tela_morte(player);
+    getch();
     iniciar_combate(player, inimigo);
-
 }
 
 void salvar_jogo_test(Player *player)

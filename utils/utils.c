@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
-#include <ncursesw/curses.h>
+#include <ncurses.h>
 #include "utils.h"
+#include "../objects/Player.h"
 #include <string.h>
 
 char* get_error_message(Exceptions ex)
@@ -49,9 +50,11 @@ void exit_with_error(Exceptions ex)
 
 void iniciar_cores()
 {
-    // Para criar cores mais costomizadas, ver  init_color, e can_change_color() que retorna true se o terminal suporta essa costumizacao
     const int STANDARD_BACKGROUND = -1;
-    // init_pair(id, cor_foreground ,cor_background)
+    short COLOR_CRIMSON=16;
+    init_color(COLOR_CRIMSON, 710, 192, 251);
+
+    init_pair(COR_TEXTO_MORTE, COLOR_CRIMSON, STANDARD_BACKGROUND);
     init_pair(COR_OPCAO_SELECIONADA, COLOR_YELLOW, STANDARD_BACKGROUND);
     init_pair(COR_VIDA, COLOR_RED, STANDARD_BACKGROUND);
     init_pair(COR_NOME_BOSS, COLOR_WHITE, STANDARD_BACKGROUND);
@@ -77,13 +80,78 @@ void desenhar_sprite(WINDOW *win, const char *nome_arquivo, int y_inicial, int x
 }
 
 
-void slow_mvwprintw(WINDOW* win, char* fala, const int y, int x)
+void slow_mvwprintw(WINDOW* win, char* fala, const int y, int x, int delay_ms)
 {
-    int delay_ms=50;
     for(int i=0;fala[i]!='\0';i++)
     {
         mvwaddch(win, y, x + i, fala[i]);
         wrefresh(win);
         napms(delay_ms);
     }
+}
+
+void mostrar_tela_morte(Player* player)
+{
+    WINDOW* tela_morte = newwin(getmaxy(stdscr), getmaxx(stdscr),0,0);
+
+    wattron(tela_morte, COLOR_PAIR(COR_TEXTO_MORTE) | A_BOLD);
+    mvwprintw(tela_morte, 16, 70, "██    ██  ██████  ██    ██     ██████  ██ ███████ ██████  ");
+    mvwprintw(tela_morte, 17, 70, " ██  ██  ██    ██ ██    ██     ██   ██ ██ ██      ██   ██");
+    mvwprintw(tela_morte, 18, 70, "  ████   ██    ██ ██    ██     ██   ██ ██ █████   ██   ██");
+    mvwprintw(tela_morte, 19, 70, "   ██    ██    ██ ██    ██     ██   ██ ██ ██      ██   ██ ");
+    mvwprintw(tela_morte, 20, 70, "   ██     ██████   ██████      ██████  ██ ███████ ██████ ");
+
+    wattroff(tela_morte, COLOR_PAIR(COR_TEXTO_MORTE) | A_BOLD);
+    wrefresh(tela_morte);
+    napms(2000);
+
+    werase(tela_morte);
+
+    int medida_lembrancas = player->medidor_lembranca[Reaper], indice_dialogo;
+    player->medidor_lembranca[Reaper]+=1;
+
+    char *dialogos[] = {
+        "Mais um falhando... Terei de te levar de volta ao inicio.",
+        "Vejo que falhou de novo. Pretende continuar tentando?",
+        "De novo? Você realmente não desiste.",
+        "Outra queda... A Torre deve gostar de você.",
+        "Você continua voltando. Interessante.",
+        "Quantas vezes pretende cair antes de chegar ao topo?",
+        "Você já parece diferente de quando chegou aqui.",
+        "A maioria teria desistido.",
+        "A Torre tira algo de você a cada retorno.",
+        "Ainda consegue lembrar por que está subindo?",
+        "Olá de novo, %s... Voltando para baixo?"
+    };
+
+    if (medida_lembrancas == 0)
+        indice_dialogo = 0;
+    else if (medida_lembrancas == 1)
+        indice_dialogo = 1;
+    else if (medida_lembrancas == 2)
+        indice_dialogo = 2;
+    else if (medida_lembrancas == 3)
+        indice_dialogo = 3;
+    else if (medida_lembrancas == 4)
+        indice_dialogo = 4;
+    else if (medida_lembrancas == 5)
+        indice_dialogo = 5;
+    else if (medida_lembrancas == 6)
+        indice_dialogo = 6;
+    else if (medida_lembrancas == 7)
+        indice_dialogo = 7;
+    else if (medida_lembrancas == 8)
+        indice_dialogo = 8;
+    else if (medida_lembrancas == 9)
+        indice_dialogo = 9;
+    else
+        indice_dialogo = 10;
+    desenhar_sprite(tela_morte, "assets/sprites/bosses/reaper.txt",5,15);
+    wrefresh(tela_morte);
+    napms(1000);
+    slow_mvwprintw(tela_morte, dialogos[indice_dialogo], 10, 70, 30);
+    wrefresh(tela_morte);
+    napms(1000);
+    
+    delwin(tela_morte);
 }

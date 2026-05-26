@@ -74,7 +74,7 @@ EstadoRodada rodada(AtaqueInimigo ataque, Player *player,Inimigo* inimigo, Comba
     };
     werase(ui->area_dialogos);
     box(ui->area_dialogos,0,0);
-    slow_mvwprintw(ui->area_dialogos, teste[rand() % 3], 1, 2); // inves disso vamos passar os dialogos do boss, que vao ficar na struct
+    slow_mvwprintw(ui->area_dialogos, teste[rand() % 3], 1, 2, 40); // inves disso vamos passar os dialogos do boss, que vao ficar na struct
     werase(ui->area_dialogos);
     wrefresh(ui->area_dialogos);
 

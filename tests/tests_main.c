@@ -4,6 +4,7 @@
 #include "tests.h"
 #include <stdlib.h>
 #include <string.h>
+#include "../utils/utils.h"
 #include <time.h>
 // Uma breve aula para vocês senhores, um hábito muito bom de se criar em desenvolvimento de sistemas: Testes
 // É prática existente na industria escrever testes para o seu sistema, para previnir erros durante as suas pipelines CI/CD e deploys incorretos

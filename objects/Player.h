@@ -5,7 +5,6 @@
 #include <ncurses.h>
 #include "Inventario.h"
 #include "Inimigo.h"
-#include "../utils/utils.h"
 #include "Atributos.h"
 
 typedef enum Genero
@@ -27,6 +26,17 @@ typedef struct Position{
     int x;
     int y;
 } Position;
+typedef enum lembrancas_
+{
+    Hollow_Knight,
+    Centaur,
+    Demon,
+    Cerberus,
+    Dragon,
+    Fallen_King,
+    Vigia,
+    Reaper
+} Lembrancas;
 
 typedef struct Player{
     char nome[50];

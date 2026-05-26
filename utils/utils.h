@@ -2,6 +2,7 @@
 #define UTILS_H
 #include <stdbool.h>
 #include <ncurses.h>
+#include "../objects/Player.h"
 
 typedef enum opcao_selecionada
 {
@@ -17,6 +18,7 @@ typedef enum
     COR_OPCAO_SELECIONADA = 1,
     COR_VIDA,
     COR_NOME_BOSS,
+    COR_TEXTO_MORTE
 } Cores;
 
 typedef enum Exceptions
@@ -38,7 +40,8 @@ int gerar_rolagem_dano();
 int gerar_chance_de_evasao_do_inimigo();
 int gerar_rolagem_mercy();
 void exit_with_error(Exceptions ex);
-void slow_mvwprintw(WINDOW *win, char *fala, const int y, int x);
+void slow_mvwprintw(WINDOW *win, char *fala, const int y, int x, int delay_ms);
+void mostrar_tela_morte(Player* player);
 
 void iniciar_cores();
 
