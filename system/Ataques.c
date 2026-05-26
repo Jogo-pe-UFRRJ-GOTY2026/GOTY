@@ -54,8 +54,6 @@ bool ataque_colidiu(Player *player, AtaqueInimigo *Ataque)
     return false;
 }
 
-
-
 void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
 {
     int max_x, max_y;

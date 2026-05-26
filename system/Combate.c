@@ -217,31 +217,6 @@ EstadoRodada loop_esquiva(AtaqueInimigo ataque_atual, Player *player, CombateUI 
     return CONTINUA;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void desenhar_botao(WINDOW *area_menu, const char *texto, int y, int x, bool selecionada)
 {
     if (selecionada)
@@ -276,10 +251,10 @@ void renderizar_menu_combate(WINDOW *area_menu, Player* player, OpcoesMenuCombat
     mvwprintw(area_menu,1, 35, "Lv.%d", player->level);
 
 
-    desenhar_botao(area_menu, "1.ATACAR", 3, 0, opcao_hovered == ATACAR);
-    desenhar_botao(area_menu, "2.ITENS", 3, 24, opcao_hovered == ITENS);
-    desenhar_botao(area_menu, "3.MERCY", 6, 0, opcao_hovered == MERCY);
-    desenhar_botao(area_menu, "4.DESISTIR", 6, 24, opcao_hovered == DESISTIR);
+    desenhar_botao(area_menu, " 1.ATACAR", 3, 0, opcao_hovered == ATACAR);
+    desenhar_botao(area_menu, " 2.ITENS", 3, 24, opcao_hovered == ITENS);
+    desenhar_botao(area_menu, " 3.MERCY", 6, 0, opcao_hovered == MERCY);
+    desenhar_botao(area_menu, " 4.DESISTIR", 6, 24, opcao_hovered == DESISTIR);
     wrefresh(area_menu);
 }
 
@@ -296,18 +271,9 @@ void renderizar_combate_ui(CombateUI* ui, Player* player)
     wrefresh(ui->area_menu);
 }
 
-
-
-
-
-
 void desenhar_jogador(WINDOW *area_esquiva, Player *player)
 {
     mvwprintw(area_esquiva, player->posicao.y, player->posicao.x, "🤍");
 }
-
-
-
-
 
 void limpar_combate(CombateUI *ui, Inimigo *inimigo);

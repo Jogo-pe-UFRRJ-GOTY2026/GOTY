@@ -14,13 +14,6 @@
 // 3. System Testing: verifica se o sistema inteiro ta funcional
 // 4. End to end testing -> Ignoramos esse até que seja absolutamente
 
-
-
-
-
-
-
-
 int main()
 {
     test_saving_system();

@@ -52,7 +52,6 @@ Player *MockPlayer()
     return player;
 }
 
-
 void simular_combate()
 {
     Player *player=MockPlayer();
@@ -60,11 +59,6 @@ void simular_combate()
     iniciar_combate(player, inimigo);
 
 }
-
-
-
-
-
 
 void salvar_jogo_test(Player *player)
 {

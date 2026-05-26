@@ -4,11 +4,6 @@
 #include <string.h>
 #include "Atributos.h"
 
-Arma criar_arma_Cap1(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
-Arma criar_arma_Cap2(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
-Arma criar_arma_Cap3(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
-Arma criar_arma_Cap4(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
-
 Inventario init_inventario()
 {
     Inventario inventario;
