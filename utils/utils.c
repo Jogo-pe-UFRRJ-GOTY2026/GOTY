@@ -79,7 +79,6 @@ void desenhar_sprite(WINDOW *win, const char *nome_arquivo, int y_inicial, int x
     fclose(f);
 }
 
-
 void slow_mvwprintw(WINDOW* win, char* fala, const int y, int x, int delay_ms)
 {
     for(int i=0;fala[i]!='\0';i++)

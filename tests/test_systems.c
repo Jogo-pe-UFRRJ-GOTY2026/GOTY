@@ -9,8 +9,6 @@
 #include "../objects/Inimigo.h"
 #include "../objects/Inventario.h"
 
-
-
 #define equals(str1, str2) (strcmp(str1, str2) == 0)
 
 Inimigo *MockInimigo()
