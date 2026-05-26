@@ -1,5 +1,4 @@
 #define _XOPEN_SOURCE_EXTENDED 1
-
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
