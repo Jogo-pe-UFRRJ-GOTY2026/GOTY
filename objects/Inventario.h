@@ -58,16 +58,18 @@ typedef struct Inventario{
     Consumivel consumiveis[4];
 } Inventario;
 
+typedef enum TipoArmadura
+{
+    CAPACETE,
+    PEITORAL,
+    GREVAS,
+    BOTAS
 
-
-
-
+} TipoArmadura;
 
 Inventario init_inventario();
-Arma criar_arma_Cap1(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
-Arma criar_arma_Cap2(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
-Arma criar_arma_Cap3(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
-Arma criar_arma_Cap4(char nome[], char descricao[], int dano, int vida, TipoDano tipo);
+Arma criar_arma(int capitulo, char nome[], char descricao[], int danoBase, int vidaBase, TipoDano tipo);
+ParteArmadura criar_armadura(int capitulo, TipoArmadura tipo, char nome[], char descricao[], int vidaBase);
 
 
 #endif

@@ -144,7 +144,6 @@ void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
     }
 }
 
-// PMI
 void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq)
 {
     if (!atq->ativo)

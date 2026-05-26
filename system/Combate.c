@@ -10,9 +10,6 @@
 #include "../utils/utils.h"
 #define ataques_na_tela 32
 
-
-
-
 EstadoRodada iniciar_combate(Player *player, Inimigo *inimigo)
 {
     CombateUI ui;
