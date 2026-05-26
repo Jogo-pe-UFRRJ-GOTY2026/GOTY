@@ -43,11 +43,15 @@ Inimigo *criar_inimigo(int vida, char nome[], const char *sprite_location, Sprit
 
 void inimigo_tomar_dano(Inimigo* inimigo, int dano)
 {
+    if(dano < 0)
+        dano = 0;
+
     inimigo->vida -= dano;
 
     if (inimigo->vida < 0)
         inimigo->vida = 0;
 }
+// inimigo_tomar_dano(inimigo, gerar_rolagem_dano() + player->inventario.arma.dano); como deve ser utilizada
 
 void renderizar_nome_estilizado(WINDOW *area_nome_boss, const char *nome)
 {

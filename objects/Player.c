@@ -40,8 +40,6 @@ DeltaDirecao get_delta_direcao(WINDOW* win)
     return delta;
 }
 
-
-
 bool atacar_inimigo(Player *player, Inimigo *inimigo)
 {
     if (gerar_chance_de_evasao_do_inimigo() > 95)
