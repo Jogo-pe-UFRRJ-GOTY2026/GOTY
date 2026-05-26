@@ -90,6 +90,8 @@ void slow_mvwprintw(WINDOW* win, char* fala, const int y, int x, int delay_ms)
 }
 
 void mostrar_tela_morte(Player* player)
+
+
 {
     WINDOW* tela_morte = newwin(getmaxy(stdscr), getmaxx(stdscr),0,0);
 
@@ -153,4 +155,29 @@ void mostrar_tela_morte(Player* player)
     napms(1000);
     
     delwin(tela_morte);
+}
+
+int calcular_largura_sprite(const char *caminho)
+{
+    FILE *file = fopen(caminho, "r");
+    if (!file)
+        return 0;
+
+    char linha[256];
+    int maior = 0;
+
+    while (fgets(linha, sizeof(linha), file))
+    {
+        int len = strlen(linha);
+
+        // remove o '\n' do final se existir
+        if (len > 0 && linha[len - 1] == '\n')
+            len--;
+
+        if (len > maior)
+            maior = len;
+    }
+
+    fclose(file);
+    return maior;
 }

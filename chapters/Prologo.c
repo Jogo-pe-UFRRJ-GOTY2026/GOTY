@@ -1,7 +1,9 @@
 // Dialogo, e tutorial de combate
 #include <stdbool.h>
 #include <ncurses.h>
+#include <stdio.h>
 #include <string.h>
+#include <locale.h>
 #include "CAPITULO.h"
 #include "../objects/Player.h"
 #include "../objects/Inimigo.h"
@@ -157,6 +159,7 @@ Player *Tela_criacao()
 // ================================================================================= //
 void Introducao()
 {
+    setlocale(LC_ALL, "");
     int altura, largura;
     getmaxyx(stdscr, altura, largura);
 
@@ -181,15 +184,40 @@ void Introducao()
     {
         werase(tela_apresentacao);
 
+        int sprite_largura = calcular_largura_sprite("assets/sprites/buildings/tower.txt");
+        int sprite_x = (largura - sprite_largura) / 2;
+
+        desenhar_sprite(
+            tela_apresentacao,
+            "assets/sprites/buildings/tower.txt",
+            topo + 1,
+            sprite_x);
+
         int y = 2;
-        int x = (largura - strlen(texto[i])) / 2;
 
-        mvwprintw(tela_apresentacao, y, x, "%s", texto[i]);
+        // ================================
+        // calcula tamanho VISUAL correto
+        // ================================
+        int visual_len = 0;
 
-        desenhar_sprite(tela_apresentacao, "assets/sprites/buildings/tower.txt", topo + 1, direita + 1);
+        for (int j = 0; texto[i][j]; j++)
+        {
+            if ((texto[i][j] & 0xC0) != 0x80)
+                visual_len++;
+        }
+
+        // ✔ centro do sprite na tela
+        int sprite_centro = sprite_x + (sprite_largura / 2);
+
+        // ✔ texto centralizado em cima do centro do sprite
+        int texto_x = sprite_centro - (visual_len / 2);
+
+        if (texto_x < 0)
+            texto_x = 0;
+
+        mvwprintw(tela_apresentacao, y, texto_x, "%s", texto[i]);
 
         wrefresh(tela_apresentacao);
-        napms(2000); // espera 2 segundos
+        napms(2000);
     }
-    delwin(tela_apresentacao);
 }
