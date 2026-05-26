@@ -105,6 +105,11 @@ Player* criar_player(const char* nome, Genero genero)
     player->atributos.sorte += player->inventario.armadura.grevas.atributosarmadura.sorte;
     player->atributos.sorte += player->inventario.armadura.botas.atributosarmadura.sorte;
 
+    //Zera o medidor de lembraças do player
+    for(int i=0;i<8;i++)
+    {
+        player->medidor_lembranca[i]=0;
+    }
     return player;
 }
 

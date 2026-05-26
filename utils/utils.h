@@ -38,8 +38,7 @@ int gerar_rolagem_dano();
 int gerar_chance_de_evasao_do_inimigo();
 int gerar_rolagem_mercy();
 void exit_with_error(Exceptions ex);
-
-
+void slow_mvwprintw(WINDOW *win, char *fala, const int y, int x);
 
 void iniciar_cores();
 

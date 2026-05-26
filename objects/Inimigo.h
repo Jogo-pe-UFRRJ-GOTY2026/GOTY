@@ -56,15 +56,17 @@ typedef struct Inimigo
     int mercy; //quando chegar a 100, pode poupar a batalha.
     char sprite[50];
     Sprite_size sprite_size;
+    int numero_ataques;
+    int tempo_por_rodada;
     const char *dialogos[6];
     AtaqueInimigo ataques[10];
     char nome[40];
 } Inimigo;
 
-Inimigo *criar_inimigo(int vida, char nome[], const char *sprite_location, Sprite_size size, int mercy);
+Inimigo *criar_inimigo(int vida, char nome[], const char *sprite_location, Sprite_size size, int mercy, int tempo_por_rodada);
 AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char *ataque_sprite, int hitbox, DirecaoAtaque direcao,SentidoAtaque sentido, int velocidade);
 void inimigo_tomar_dano(Inimigo *inimigo, int dano);
 void inimigo_tomar_mercy(Inimigo *inimigo, int dano);
-void limpar_inimigo(Inimigo *inimigo);
+//void limpar_inimigo(Inimigo *inimigo);
 
 #endif

@@ -17,17 +17,18 @@ Inimigo *MockInimigo()
 {
     //exemplo da criação ataques
     AtaqueInimigo ataques[] = {
-        criar_ataque(LINHA, 10, "🪓", 1, HORIZONTAL,DIREITA_ESQUERDA, 10),
-        criar_ataque(BULLET, 2, "†", 1, VERTICAL,CIMA_BAIXO,4),
-        criar_ataque(BULLET, 3, "*", 1, HORIZONTAL,ESQUERDA_DIREITA,7)};
+        criar_ataque(LINHA, 10, "█▙▔▔▔", 1, HORIZONTAL, DIREITA_ESQUERDA, 2),
+        criar_ataque(BULLET, 2, "†", 1, VERTICAL, CIMA_BAIXO, 3),
+        criar_ataque(BULLET, 3, "*", 1, HORIZONTAL, ESQUERDA_DIREITA, 5)};
 
     Sprite_size size;
     size.x=33;
     size.y=20;
 
-    Inimigo *inimigo = criar_inimigo(100, "Hollow Knight", "assets/sprites/bosses/hollow.txt",size, 40);
+    Inimigo *inimigo = criar_inimigo(100, "Hollow Knight", "assets/sprites/bosses/hollow.txt",size, 40, 20);
 
-    for(int i=0;i<3;i++)
+    inimigo->numero_ataques=len(ataques);
+    for(int i=0;i<inimigo->numero_ataques;i++)
     {
         inimigo->ataques[i] = ataques[i];
     }

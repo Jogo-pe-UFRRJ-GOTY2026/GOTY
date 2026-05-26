@@ -18,6 +18,7 @@ SRC = main.c 						\
       objects/Player.c 				\
       system/Save.c 				\
       system/Combate.c 				\
+	  system/Ataques.c				\
 	  utils/utils.c                 \
 	  chapters/Prologo.c            \
 	  chapters/Capitulo1.c          \
@@ -31,6 +32,7 @@ TEST_SRC = 	tests/tests_main.c		\
 			tests/test_systems.c	\
 			system/Save.c 			\
 		    system/Combate.c 		\
+	  		system/Ataques.c		\
 			objects/Player.c 		\
       		objects/Inventario.c 	\
     		objects/Inimigo.c 	 	\

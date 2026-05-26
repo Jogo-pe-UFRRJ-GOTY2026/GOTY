@@ -3,6 +3,7 @@
 #include <locale.h>
 #include "tests.h"
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 // Uma breve aula para vocês senhores, um hábito muito bom de se criar em desenvolvimento de sistemas: Testes
 // É prática existente na industria escrever testes para o seu sistema, para previnir erros durante as suas pipelines CI/CD e deploys incorretos
@@ -23,7 +24,8 @@
 int main()
 {
     test_saving_system();
-    printf("Teste do sistema de salvamento passados com sucesso\n\n");
+    printf("Teste do sistema de salvamento passados com sucesso");
+
     napms(2000);
 
     setlocale(LC_ALL, ""); 
@@ -39,7 +41,8 @@ int main()
     use_default_colors();
     iniciar_cores();
     
-    
+    //desenhar_sprite(stdscr, "assets/sprites/others/vigia.txt", 10,5);
+    //getch();
     simular_combate();
 
     return 0;

@@ -17,32 +17,40 @@ typedef struct CombateUI{
 
 typedef enum OpcoesMenuCombate
 {
-    ATACAR,
+    ATACAR=1,
     ITENS,
     MERCY,
     DESISTIR,
     INVALIDA
 } OpcoesMenuCombate ;
 
-typedef enum Estagio_atual_combate
+typedef enum EstadoRodada_
 {
     FASE_DIALOGO1,
     FASE_ESQUIVA,
-    FASE_DIALOGO2,
     FASE_ACAO_JOGADOR,
-    FASE_DIALOGO3,
-} EstagioCombate;
+    FASE_DIALOGO2,
+    VITORIA,
+    DERROTA,
+    CONTINUA
+} EstadoRodada;
 
-void desenhar_jogador(WINDOW *area_esquiva, Player *player);
-void iniciar_combate(Player *player,Inimigo* inimigo);
-bool ataque_colidiu(Player *player, AtaqueInimigo* Ataque);
+EstadoRodada iniciar_combate(Player *player, Inimigo *inimigo);
+EstadoRodada rodada(AtaqueInimigo ataque, Player *player, Inimigo *inimigo, CombateUI *ui);
+EstadoRodada loop_esquiva(AtaqueInimigo ataque_atual, Player *player, CombateUI *ui, int tempo_rodada);
+
+
+bool ataque_colidiu(Player *player, AtaqueInimigo *Ataque);
 void spawnar_ataque(AtaqueInimigo *Ataque, WINDOW *area_esquiva);
-void renderizar_combate_ui(CombateUI* ui, Player* player);
 void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq);
-//void atualizar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq, int frame_atual);
+
+void renderizar_menu_combate(WINDOW *area_menu, Player *player, OpcoesMenuCombate opcao_hovered);
+    void renderizar_combate_ui(CombateUI *ui, Player *player);
 void desenhar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq);
+void desenhar_jogador(WINDOW *area_esquiva, Player *player);
+
+
 void limpar_combate(CombateUI *ui, Inimigo *inimigo);
 void renderizar_nome_estilizado(WINDOW *area_nome_boss, const char *nome);
-bool rodada();
 
 #endif

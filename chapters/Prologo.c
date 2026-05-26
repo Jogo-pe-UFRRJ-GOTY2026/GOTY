@@ -182,8 +182,20 @@ void  Introducao()
     int direita=40, esquerda=155;
     int topo=5, base=40;
 
-    char* texto[]={"Dizem que existe uma saída...", "Dizem que ela fica no topo...", "Mas ninguém volta para confirmar."};
-    for(int i=0;i<3;i++) //troca o 3 pelo numero de strings no texto
+    char *texto[] = {
+        "Após a morte, existem 4 regiões",
+        "Paraíso, onde as boas almas vão",
+        "Purgatório, onde você se arrepende de seus pecados",
+        "Inferno, onde as almas ruins vão",
+        "E o intervalo, uma região onde qualquer alma que for esquecida se encaminha, sofrendo por uma falta de memória progressiva, "
+        "até se tornar um ser vagando sem nenhuma memória quando nenhum ser vivo se lembra mais dela.",
+    // nenhum ser pois, no pacifista, como ele fica na torre, os bosses e npcs la vao se lembrar dele
+    // e ele vai continuar existindo la. Sendo as almas do intervalo lembrando dele, necessitam de mais almas para que ele permaneça lembrado
+        "No Intervalo, existe uma torre chamada Torre dos Ecos, que oferece aos ecos das almas fadadas ao esquecimento"
+        " uma chance de serem lembradas."};
+    int num_dialogos = sizeof(texto)/sizeof(texto[0]);
+    
+    for (int i = 0; i < num_dialogos; i++)
     {
         mvwprintw(tela_apresentacao,2, largura/2-10,"%s" ,texto[i] );
 
