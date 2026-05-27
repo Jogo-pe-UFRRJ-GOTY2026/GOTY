@@ -6,7 +6,7 @@
 #include "../objects/Inimigo.h"
 #include "../objects/Inventario.h"
 #include "../utils/utils.h"
-void Prologo_pt2()
+void Prologo_pt2(Player* player)
 {
 
 }

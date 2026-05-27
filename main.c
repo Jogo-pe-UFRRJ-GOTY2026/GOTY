@@ -47,7 +47,7 @@ int main()
     switch(AndarSalvo)
     {
         case Andar0:
-
+            Prologo_pt2(player);
         case Andar1:
             Capitulo1(player);
         case Andar2:

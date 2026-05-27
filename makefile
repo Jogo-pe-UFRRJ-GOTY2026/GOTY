@@ -20,11 +20,13 @@ SRC = main.c 						\
       system/Combate.c 				\
 	  system/Ataques.c				\
 	  utils/utils.c                 \
-	  chapters/Prologo.c            \
+	  chapters/Prologo_pt1.c        \
+	  chapters/Prologo_pt2.c        \
 	  chapters/Capitulo1.c          \
 	  chapters/Capitulo2.c          \
 	  chapters/Capitulo3.c          \
 	  chapters/Capitulo4.c          \
+	  chapters/Capitulo5.c          \
 	  
 
 

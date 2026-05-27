@@ -11,6 +11,7 @@
 
 void Introducao();
 
+
 Player* Prologo_pt1()
 {
 
@@ -19,9 +20,12 @@ Player* Prologo_pt1()
 
     WINDOW *tela_descricao = newwin(getmaxy(stdscr)-30, getmaxx(stdscr)-50, 20, 30);
     keypad(tela_descricao, TRUE);
+    nodelay(tela_descricao, TRUE);
     box(tela_descricao,0,0);
 
     // isso fica em baixo
+
+
     for (int x = 1, y = 16; x < getmaxx(tela_descricao)-1; x++)
         mvwprintw(tela_descricao, y, x, "-");
 
@@ -29,6 +33,8 @@ Player* Prologo_pt1()
     mvwprintw(tela_descricao,18,50, "Aperte Enter para se aproximar da Torre dos Echos.");
     wattroff(tela_descricao, COLOR_PAIR(COR_DESTAQUE));
 
+
+    // FODA-SE, O JOGADOR NÃO VAI PULAR ISSO, APRENDA A LER CARALHO, ANLAFABETISMO DA POPULAÇÃO TEM QUE DIMINUIR DE TODO MODO
 
     slow_mvwprintw(tela_descricao,player->nome,1,1,30);
     slow_mvwprintw(tela_descricao,"... Uma alma marcada pela determinação.",1, 1+strlen(player->nome),30);
@@ -55,26 +61,35 @@ Player* Prologo_pt1()
     slow_mvwprintw(tela_descricao, "Com essas dúvidas, e a descoberta de uma possibilidade de sair daquele lugar, ", 14, 1, 30);
     slow_mvwprintw(tela_descricao, player->nome, 14, 78, 30);
     slow_mvwprintw(tela_descricao, "toma uma atitude…", 14, 79 + strlen(player->nome), 30);
+
     int tecla;
-    while(true)
+    while(tela_descricao != NULL)
     {
-        if(tecla == KEY_ENTER || tecla == '\n' || tecla == 10)
+        tecla = wgetch(tela_descricao);
+        if (tecla == KEY_ENTER || tecla == '\n' || tecla == 10)
         {
             delwin(tela_descricao);
             break;
         }
     }
 
-
-
     WINDOW* tela_encontro_vigia = newwin(getmaxx(stdscr), getmaxy(stdscr),0,0);
+    int ja_realizou_pergunta[3]={0};
+    desenhar_sprite(tela_descricao, "assets/others/vigia.txt", 10,15);
+    char *dialogos[3] = {
+        "Me chamam de muitas coisas, observador,sentinela…"
+        "Mas você pode me chamar de Vigia, mais uma alma como você. E você é?",
+        "Possivelmente, milhares de almas almejam subir a torre, a gente já deve ter se visto alguma outra vez,"
+        "mas você ainda não fez nada suficientemente impactante para ficar marcado na minha memória…",
+
+        "Conforme você avança na torre, cada chefe que você derrota é uma conquista digna de um eco,"
+        "e cada eco atinge a memória de milhares de almas do intervalo, que quando reunidas, equivalem à memória de um ser humano."
+        "Se prepare, se você quiser encher seu medidor, vai precisar de muitas almas para substituir 7 simples vivos."
+    };
+    wgetch(tela_encontro_vigia);
 
 
-
-
-
-    player->NumeroAndar=0;
-    
+    player->NumeroAndar = 0;
 }   
 
 
@@ -238,8 +253,10 @@ void Introducao()
     getmaxyx(stdscr, altura, largura);
 
     WINDOW *tela_apresentacao = newwin(0, 0, 0, 0);
+    nodelay(tela_apresentacao, TRUE);
+    keypad(tela_apresentacao, TRUE);
 
-    int direita = 40, esquerda = 155;
+    int esquerda = 40, direita = 155;
     int topo = 5, base = 40;
     int tecla;
     char *texto[] = {
@@ -249,7 +266,7 @@ void Introducao()
         "Inferno, onde as almas ruins vão.",
         "E o Intervalo, uma região onde qualquer alma esquecida se encaminha.",
         "Lá, as almas sofrem uma perda de memória progressiva,",
-        "até se tornarem seres vagando sem lembranças, quando ninguém mais se lembra delas.",
+        "Até se tornarem seres vagando sem lembranças, quando ninguém mais se lembra delas.",
         "No Intervalo, existe uma torre chamada Torre dos Ecos,",
         "Ela oferece às almas esquecidas uma chance de serem lembradas."};
     int num_dialogos = sizeof(texto) / sizeof(texto[0]);
@@ -258,8 +275,6 @@ void Introducao()
     {
         werase(tela_apresentacao);
 
-        int sprite_largura = calcular_largura_sprite("assets/sprites/buildings/tower.txt");
-        int sprite_x = (largura - sprite_largura) / 2;
 
         wattron(tela_apresentacao, COLOR_PAIR(COR_DESTAQUE) | A_BOLD); // Ativa um atributo na janela passada, nesse caso, a cor e o negrito
         mvwprintw(tela_apresentacao, base + 2, direita, "Pressione ENTER para pular");
@@ -272,11 +287,7 @@ void Introducao()
         for (int x = esquerda + 1; x < direita; x++)
             mvwprintw(tela_apresentacao, base, x, "-");
 
-        desenhar_sprite( tela_apresentacao, "assets/sprites/buildings/tower.txt", topo + 1,  sprite_x);
-
-
-
-
+        desenhar_sprite(tela_apresentacao, "assets/sprites/buildings/tower.txt", topo + 1, esquerda + 1);
 
         for (int y = topo; y <= base; y++)
         {
@@ -291,17 +302,14 @@ void Introducao()
                 mvwprintw(tela_apresentacao, y, direita, "|");
             }
         }
-        desenhar_sprite(tela_apresentacao, "assets/sprites/buildings/tower.txt", topo + 1, esquerda + 1);
         wrefresh(tela_apresentacao);
 
-
-
-        slow_mvwprintw(tela_apresentacao, texto[i], 2, esquerda - 5, 50);
+        int metade_box = esquerda + (direita - esquerda) / 2 - 5; //vide, o meio visual é meio logico - 5 pq sim
+        slow_mvwprintw(tela_apresentacao, texto[i], 2, metade_box - strlen(texto[i])/2, 50);
 
         tecla = wgetch(tela_apresentacao);
         if (tecla == KEY_ENTER || tecla == 10)
             break;
-
         wrefresh(tela_apresentacao);
         napms(2000); //espera 2 segundos
         tecla = wgetch(tela_apresentacao);
@@ -310,5 +318,8 @@ void Introducao()
     }
     
     delwin(tela_apresentacao);
+
+
+
 
 }
