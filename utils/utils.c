@@ -1,7 +1,9 @@
+#define _XOPEN_SOURCE_EXTENDED 1
+
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
-#include <ncurses.h>
+#include <ncursesw/ncurses.h>
 #include "utils.h"
 #include "../objects/Player.h"
 #include <string.h>
@@ -58,6 +60,7 @@ void iniciar_cores()
     init_pair(COR_OPCAO_SELECIONADA, COLOR_YELLOW, STANDARD_BACKGROUND);
     init_pair(COR_VIDA, COLOR_RED, STANDARD_BACKGROUND);
     init_pair(COR_NOME_BOSS, COLOR_WHITE, STANDARD_BACKGROUND);
+    init_pair(COR_DESTAQUE, COLOR_CYAN, STANDARD_BACKGROUND);
 }
 
 void desenhar_sprite(WINDOW *win, const char *nome_arquivo, int y_inicial, int x_inicial)
@@ -81,9 +84,16 @@ void desenhar_sprite(WINDOW *win, const char *nome_arquivo, int y_inicial, int x
 
 void slow_mvwprintw(WINDOW* win, char* fala, const int y, int x, int delay_ms)
 {
-    for(int i=0;fala[i]!='\0';i++)
+    wchar_t buffer[1024]={0};
+    mbstowcs(buffer, fala, 1024);
+
+    wchar_t temp[2];
+    temp[1] = L'\0';
+
+    for(int i=0;fala[i]!=L'\0';i++)
     {
-        mvwaddch(win, y, x + i, fala[i]);
+        temp[0] = buffer[i];
+        mvwaddwstr(win, y, x + i, temp);
         wrefresh(win);
         napms(delay_ms);
     }
