@@ -170,8 +170,7 @@ void mostrar_tela_morte(Player* player)
 int calcular_largura_sprite(const char *caminho)
 {
     FILE *file = fopen(caminho, "r");
-    if (!file)
-        return 0;
+    if (file==NULL) return 0;
 
     char linha[256];
     int maior = 0;
