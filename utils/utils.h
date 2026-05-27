@@ -45,6 +45,7 @@ int gerar_chance_de_evasao_do_inimigo();
 int gerar_rolagem_mercy();
 void exit_with_error(Exceptions ex);
 void slow_mvwprintw(WINDOW *win, char *fala, const int y, int x, int delay_ms);
+void apagar_janela(WINDOW* win);
 void mostrar_tela_morte(Player* player);
 int calcular_largura_sprite(const char *caminho);
 void iniciar_cores();

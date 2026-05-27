@@ -161,9 +161,8 @@ void mostrar_tela_morte(Player* player)
     napms(1000);
     slow_mvwprintw(tela_morte, dialogos[indice_dialogo], 10, 70, 30);
     wrefresh(tela_morte);
-    napms(1000);
-    
-    delwin(tela_morte);
+    napms(4000);
+    apagar_janela(tela_morte);
 }
 
 int calcular_largura_sprite(const char *caminho)
@@ -188,4 +187,12 @@ int calcular_largura_sprite(const char *caminho)
 
     fclose(file);
     return maior;
+}
+
+void apagar_janela(WINDOW* win)
+{
+    werase(win);
+    wrefresh(win);
+    delwin(win);
+    win=NULL;
 }

@@ -41,8 +41,8 @@ int main()
     player = menu_inicial();
     if(player==NULL)
     {
-        printf("Jogo encerrado");
-        return 0;
+        perror("Jogo encerrado");
+        return 1;
     }
     switch(AndarSalvo)
     {

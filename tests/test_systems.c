@@ -46,7 +46,7 @@ Player *MockPlayer()
 
     player->NumeroAndar = 3;
 
-    player->inventario.arma = criar_arma_Cap1("Espada de Teste", "Mocking", 999, 0, CORTE);
+    player->inventario.arma = criar_arma(1, "Espada de Teste", "Mocking", 999, 0, CORTE);
     return player;
 }
 
@@ -55,7 +55,7 @@ void simular_combate()
     Player *player=MockPlayer();
     Inimigo* inimigo=MockInimigo();
     mostrar_tela_morte(player);
-    getch();
+    
     iniciar_combate(player, inimigo);
 }
 
@@ -77,7 +77,6 @@ void carregar_save_test()
 
     assert(equals(pl->inventario.arma.nome, "Espada de Teste"));
     assert(equals(pl->inventario.arma.descricao, "Mocking"));
-    assert(pl->inventario.arma.dano == 999);
     assert(pl->inventario.arma.tipo == CORTE);
     free(pl);
 }

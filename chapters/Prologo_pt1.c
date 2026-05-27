@@ -11,6 +11,28 @@
 
 void Introducao();
 
+#define print_descricao(win, string, y, x, delay)       \
+    ({                                                  \
+        tecla = wgetch(win);                            \
+        if(tecla== KEY_ENTER || tecla == 10)            \
+        {                                               \
+            werase(win);                                \
+            wrefresh(win);                              \
+            delwin(win);                                \
+            win=NULL;                                   \
+            break;                                      \
+        }                                               \
+        slow_mvwprintw(win, string, y,x,delay);         \
+        tecla=wgetch(win);                              \
+        if(tecla== KEY_ENTER || tecla == 10)            \
+        {                                               \
+            werase(win);                                \
+            wrefresh(win);                              \
+            delwin(win);                                \
+            win=NULL;                                   \
+            break;                                      \
+        }                                               \
+    })
 
 Player* Prologo_pt1()
 {
@@ -18,64 +40,69 @@ Player* Prologo_pt1()
     Introducao();
     Player* player = Tela_criacao();
 
-    WINDOW *tela_descricao = newwin(getmaxy(stdscr)-30, getmaxx(stdscr)-50, 20, 30);
+    WINDOW *tela_descricao = newwin(getmaxy(stdscr)-10, getmaxx(stdscr)-20, 0, 10);
     keypad(tela_descricao, TRUE);
     nodelay(tela_descricao, TRUE);
     box(tela_descricao,0,0);
-
+    int tecla;
     // isso fica em baixo
-
+    
 
     for (int x = 1, y = 16; x < getmaxx(tela_descricao)-1; x++)
         mvwprintw(tela_descricao, y, x, "-");
 
     wattron(tela_descricao, COLOR_PAIR(COR_DESTAQUE));
-    mvwprintw(tela_descricao,18,50, "Aperte Enter para se aproximar da Torre dos Echos.");
+    mvwprintw(tela_descricao,18,35, "Aperte Enter para se aproximar da Torre dos Echos.");
     wattroff(tela_descricao, COLOR_PAIR(COR_DESTAQUE));
 
 
     // FODA-SE, O JOGADOR NÃO VAI PULAR ISSO, APRENDA A LER CARALHO, ANLAFABETISMO DA POPULAÇÃO TEM QUE DIMINUIR DE TODO MODO
-
-    slow_mvwprintw(tela_descricao,player->nome,1,1,30);
-    slow_mvwprintw(tela_descricao,"... Uma alma marcada pela determinação.",1, 1+strlen(player->nome),30);
-    slow_mvwprintw(tela_descricao,"Alguém que carregava ambições impossíveis… e um desejo tão profundo que se tornou a última parte intacta de sua existência :",2,1,30);
+    do{
+    print_descricao(tela_descricao,player->nome,1,1,30);
+    print_descricao(tela_descricao,"... Uma alma marcada pela determinação.",1, 1+strlen(player->nome),30);
+    print_descricao(tela_descricao,"Alguém que carregava ambições impossíveis… e um desejo tão profundo que se tornou a última parte intacta de sua existência :",2,1,30);
     
     wattron(tela_descricao, A_BOLD);
-    slow_mvwprintw(tela_descricao, player->genero==Masculino ? "Ser lembrado." : "Ser lembrada.",3,5,30);
+    print_descricao(tela_descricao, player->genero==Masculino ? "Ser lembrado." : "Ser lembrada.",3,5,30);
     wattroff(tela_descricao, A_BOLD);
 
-    slow_mvwprintw(tela_descricao,player->nome,5,1,30);
-    slow_mvwprintw(tela_descricao, " é uma das almas pertencentes ao Intervalo, sofrendo por mal se lembrar de si mesmo e dos feitos em vida, ", 5, 1 + strlen(player->nome), 30);
-    slow_mvwprintw(tela_descricao, "e sem ter como acabar com esse sofrimento lento de perda de significado próprio", 6, 1, 30);
+    print_descricao(tela_descricao, player->nome,5,1,30);
+    print_descricao(tela_descricao, " é uma das almas pertencentes ao Intervalo, sofrendo por mal se lembrar de si mesmo e dos feitos em vida, ", 5, 1 + strlen(player->nome), 30);
+    print_descricao(tela_descricao, "e sem ter como acabar com esse sofrimento lento de perda de significado próprio", 6, 1, 30);
 
-    slow_mvwprintw(tela_descricao, "Afinal, a Morte, Coletora das almas mortas, o pega e traz para o único lugar sua alma pode ficar. ", 7, 1, 30);
-    slow_mvwprintw(tela_descricao,"No Intervalo, perpetuando esse ciclo sem saída, ou quase).",8,1,30);
+    print_descricao(tela_descricao, "Afinal, a Morte, Coletora das almas mortas, o pega e traz para o único lugar sua alma pode ficar. ", 7, 1, 30);
+    print_descricao(tela_descricao,"No Intervalo, perpetuando esse ciclo sem saída, ou quase).",8,1,30);
 
 
-    slow_mvwprintw(tela_descricao, "A sua alma determinada por reconhecimento ainda exala o desejo de estar viva e se lembrar do indivíduo", 10, 1, 30);
-    slow_mvwprintw(tela_descricao, "que o mantém em suas memórias que o impedem de perder sua essência.", 11, 1, 30);
+    print_descricao(tela_descricao, "A sua alma determinada por reconhecimento ainda exala o desejo de estar viva e se lembrar do indivíduo", 10, 1, 30);
+    print_descricao(tela_descricao, "que o mantém em suas memórias que o impedem de perder sua essência.", 11, 1, 30);
 
-    slow_mvwprintw(tela_descricao, "Porém, a alma de ", 12, 1, 30);
-    slow_mvwprintw(tela_descricao, player->nome, 12, 18, 30);
-    slow_mvwprintw(tela_descricao, " está se apagando…, será que o indivíduo se esqueceu definitivamente dessa alma? Será que o indivíduo morreu?", 12, 19 + strlen(player->nome), 30);
-    slow_mvwprintw(tela_descricao, "Com essas dúvidas, e a descoberta de uma possibilidade de sair daquele lugar, ", 14, 1, 30);
-    slow_mvwprintw(tela_descricao, player->nome, 14, 78, 30);
-    slow_mvwprintw(tela_descricao, "toma uma atitude…", 14, 79 + strlen(player->nome), 30);
+    print_descricao(tela_descricao, "Porém, a alma de ", 12, 1, 30);
+    print_descricao(tela_descricao, player->nome, 12, 18, 30);
+    print_descricao(tela_descricao, " está se apagando…, será que o indivíduo se esqueceu definitivamente dessa alma?", 12, 19+ strlen(player->nome), 30);
+    print_descricao(tela_descricao, "Será que o indivíduo morreu?", 13, 1 , 30);
+    print_descricao(tela_descricao, "Com essas dúvidas, e a descoberta de uma possibilidade de sair daquele lugar, ", 14, 1, 30);
+    print_descricao(tela_descricao, player->nome, 14, 78, 30);
+    print_descricao(tela_descricao, "toma uma atitude…", 14, 79 + strlen(player->nome), 30);
+    } while(0);
 
-    int tecla;
     while(tela_descricao != NULL)
     {
         tecla = wgetch(tela_descricao);
         if (tecla == KEY_ENTER || tecla == '\n' || tecla == 10)
         {
+            werase(tela_descricao);
+            wrefresh(tela_descricao);
             delwin(tela_descricao);
             break;
         }
     }
 
-    WINDOW* tela_encontro_vigia = newwin(getmaxx(stdscr), getmaxy(stdscr),0,0);
+    WINDOW* tela_encontro_vigia = newwin(getmaxy(stdscr), getmaxx(stdscr),0,0);
     int ja_realizou_pergunta[3]={0};
-    desenhar_sprite(tela_descricao, "assets/others/vigia.txt", 10,15);
+    desenhar_sprite(tela_descricao, "assets/sprites/others/vigia.txt", 1,1);
+    wrefresh(tela_encontro_vigia);
+
     char *dialogos[3] = {
         "Me chamam de muitas coisas, observador,sentinela…"
         "Mas você pode me chamar de Vigia, mais uma alma como você. E você é?",
@@ -86,10 +113,13 @@ Player* Prologo_pt1()
         "e cada eco atinge a memória de milhares de almas do intervalo, que quando reunidas, equivalem à memória de um ser humano."
         "Se prepare, se você quiser encher seu medidor, vai precisar de muitas almas para substituir 7 simples vivos."
     };
-    wgetch(tela_encontro_vigia);
+    napms(10000);
+    apagar_janela(tela_encontro_vigia);
+
 
 
     player->NumeroAndar = 0;
+    return player;
 }   
 
 
@@ -256,8 +286,8 @@ void Introducao()
     nodelay(tela_apresentacao, TRUE);
     keypad(tela_apresentacao, TRUE);
 
-    int esquerda = 40, direita = 155;
-    int topo = 5, base = 40;
+    int esquerda = 25, direita = 140;
+    int topo = 5, base = 32;
     int tecla;
     char *texto[] = {
         "Após a morte, existem 4 regiões.",
@@ -277,7 +307,7 @@ void Introducao()
 
 
         wattron(tela_apresentacao, COLOR_PAIR(COR_DESTAQUE) | A_BOLD); // Ativa um atributo na janela passada, nesse caso, a cor e o negrito
-        mvwprintw(tela_apresentacao, base + 2, direita, "Pressione ENTER para pular");
+        mvwprintw(tela_apresentacao, base + 2, direita-30, "Pressione ENTER para pular");
         wattroff(tela_apresentacao, COLOR_PAIR(COR_DESTAQUE) | A_BOLD); // Desativa um atributo na janela passada, nesse caso, a cor e o negrito
 
             
