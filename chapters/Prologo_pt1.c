@@ -100,7 +100,7 @@ Player* Prologo_pt1()
 
     WINDOW* tela_encontro_vigia = newwin(getmaxy(stdscr), getmaxx(stdscr),0,0);
     int ja_realizou_pergunta[3]={0};
-    desenhar_sprite(tela_descricao, "assets/sprites/others/vigia.txt", 1,1);
+    desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
     wrefresh(tela_encontro_vigia);
 
     char *dialogos[3] = {
@@ -113,7 +113,12 @@ Player* Prologo_pt1()
         "e cada eco atinge a memória de milhares de almas do intervalo, que quando reunidas, equivalem à memória de um ser humano."
         "Se prepare, se você quiser encher seu medidor, vai precisar de muitas almas para substituir 7 simples vivos."
     };
+
+    
+
     napms(10000);
+
+
     apagar_janela(tela_encontro_vigia);
 
 
