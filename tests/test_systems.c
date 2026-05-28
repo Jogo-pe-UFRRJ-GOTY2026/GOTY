@@ -23,7 +23,7 @@ Inimigo *MockInimigo()
     size.x=33;
     size.y=20;
 
-    Inimigo *inimigo = criar_inimigo(100, "Hollow Knight", "assets/sprites/bosses/hollow.txt",size, 40, 20);
+    Inimigo *inimigo = criar_inimigo(100, "Hollow Knight", "assets/sprites/bosses/hollow.txt",size, 40, 20, Hollow_Knight);
 
     inimigo->numero_ataques=len(ataques);
     for(int i=0;i<inimigo->numero_ataques;i++)

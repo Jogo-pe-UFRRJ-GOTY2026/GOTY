@@ -25,17 +25,19 @@ AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite,
     return ataque;
 }
 
-Inimigo *criar_inimigo(int vida, char nome[], const char *sprite_location, Sprite_size size, int mercy, int tempo_por_rodada)
+Inimigo *criar_inimigo(int vida, char nome[], const char *sprite_location, Sprite_size size, int mercy, int tempo_por_rodada, Lembrancas Id)
 {
     Inimigo *inimigo = malloc(sizeof(Inimigo));
     if(inimigo==NULL)
         perror("Foda ne cria");
 
     strncpy(inimigo->nome, nome, sizeof(inimigo->nome));
+    inimigo->vida_max=vida;
     inimigo->vida = vida;
     inimigo->mercy = mercy;
     inimigo->sprite_size.x=size.x;
     inimigo->sprite_size.y=size.y;
+    inimigo->id=Id;
     strncpy(inimigo->sprite, sprite_location, sizeof(inimigo->sprite));
     inimigo->tempo_por_rodada=tempo_por_rodada;
     return inimigo;

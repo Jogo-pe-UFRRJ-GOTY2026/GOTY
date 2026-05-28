@@ -44,8 +44,10 @@ bool atacar_inimigo(Player *player, Inimigo *inimigo)
 {
     if (gerar_chance_de_evasao_do_inimigo() > 95)
         return false;
+    int dano = gerar_rolagem_dano() + player->inventario.arma.dano;
 
-    inimigo_tomar_dano(inimigo, gerar_rolagem_dano() + player->inventario.arma.dano);
+
+    inimigo_tomar_dano(inimigo, dano);
 
     return true;
 }

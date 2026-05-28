@@ -43,7 +43,6 @@ Player* carregar_salvamento()
 
 bool salvar_jogo(Player *player)
 {
-    mkdir("saves", 0777);
     FILE* save_file = fopen("saves/player_save.bin", "wb");
     if(save_file==NULL)
     {

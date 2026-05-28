@@ -44,7 +44,6 @@ int main()
         perror("Jogo encerrado");
         return 1;
     }
-        
     switch(player->NumeroAndar)
     {
         case Andar0:

@@ -25,6 +25,9 @@ EstadoRodada iniciar_combate(Player *player, Inimigo *inimigo)
     ui.area_boss = newwin(inimigo->sprite_size.y + 5, inimigo->sprite_size.x + 2, 5, 5);
     desenhar_sprite(ui.area_boss, inimigo->sprite, 1, 1);
 
+    //VIDA BOSS
+    ui.area_vida_boss = newwin(3,40,5,inimigo->sprite_size.x+30);
+
     const int LARGURA_UI = 40;
     // AREA ESQUIVA E PLAYER - acaba em y = 18
     ui.area_esquiva = newwin(12,40, 6, inimigo->sprite_size.x+28);
@@ -38,13 +41,14 @@ EstadoRodada iniciar_combate(Player *player, Inimigo *inimigo)
 
     // MENU
     ui.area_menu = newwin(25,40, 24,inimigo->sprite_size.x+28);
-    renderizar_combate_ui(&ui, player);
+    renderizar_combate_ui(&ui, player, inimigo);
 
 
     keypad(ui.area_esquiva, TRUE);
     wtimeout(ui.area_esquiva, 16);
 
     EstadoRodada resultado_combate;
+
     while (inimigo->vida > 0 && player->vida > 0)
     {
         resultado_combate = rodada(inimigo->ataques[rand() % inimigo->numero_ataques], player, inimigo, &ui);
@@ -62,18 +66,8 @@ EstadoRodada rodada(AtaqueInimigo ataque, Player *player,Inimigo* inimigo, Comba
 
     // ------------------------------------ DIALOGO 1
 
-    atual = FASE_DIALOGO1;
 
-    char* teste[] = {
-        "BECAME A SOLDIER FOR THE CONTROLLER",
-        "ARE YOU LISTENING TO THE WHISPERING?",
-        "SOMETHING IS CREEPING IN THE DARK"
-    };
-    werase(ui->area_dialogos);
-    box(ui->area_dialogos,0,0);
-    slow_mvwprintw(ui->area_dialogos, teste[rand() % 3], 1, 2, 40); // inves disso vamos passar os dialogos do boss, que vao ficar na struct
-    werase(ui->area_dialogos);
-    wrefresh(ui->area_dialogos);
+    
 
     atual = FASE_ESQUIVA;
     EstadoRodada resultado_esquiva = loop_esquiva(ataque, player, ui, inimigo->tempo_por_rodada);
@@ -107,9 +101,11 @@ EstadoRodada rodada(AtaqueInimigo ataque, Player *player,Inimigo* inimigo, Comba
                 break;
             case '3':
                 opcao_atual = MERCY;
+
                 break;
             case '4':
                 opcao_atual = DESISTIR;
+                
                 break;
             default:
                 break;
@@ -121,11 +117,26 @@ EstadoRodada rodada(AtaqueInimigo ataque, Player *player,Inimigo* inimigo, Comba
     switch (opcao_escolhida)
     {
         case ATACAR:
-        // To pensando em fazer logo a ideia do pedro de apertar as teclas numa sequencia rapida para dar bonus de dano
+            werase(ui->area_dialogos);
+            box(ui->area_dialogos, 0, 0);
+            slow_mvwprintw(ui->area_dialogos, inimigo->dialogos_ataque[rand() % 5], 1, 2, 40);
+            napms(1000);
+            werase(ui->area_dialogos);
+            wrefresh(ui->area_dialogos);
+            renderizar_vida_boss(ui->area_vida_boss, inimigo);
+            wrefresh(ui->area_vida_boss);
+            atacar_inimigo(player, inimigo);
             break;
         case ITENS:
             break;
         case MERCY:
+            werase(ui->area_dialogos);
+            box(ui->area_dialogos, 0, 0);
+            slow_mvwprintw(ui->area_dialogos, inimigo->dialogos_mercy[rand() % 2], 1, 2, 40);
+            napms(1000);
+            werase(ui->area_dialogos);
+            wrefresh(ui->area_dialogos);
+
             if(inimigo->mercy>=100)
             {
                 return VITORIA;
@@ -202,7 +213,7 @@ EstadoRodada loop_esquiva(AtaqueInimigo ataque_atual, Player *player, CombateUI 
                 {
                     tomar_dano(player, &ataques_ativos[i]);
                     ataques_ativos[i].ativo = false;    // ataque some ao acertar
-                    renderizar_combate_ui(ui, player); // atualiza HP no menu
+                    renderizar_combate_ui(ui, player, NULL); // atualiza HP no menu
                 }
             }
         }
@@ -255,17 +266,37 @@ void renderizar_menu_combate(WINDOW *area_menu, Player* player, OpcoesMenuCombat
     wrefresh(area_menu);
 }
 
-void renderizar_combate_ui(CombateUI* ui, Player* player)
+
+void renderizar_combate_ui(CombateUI* ui, Player* player, Inimigo* inimigo)
 {
     box(ui->area_boss,0,0);
     box(ui->area_esquiva,0,0);
     desenhar_jogador(ui->area_esquiva, player);
     renderizar_menu_combate(ui->area_menu, player, INVALIDA);
+    renderizar_vida_boss(ui->area_vida_boss, inimigo);
 
+    wrefresh(ui->area_vida_boss);
     wrefresh(ui->area_nome_boss);
     wrefresh(ui->area_boss);
     wrefresh(ui->area_esquiva);
     wrefresh(ui->area_menu);
+}
+void renderizar_vida_boss(WINDOW *area_vida_boss, Inimigo *inimigo)
+{
+    if (inimigo == NULL)
+        return;
+    werase(area_vida_boss);
+    int barras_totais = 20;
+    int barras_cheias = (inimigo->vida * barras_totais) / inimigo->vida_max;
+
+    mvwprintw(area_vida_boss, 0, 0, "HP [");
+    wattron(area_vida_boss, COLOR_PAIR(COR_VIDA));
+    for (int i = 0; i < barras_cheias; i++)
+        mvwprintw(area_vida_boss, 0, 4 + i, "█");
+    wattroff(area_vida_boss, COLOR_PAIR(COR_VIDA));
+    mvwprintw(area_vida_boss, 0, 4+barras_totais, "] %d/%d", inimigo->vida, inimigo->vida_max);
+
+    wrefresh(area_vida_boss);
 }
 
 void desenhar_jogador(WINDOW *area_esquiva, Player *player)

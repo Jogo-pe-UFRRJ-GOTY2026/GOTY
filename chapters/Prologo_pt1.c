@@ -3,11 +3,13 @@
 #include <ncurses.h>
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 #include "CAPITULO.h"
 #include "../objects/Player.h"
 #include "../objects/Inimigo.h"
 #include "../objects/Inventario.h"
 #include "../utils/utils.h"
+#include "../system/Save.h"
 
 void Introducao();
 
@@ -175,6 +177,9 @@ Player* Prologo_pt1()
 
             apagar_janela(tela_encontro_vigia);
             player->NumeroAndar = 0;
+            bool salvou = salvar_jogo(player);
+            assert(salvou == true);
+
             return player;     
         }
         if(!ja_realizou_pergunta[opcao])
@@ -252,6 +257,7 @@ Player* Prologo_pt1()
 
     }
 
+    // FALLBACK
     werase(tela_encontro_vigia);
     desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
     box(tela_encontro_vigia,0,0);
@@ -267,6 +273,7 @@ Player* Prologo_pt1()
 
 
     player->NumeroAndar = 0;
+    salvar_jogo(player);
     return player;
 }   
 

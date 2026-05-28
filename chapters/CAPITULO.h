@@ -14,9 +14,8 @@ bool Capitulo3(Player *player);
 bool Capitulo4(Player *player);
 bool Capitulo5(Player *player);
 
-typedef enum
+typedef enum Andar_
 {
-    Prologo,
     Andar0,
     Andar1,
     Andar2,
