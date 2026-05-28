@@ -98,29 +98,172 @@ Player* Prologo_pt1()
         }
     }
 
+
+
+    int inicio_texto_x=40;
     WINDOW* tela_encontro_vigia = newwin(getmaxy(stdscr), getmaxx(stdscr),0,0);
-    int ja_realizou_pergunta[3]={0};
+    box(tela_encontro_vigia, 0, 0);
+
+
     desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
     wrefresh(tela_encontro_vigia);
 
-    char *dialogos[3] = {
-        "Me chamam de muitas coisas, observador,sentinela…"
-        "Mas você pode me chamar de Vigia, mais uma alma como você. E você é?",
-        "Possivelmente, milhares de almas almejam subir a torre, a gente já deve ter se visto alguma outra vez,"
-        "mas você ainda não fez nada suficientemente impactante para ficar marcado na minha memória…",
+    // Dialogo de abertura
+    mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
+    slow_mvwprintw(tela_encontro_vigia, "Oh.", 19, inicio_texto_x, 40);
+    slow_mvwprintw(tela_encontro_vigia, "Mais um.", 20, inicio_texto_x, 40);
+    slow_mvwprintw(tela_encontro_vigia, "Desejando subir a torre?", 21, inicio_texto_x, 40);
+    napms(1800);
 
-        "Conforme você avança na torre, cada chefe que você derrota é uma conquista digna de um eco,"
-        "e cada eco atinge a memória de milhares de almas do intervalo, que quando reunidas, equivalem à memória de um ser humano."
-        "Se prepare, se você quiser encher seu medidor, vai precisar de muitas almas para substituir 7 simples vivos."
-    };
+    werase(tela_encontro_vigia);
+    box(tela_encontro_vigia, 0, 0);
+    desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
+    wrefresh(tela_encontro_vigia);
 
+    slow_mvwprintw(tela_encontro_vigia, "Chegando na porta, você se depara com uma figura encapuzada", 19, inicio_texto_x, 20);
+    slow_mvwprintw(tela_encontro_vigia, "Com medo, e um sentimento estranho de familiaridade, você interage com ele.", 20, inicio_texto_x, 20);
+    napms(1500);
     
 
-    napms(10000);
+    
+    int ja_realizou_pergunta[3]={0};
+    char * OpcoesDialogo[3]={
+            "1. Quem é você?",
+            "2. Você parece estranhamente familiar… A gente se conhece?",
+            "3. Ecos dizem pelo intervalo sobre essa torre ser uma saída… O que preciso fazer para impedir que eu seja esquecido?"
+        };
 
+
+  
+    int opcao = 0;
+
+    while(true)
+    {
+        werase(tela_encontro_vigia);
+        desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
+        box(tela_encontro_vigia,0,0);
+
+
+        for(int i=0;i<3;i++)
+        {
+
+            if(ja_realizou_pergunta[i])
+                wattron(tela_encontro_vigia, COLOR_PAIR(COR_OPCAO_INVALIDA));
+            mvwprintw(tela_encontro_vigia, 20 + i, inicio_texto_x, OpcoesDialogo[i]);
+            wattrset(tela_encontro_vigia, A_NORMAL); // reseta tudo, não só o par
+        }
+
+        wattron(tela_encontro_vigia, COLOR_PAIR(COR_DESTAQUE));
+        mvwprintw(tela_encontro_vigia,getmaxy(tela_encontro_vigia)-3,4,"Pressione ENTER para entrar na torre");
+        wattroff(tela_encontro_vigia, COLOR_PAIR(COR_DESTAQUE));
+        wrefresh(tela_encontro_vigia);
+
+        tecla = wgetch(tela_encontro_vigia);
+        if(tecla=='1')  opcao=0;
+        if(tecla=='2')  opcao=1;
+        if(tecla=='3')  opcao=2;
+        if(tecla == KEY_ENTER || tecla == '\n' || tecla == 10)
+        {
+            werase(tela_encontro_vigia);
+            desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
+            box(tela_encontro_vigia,0,0);
+            mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
+            slow_mvwprintw(tela_encontro_vigia, "Ate logo, te vejo em breve...", 19, inicio_texto_x, 30);
+            wrefresh(tela_encontro_vigia);
+
+            napms(1800);
+
+            apagar_janela(tela_encontro_vigia);
+            player->NumeroAndar = 0;
+            return player;     
+        }
+        if(!ja_realizou_pergunta[opcao])
+        {
+            ja_realizou_pergunta[opcao]=1;
+
+            werase(tela_encontro_vigia);
+            desenhar_sprite(tela_encontro_vigia,"assets/sprites/others/vigia.txt",1,1);
+            box(tela_encontro_vigia,0,0);
+
+
+            if(opcao == 0) //                  "1. Quem é você?",
+            {
+                mvwprintw(tela_encontro_vigia, 16, inicio_texto_x, "[");
+                mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + 1, player->nome);
+                mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + strlen(player->nome) + 1, "]");
+                wrefresh(tela_encontro_vigia);
+                slow_mvwprintw(tela_encontro_vigia, "-Quem é você?",17,inicio_texto_x, 40);
+                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[Vigia]");
+                wrefresh(tela_encontro_vigia);
+                slow_mvwprintw(tela_encontro_vigia, "Me chamam de muitas coisas, observador,sentinela… Mas você pode me chamar de Vigia, mais uma alma como você. E você é?",19, inicio_texto_x, 20);
+                napms(1000);
+
+                werase(tela_encontro_vigia);
+                desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
+                box(tela_encontro_vigia, 0, 0);
+                wrefresh(tela_encontro_vigia);
+
+                //protagonista responde com o proprio nome
+                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[");
+                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x+1, player->nome);
+                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x+strlen(player->nome)+1, "]");
+                wrefresh(tela_encontro_vigia);
+                mvwprintw(tela_encontro_vigia, 19, inicio_texto_x, "-");
+                slow_mvwprintw(tela_encontro_vigia, player->nome, 19, inicio_texto_x+1, 20);
+            }
+            else if(opcao == 1) //            "2. Você parece estranhamente familiar… A gente se conhece?",
+            {
+                mvwprintw(tela_encontro_vigia, 16, inicio_texto_x, "[");
+                mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + 1, player->nome);
+                mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + strlen(player->nome) + 1, "]");
+                wrefresh(tela_encontro_vigia);
+                slow_mvwprintw(tela_encontro_vigia, "-Você parece estranhamente familiar… A gente se conhece?", 17, inicio_texto_x, 40);
+                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[Vigia]");
+                wrefresh(tela_encontro_vigia);
+                slow_mvwprintw(tela_encontro_vigia, "Possivelmente, milhares de almas almejam subir a torre, a gente ja deve ter se visto alguma outra vez...", 19, inicio_texto_x, 20);
+                napms(600);
+                slow_mvwprintw(tela_encontro_vigia, "Mas voce ainda nao fez nada suficientemente impactante para ficar marcado na minha memoria…", 20, inicio_texto_x, 20);
+            }
+            else if(opcao == 2) //             "3. Ecos dizem pelo intervalo sobre essa torre ser uma saída… O que preciso fazer para impedir que eu seja esquecido?"
+            {
+                mvwprintw(tela_encontro_vigia, 16, inicio_texto_x, "[");
+                mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + 1, player->nome);
+                mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + strlen(player->nome) + 1, "]");
+                wrefresh(tela_encontro_vigia);
+                slow_mvwprintw(tela_encontro_vigia, "-Ecos dizem pelo intervalo sobre essa torre ser uma saída… O que preciso fazer para impedir que eu seja esquecido?", 17, inicio_texto_x, 40);
+                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[Vigia]");
+                wrefresh(tela_encontro_vigia);
+                slow_mvwprintw(tela_encontro_vigia,
+                               "Conforme voce avanca na torre, cada chefe que voce derrota e uma conquista digna de um eco...",
+                               19, inicio_texto_x, 20);
+                napms(600);
+                slow_mvwprintw(tela_encontro_vigia,
+                               "E cada eco atinge a memoria de milhares de almas do intervalo, que quando reunidas, equivalem a memoria de um ser humano.",
+                               20, inicio_texto_x, 20);
+                napms(600);
+                slow_mvwprintw(tela_encontro_vigia,
+                               "Se prepare. Se voce quiser encher seu medidor, vai precisar de muitas almas para substituir 7 simples vivos.",
+                               21, inicio_texto_x, 20);
+            }
+
+            wrefresh(tela_encontro_vigia);
+            napms(1500);
+        }
+
+    }
+
+    werase(tela_encontro_vigia);
+    desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
+    box(tela_encontro_vigia,0,0);
+    mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
+    wrefresh(tela_encontro_vigia);
+    slow_mvwprintw(tela_encontro_vigia, "Ate logo, te vejo em breve...", 20, inicio_texto_x, 30);
+
+    wrefresh(tela_encontro_vigia);
+
+    napms(1800);
 
     apagar_janela(tela_encontro_vigia);
-
 
 
     player->NumeroAndar = 0;
@@ -353,8 +496,6 @@ void Introducao()
     }
     
     delwin(tela_apresentacao);
-
-
 
 
 }

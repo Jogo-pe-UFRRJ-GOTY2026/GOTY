@@ -44,7 +44,8 @@ int main()
         perror("Jogo encerrado");
         return 1;
     }
-    switch(AndarSalvo)
+        
+    switch(player->NumeroAndar)
     {
         case Andar0:
             Prologo_pt2(player);

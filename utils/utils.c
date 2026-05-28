@@ -53,13 +53,15 @@ void iniciar_cores()
 {
     const int STANDARD_BACKGROUND = -1;
     short COLOR_CRIMSON=16;
+    short COLOR_GREY = 17;
     init_color(COLOR_CRIMSON, 710, 192, 251);
-
+    init_color(COLOR_GREY, 500, 500, 500);
     init_pair(COR_TEXTO_MORTE, COLOR_CRIMSON, STANDARD_BACKGROUND);
     init_pair(COR_OPCAO_SELECIONADA, COLOR_YELLOW, STANDARD_BACKGROUND);
     init_pair(COR_VIDA, COLOR_RED, STANDARD_BACKGROUND);
     init_pair(COR_NOME_BOSS, COLOR_WHITE, STANDARD_BACKGROUND);
     init_pair(COR_DESTAQUE, COLOR_CYAN, STANDARD_BACKGROUND);
+    init_pair(COR_OPCAO_INVALIDA, COLOR_GREY, STANDARD_BACKGROUND);
 }
 
 void desenhar_sprite(WINDOW *win, const char *nome_arquivo, int y_inicial, int x_inicial)

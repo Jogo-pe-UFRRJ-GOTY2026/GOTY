@@ -22,6 +22,7 @@ typedef enum cores
     COR_NOME_BOSS,
     COR_TEXTO_MORTE,
     COR_DESTAQUE,
+    COR_OPCAO_INVALIDA
 } Cores;
 
 
