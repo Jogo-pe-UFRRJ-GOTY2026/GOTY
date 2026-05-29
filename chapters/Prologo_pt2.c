@@ -254,9 +254,9 @@ void Prologo_pt2(Player *player)
         mvwprintw(tela_prologopt2, 22, 6, "[Cavaleiro]");
         slow_mvwprintw(tela_prologopt2, "(ofegante) ...você venceu.", 23, 6, 20);
         napms(2000);
-        slow_mvwprintw(tela_prologopt2, "Talvez você realmente seja diferente dos outros.", 25, 6, 20);
+        slow_mvwprintw(tela_prologopt2, "Talvez você realmente seja diferente dos outros.", 24, 6, 20);
         napms(2000);
-        slow_mvwprintw(tela_prologopt2,"Vá em frente, viajante... não deixe a torre apagar quem você é.",24, 6, 20);
+        slow_mvwprintw(tela_prologopt2,"Vá em frente, viajante... não deixe a torre apagar quem você é.",25, 6, 20);
         player->karma += 1;
         // salvar_jogo(player);
     }

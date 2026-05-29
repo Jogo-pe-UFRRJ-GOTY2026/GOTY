@@ -57,7 +57,7 @@ void inimigo_tomar_dano(Inimigo* inimigo, int dano)
 
 void inimigo_tomar_mercy(Inimigo *inimigo, int dano)
 {
-    inimigo->mercy -= dano;
+    inimigo->mercy += dano;
 
     if (inimigo->mercy > 100)
         inimigo->mercy = 100;
