@@ -52,6 +52,15 @@ bool atacar_inimigo(Player *player, Inimigo *inimigo)
     return true;
 }
 
+bool mercy_inimigo(Player *player, Inimigo *inimigo)
+{
+    int dano = gerar_rolagem_mercy();
+
+    inimigo_tomar_mercy(inimigo, dano);
+
+    return true;
+}
+
 void tomar_dano(Player *player, AtaqueInimigo *attack)
 {
     int defesaTotal = defesa_total(player);

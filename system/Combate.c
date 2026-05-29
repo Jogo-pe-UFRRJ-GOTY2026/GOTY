@@ -126,6 +126,8 @@ EstadoRodada rodada(AtaqueInimigo ataque, Player *player,Inimigo* inimigo, Comba
             renderizar_vida_boss(ui->area_vida_boss, inimigo);
             wrefresh(ui->area_vida_boss);
             atacar_inimigo(player, inimigo);
+            renderizar_vida_boss(ui->area_vida_boss, inimigo);
+            wrefresh(ui->area_dialogos);
             break;
         case ITENS:
             break;
@@ -134,8 +136,9 @@ EstadoRodada rodada(AtaqueInimigo ataque, Player *player,Inimigo* inimigo, Comba
             box(ui->area_dialogos, 0, 0);
             slow_mvwprintw(ui->area_dialogos, inimigo->dialogos_mercy[rand() % 2], 1, 2, 40);
             napms(1000);
+            wrefresh(ui->area_vida_boss);
+            mercy_inimigo(player, inimigo);
             werase(ui->area_dialogos);
-            wrefresh(ui->area_dialogos);
 
             if(inimigo->mercy>=100)
             {

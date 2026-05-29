@@ -55,6 +55,14 @@ void inimigo_tomar_dano(Inimigo* inimigo, int dano)
 }
 // inimigo_tomar_dano(inimigo, gerar_rolagem_dano() + player->inventario.arma.dano); como deve ser utilizada
 
+void inimigo_tomar_mercy(Inimigo *inimigo, int dano)
+{
+    inimigo->mercy -= dano;
+
+    if (inimigo->mercy > 100)
+        inimigo->mercy = 100;
+}
+
 void renderizar_nome_estilizado(WINDOW *area_nome_boss, const char *nome)
 {
     int meio = (getmaxx(area_nome_boss) / 2) - 10 - strlen(nome);

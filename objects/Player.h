@@ -45,6 +45,7 @@ Player *criar_player(const char *nome, Genero genero);
 void mover_player(Player *player, DeltaDirecao direcao, int limite_esquerda, int limite_direita, int limite_cima, int limite_baixo);
 void tomar_dano(Player *player, AtaqueInimigo *atack);
 bool atacar_inimigo(Player *player, Inimigo *inimigo);
+bool mercy_inimigo(Player *player, Inimigo *inimigo);
 int vida_max_total(Player *player);
 int defesa_total(Player *player);
 int forca_total(Player *player);
