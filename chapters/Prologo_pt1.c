@@ -13,82 +13,82 @@
 
 void Introducao();
 
-#define print_descricao(win, string, y, x, delay)       \
-    ({                                                  \
-        tecla = wgetch(win);                            \
-        if(tecla== KEY_ENTER || tecla == 10)            \
-        {                                               \
-            werase(win);                                \
-            wrefresh(win);                              \
-            delwin(win);                                \
-            win=NULL;                                   \
-            break;                                      \
-        }                                               \
-        slow_mvwprintw(win, string, y,x,delay);         \
-        tecla=wgetch(win);                              \
-        if(tecla== KEY_ENTER || tecla == 10)            \
-        {                                               \
-            werase(win);                                \
-            wrefresh(win);                              \
-            delwin(win);                                \
-            win=NULL;                                   \
-            break;                                      \
-        }                                               \
+#define print_descricao(win, string, y, x, delay) \
+    ({                                            \
+        tecla = wgetch(win);                      \
+        if (tecla == KEY_ENTER || tecla == 10)    \
+        {                                         \
+            werase(win);                          \
+            wrefresh(win);                        \
+            delwin(win);                          \
+            win = NULL;                           \
+            break;                                \
+        }                                         \
+        slow_mvwprintw(win, string, y, x, delay); \
+        tecla = wgetch(win);                      \
+        if (tecla == KEY_ENTER || tecla == 10)    \
+        {                                         \
+            werase(win);                          \
+            wrefresh(win);                        \
+            delwin(win);                          \
+            win = NULL;                           \
+            break;                                \
+        }                                         \
     })
 
-Player* Prologo_pt1()
+Player *Prologo_pt1()
 {
 
     Introducao();
-    Player* player = Tela_criacao();
+    Player *player = Tela_criacao();
 
-    WINDOW *tela_descricao = newwin(getmaxy(stdscr)-10, getmaxx(stdscr)-20, 0, 10);
+    WINDOW *tela_descricao = newwin(getmaxy(stdscr) - 10, getmaxx(stdscr) - 20, 0, 10);
     keypad(tela_descricao, TRUE);
     nodelay(tela_descricao, TRUE);
-    box(tela_descricao,0,0);
+    box(tela_descricao, 0, 0);
     int tecla;
     // isso fica em baixo
-    
 
-    for (int x = 1, y = 16; x < getmaxx(tela_descricao)-1; x++)
+    for (int x = 1, y = 16; x < getmaxx(tela_descricao) - 1; x++)
         mvwprintw(tela_descricao, y, x, "-");
 
     wattron(tela_descricao, COLOR_PAIR(COR_DESTAQUE));
-    mvwprintw(tela_descricao,18,35, "Aperte Enter para se aproximar da Torre dos Echos.");
+    mvwprintw(tela_descricao, 18, 35, "Aperte Enter para se aproximar da Torre dos Echos.");
     wattroff(tela_descricao, COLOR_PAIR(COR_DESTAQUE));
 
-
     // FODA-SE, O JOGADOR NÃO VAI PULAR ISSO, APRENDA A LER CARALHO, ANLAFABETISMO DA POPULAÇÃO TEM QUE DIMINUIR DE TODO MODO
-    do{
-    print_descricao(tela_descricao,player->nome,1,1,30);
-    print_descricao(tela_descricao,"... Uma alma marcada pela determinação.",1, 1+strlen(player->nome),30);
-    print_descricao(tela_descricao,"Alguém que carregava ambições impossíveis… e um desejo tão profundo que se tornou a última parte intacta de sua existência :",2,1,30);
-    
-    wattron(tela_descricao, A_BOLD);
-    print_descricao(tela_descricao, player->genero==Masculino ? "Ser lembrado." : "Ser lembrada.",3,5,30);
-    wattroff(tela_descricao, A_BOLD);
+    do
+    {
+        print_descricao(tela_descricao, player->nome, 1, 1, 30);
+        print_descricao(tela_descricao, "... Uma alma marcada pela determinação.", 1, 1 + strlen(player->nome), 30);
 
-    print_descricao(tela_descricao, player->nome,5,1,30);
-    print_descricao(tela_descricao, " é uma das almas pertencentes ao Intervalo, sofrendo por mal se lembrar de si mesmo e dos feitos em vida, ", 5, 1 + strlen(player->nome), 30);
-    print_descricao(tela_descricao, "e sem ter como acabar com esse sofrimento lento de perda de significado próprio", 6, 1, 30);
+        print_descricao(tela_descricao, "Alguém que carregava ambições impossíveis…", 2, 1, 30);
+        print_descricao(tela_descricao, "e um desejo tão profundo que se tornou a última parte intacta de sua existência:", 3, 1, 30);
 
-    print_descricao(tela_descricao, "Afinal, a Morte, Coletora das almas mortas, o pega e traz para o único lugar sua alma pode ficar. ", 7, 1, 30);
-    print_descricao(tela_descricao,"No Intervalo, perpetuando esse ciclo sem saída, ou quase).",8,1,30);
+        wattron(tela_descricao, A_BOLD);
+        print_descricao(tela_descricao, player->genero == Masculino ? "Ser lembrado." : "Ser lembrada.", 5, 5, 30);
+        wattroff(tela_descricao, A_BOLD);
 
+        print_descricao(tela_descricao, player->nome, 7, 1, 30);
+        print_descricao(tela_descricao, " é uma das inúmeras almas presas no Intervalo.", 7, 1 + strlen(player->nome), 30);
 
-    print_descricao(tela_descricao, "A sua alma determinada por reconhecimento ainda exala o desejo de estar viva e se lembrar do indivíduo", 10, 1, 30);
-    print_descricao(tela_descricao, "que o mantém em suas memórias que o impedem de perder sua essência.", 11, 1, 30);
+        print_descricao(tela_descricao, "Um lugar onde memórias desaparecem lentamente. Com o tempo, nomes, rostos e sonhos deixam de existir.", 8, 1, 30);
 
-    print_descricao(tela_descricao, "Porém, a alma de ", 12, 1, 30);
-    print_descricao(tela_descricao, player->nome, 12, 18, 30);
-    print_descricao(tela_descricao, " está se apagando…, será que o indivíduo se esqueceu definitivamente dessa alma?", 12, 19+ strlen(player->nome), 30);
-    print_descricao(tela_descricao, "Será que o indivíduo morreu?", 13, 1 , 30);
-    print_descricao(tela_descricao, "Com essas dúvidas, e a descoberta de uma possibilidade de sair daquele lugar, ", 14, 1, 30);
-    print_descricao(tela_descricao, player->nome, 14, 78, 30);
-    print_descricao(tela_descricao, "toma uma atitude…", 14, 79 + strlen(player->nome), 30);
-    } while(0);
+        print_descricao(tela_descricao, "A maioria das almas acaba esquecendo quem era. E então… desaparecem.", 9, 1, 30);
 
-    while(tela_descricao != NULL)
+        print_descricao(tela_descricao, "Mas algo dentro de", 10, 1, 30);
+        print_descricao(tela_descricao, player->nome, 10, 20, 30);
+        print_descricao(tela_descricao, "ainda resiste.", 10, 21 + strlen(player->nome), 30);
+
+        print_descricao(tela_descricao, "Mesmo sem se lembrar do próprio passado, sua alma se recusa a desaparecer.", 11, 1, 30);
+
+        print_descricao(tela_descricao, "E agora, diante de uma possível saída… Subir a Torre dos Ecos", 12, 1, 30);
+        print_descricao(tela_descricao, player->nome, 13, 1, 30);
+        print_descricao(tela_descricao, " toma uma decisão…", 13, 1 + strlen(player->nome), 30);
+
+    } while (0);
+
+    while (tela_descricao != NULL)
     {
         tecla = wgetch(tela_descricao);
         if (tecla == KEY_ENTER || tecla == '\n' || tecla == 10)
@@ -100,21 +100,17 @@ Player* Prologo_pt1()
         }
     }
 
-
-
-    int inicio_texto_x=40;
-    WINDOW* tela_encontro_vigia = newwin(getmaxy(stdscr), getmaxx(stdscr),0,0);
+    int inicio_texto_x = 40;
+    WINDOW *tela_encontro_vigia = newwin(getmaxy(stdscr), getmaxx(stdscr), 0, 0);
     box(tela_encontro_vigia, 0, 0);
 
-
-    desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
+    desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
     wrefresh(tela_encontro_vigia);
 
     // Dialogo de abertura
     mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
-    slow_mvwprintw(tela_encontro_vigia, "Oh.", 19, inicio_texto_x, 40);
-    slow_mvwprintw(tela_encontro_vigia, "Mais um.", 20, inicio_texto_x, 40);
-    slow_mvwprintw(tela_encontro_vigia, "Desejando subir a torre?", 21, inicio_texto_x, 40);
+    slow_mvwprintw(tela_encontro_vigia, "...", 19, inicio_texto_x, 40);
+    slow_mvwprintw(tela_encontro_vigia, "Então outro finalmente acordou.", 20, inicio_texto_x, 40);
     napms(1800);
 
     werase(tela_encontro_vigia);
@@ -125,52 +121,49 @@ Player* Prologo_pt1()
     slow_mvwprintw(tela_encontro_vigia, "Chegando na porta, você se depara com uma figura encapuzada", 19, inicio_texto_x, 20);
     slow_mvwprintw(tela_encontro_vigia, "Com medo, e um sentimento estranho de familiaridade, você interage com ele.", 20, inicio_texto_x, 20);
     napms(1500);
-    
 
-    
-    int ja_realizou_pergunta[3]={0};
-    char * OpcoesDialogo[3]={
-            "1. Quem é você?",
-            "2. Você parece estranhamente familiar… A gente se conhece?",
-            "3. Ecos dizem pelo intervalo sobre essa torre ser uma saída… O que preciso fazer para impedir que eu seja esquecido?"
-        };
+    int ja_realizou_pergunta[3] = {0};
+    char *OpcoesDialogo[3] = {
+        "1. Quem é você?",
+        "2. Você parece estranhamente familiar… A gente se conhece?",
+        "3. Eu mal consigo lembrar quem sou… como as outras almas continuam existindo?"};
 
-
-  
     int opcao = 0;
 
-    while(true)
+    while (true)
     {
         werase(tela_encontro_vigia);
-        desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
-        box(tela_encontro_vigia,0,0);
+        desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
+        box(tela_encontro_vigia, 0, 0);
 
-
-        for(int i=0;i<3;i++)
+        for (int i = 0; i < 3; i++)
         {
 
-            if(ja_realizou_pergunta[i])
+            if (ja_realizou_pergunta[i])
                 wattron(tela_encontro_vigia, COLOR_PAIR(COR_OPCAO_INVALIDA));
             mvwprintw(tela_encontro_vigia, 20 + i, inicio_texto_x, OpcoesDialogo[i]);
             wattrset(tela_encontro_vigia, A_NORMAL); // reseta tudo, não só o par
         }
 
         wattron(tela_encontro_vigia, COLOR_PAIR(COR_DESTAQUE));
-        mvwprintw(tela_encontro_vigia,getmaxy(tela_encontro_vigia)-3,4,"Pressione ENTER para entrar na torre");
+        mvwprintw(tela_encontro_vigia, getmaxy(tela_encontro_vigia) - 3, 4, "Pressione ENTER para entrar na torre");
         wattroff(tela_encontro_vigia, COLOR_PAIR(COR_DESTAQUE));
         wrefresh(tela_encontro_vigia);
 
         tecla = wgetch(tela_encontro_vigia);
-        if(tecla=='1')  opcao=0;
-        if(tecla=='2')  opcao=1;
-        if(tecla=='3')  opcao=2;
-        if(tecla == KEY_ENTER || tecla == '\n' || tecla == 10)
+        if (tecla == '1')
+            opcao = 0;
+        if (tecla == '2')
+            opcao = 1;
+        if (tecla == '3')
+            opcao = 2;
+        if (tecla == KEY_ENTER || tecla == '\n' || tecla == 10)
         {
             werase(tela_encontro_vigia);
-            desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
-            box(tela_encontro_vigia,0,0);
+            desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
+            box(tela_encontro_vigia, 0, 0);
             mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
-            slow_mvwprintw(tela_encontro_vigia, "Ate logo, te vejo em breve...", 19, inicio_texto_x, 30);
+            slow_mvwprintw(tela_encontro_vigia, "Até logo, te vejo em breve...", 19, inicio_texto_x, 30);
             wrefresh(tela_encontro_vigia);
 
             napms(1800);
@@ -180,43 +173,47 @@ Player* Prologo_pt1()
             bool salvou = salvar_jogo(player);
             assert(salvou == true);
 
-            return player;     
+            return player;
         }
-        if(!ja_realizou_pergunta[opcao])
+        if (!ja_realizou_pergunta[opcao])
         {
-            ja_realizou_pergunta[opcao]=1;
+            ja_realizou_pergunta[opcao] = 1;
 
             werase(tela_encontro_vigia);
-            desenhar_sprite(tela_encontro_vigia,"assets/sprites/others/vigia.txt",1,1);
-            box(tela_encontro_vigia,0,0);
+            desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
+            box(tela_encontro_vigia, 0, 0);
 
-
-            if(opcao == 0) //                  "1. Quem é você?",
+            if (opcao == 0) //                  "1. Quem é você?",
             {
                 mvwprintw(tela_encontro_vigia, 16, inicio_texto_x, "[");
                 mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + 1, player->nome);
                 mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + strlen(player->nome) + 1, "]");
                 wrefresh(tela_encontro_vigia);
-                slow_mvwprintw(tela_encontro_vigia, "-Quem é você?",17,inicio_texto_x, 40);
+                slow_mvwprintw(tela_encontro_vigia, "-Quem é você?", 17, inicio_texto_x, 40);
                 mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[Vigia]");
                 wrefresh(tela_encontro_vigia);
-                slow_mvwprintw(tela_encontro_vigia, "Me chamam de muitas coisas, observador,sentinela… Mas você pode me chamar de Vigia, mais uma alma como você. E você é?",19, inicio_texto_x, 20);
+                slow_mvwprintw(tela_encontro_vigia, "Depende de quem pergunta.", 19, inicio_texto_x, 20);
                 napms(1000);
-
+                slow_mvwprintw(tela_encontro_vigia, "Alguns me chamavam de sentinela.", 20, inicio_texto_x, 20);
+                napms(1000);
+                slow_mvwprintw(tela_encontro_vigia, "Outros de observador.", 21, inicio_texto_x, 20);
+                napms(1000);
+                slow_mvwprintw(tela_encontro_vigia, "Mas nomes não permanecem por muito tempo no Intervalo. E você, qual seu nome?", 22, inicio_texto_x, 20);
+                napms(1000);
                 werase(tela_encontro_vigia);
                 desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
                 box(tela_encontro_vigia, 0, 0);
                 wrefresh(tela_encontro_vigia);
 
-                //protagonista responde com o proprio nome
+                // protagonista responde com o proprio nome
                 mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[");
-                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x+1, player->nome);
-                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x+strlen(player->nome)+1, "]");
+                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x + 1, player->nome);
+                mvwprintw(tela_encontro_vigia, 18, inicio_texto_x + strlen(player->nome) + 1, "]");
                 wrefresh(tela_encontro_vigia);
                 mvwprintw(tela_encontro_vigia, 19, inicio_texto_x, "-");
-                slow_mvwprintw(tela_encontro_vigia, player->nome, 19, inicio_texto_x+1, 20);
+                slow_mvwprintw(tela_encontro_vigia, player->nome, 19, inicio_texto_x + 1, 20);
             }
-            else if(opcao == 1) //            "2. Você parece estranhamente familiar… A gente se conhece?",
+            else if (opcao == 1) //            "2. Você parece estranhamente familiar… A gente se conhece?",
             {
                 mvwprintw(tela_encontro_vigia, 16, inicio_texto_x, "[");
                 mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + 1, player->nome);
@@ -225,45 +222,65 @@ Player* Prologo_pt1()
                 slow_mvwprintw(tela_encontro_vigia, "-Você parece estranhamente familiar… A gente se conhece?", 17, inicio_texto_x, 40);
                 mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[Vigia]");
                 wrefresh(tela_encontro_vigia);
-                slow_mvwprintw(tela_encontro_vigia, "Possivelmente, milhares de almas almejam subir a torre, a gente ja deve ter se visto alguma outra vez...", 19, inicio_texto_x, 20);
+                slow_mvwprintw(tela_encontro_vigia, "...talvez.", 19, inicio_texto_x, 20);
                 napms(600);
-                slow_mvwprintw(tela_encontro_vigia, "Mas voce ainda nao fez nada suficientemente impactante para ficar marcado na minha memoria…", 20, inicio_texto_x, 20);
+                slow_mvwprintw(tela_encontro_vigia, "Depois de tantas almas, rostos começam a se misturar.", 20, inicio_texto_x, 20);
             }
-            else if(opcao == 2) //             "3. Ecos dizem pelo intervalo sobre essa torre ser uma saída… O que preciso fazer para impedir que eu seja esquecido?"
+            else if (opcao == 2) //            "3. Eu mal consigo lembrar quem sou… como as outras almas continuam existindo?"
             {
                 mvwprintw(tela_encontro_vigia, 16, inicio_texto_x, "[");
                 mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + 1, player->nome);
                 mvwprintw(tela_encontro_vigia, 16, inicio_texto_x + strlen(player->nome) + 1, "]");
                 wrefresh(tela_encontro_vigia);
-                slow_mvwprintw(tela_encontro_vigia, "-Ecos dizem pelo intervalo sobre essa torre ser uma saída… O que preciso fazer para impedir que eu seja esquecido?", 17, inicio_texto_x, 40);
+                slow_mvwprintw(tela_encontro_vigia, "-Eu mal consigo lembrar quem sou… como as outras almas continuam existindo?", 17, inicio_texto_x, 40);
                 mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[Vigia]");
                 wrefresh(tela_encontro_vigia);
                 slow_mvwprintw(tela_encontro_vigia,
-                               "Conforme voce avanca na torre, cada chefe que voce derrota e uma conquista digna de um eco...",
+                               "Toda alma esquecida deixa fragmentos para trás.",
                                19, inicio_texto_x, 20);
-                napms(600);
+                napms(700);
                 slow_mvwprintw(tela_encontro_vigia,
-                               "E cada eco atinge a memoria de milhares de almas do intervalo, que quando reunidas, equivalem a memoria de um ser humano.",
+                               "Nós chamamos esses fragmentos de Ecos.",
                                20, inicio_texto_x, 20);
-                napms(600);
+                napms(900);
                 slow_mvwprintw(tela_encontro_vigia,
-                               "Se prepare. Se voce quiser encher seu medidor, vai precisar de muitas almas para substituir 7 simples vivos.",
+                               "Quando alguém desafia a torre, derrota um guardião ou realiza algo marcante...",
                                21, inicio_texto_x, 20);
+                napms(700);
+                slow_mvwprintw(tela_encontro_vigia,
+                               "...esses Ecos se espalham pelo Intervalo.",
+                               22, inicio_texto_x, 20);
+                napms(900);
+                slow_mvwprintw(tela_encontro_vigia,
+                               "Milhares de almas passam a se lembrar de você.",
+                               23, inicio_texto_x, 20);
+                napms(700);
+                slow_mvwprintw(tela_encontro_vigia,
+                               "E memória... é a única coisa que impede alguém de desaparecer aqui.",
+                               24, inicio_texto_x, 20);
+                napms(1200);
+                slow_mvwprintw(tela_encontro_vigia,
+                               "Mas não se engane.",
+                               25, inicio_texto_x, 20);
+                napms(700);
+                slow_mvwprintw(tela_encontro_vigia,
+                               "A memória de sete vivos vale mais do que a de incontáveis almas esquecidas.",
+                               26, inicio_texto_x, 20);
             }
-
             wrefresh(tela_encontro_vigia);
             napms(1500);
         }
-
     }
 
     // FALLBACK
     werase(tela_encontro_vigia);
-    desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1,1);
-    box(tela_encontro_vigia,0,0);
+    desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
+    box(tela_encontro_vigia, 0, 0);
     mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
     wrefresh(tela_encontro_vigia);
-    slow_mvwprintw(tela_encontro_vigia, "Ate logo, te vejo em breve...", 20, inicio_texto_x, 30);
+    slow_mvwprintw(tela_encontro_vigia, "Boa sorte.", 20, inicio_texto_x, 30);
+    napms(600);
+    slow_mvwprintw(tela_encontro_vigia, "...você vai precisar.", 21, inicio_texto_x, 30);
 
     wrefresh(tela_encontro_vigia);
 
@@ -271,20 +288,15 @@ Player* Prologo_pt1()
 
     apagar_janela(tela_encontro_vigia);
 
-
     player->NumeroAndar = 0;
     salvar_jogo(player);
     return player;
-}   
-
-
-
-
+}
 
 // ================================================================================= //
-//                              Criação de personagem                                // 
+//                              Criação de personagem                                //
 // ================================================================================= //
-Player* Tela_criacao()
+Player *Tela_criacao()
 {
     int altura_tela, largura_tela;
     getmaxyx(stdscr, altura_tela, largura_tela);
@@ -316,12 +328,12 @@ Player* Tela_criacao()
         mvwprintw(criacao_personagem_window, 7, largura_tela / 3, "╚██████╗██║  ██║██║██║  ██║╚██████╗██║  ██║╚██████╔╝    ██████╔╝███████╗");
         mvwprintw(criacao_personagem_window, 8, largura_tela / 3, " ╚═════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝     ╚═════╝ ╚══════╝");
 
-        mvwprintw(criacao_personagem_window, 3, largura_tela / 3, "██████╗██████╗ ██╗ █████╗  ██████╗ █████╗  ██████╗     ██████╗ ███████╗");   
-        mvwprintw(criacao_personagem_window, 4, largura_tela / 3, "██╔════╝██╔══██╗██║██╔══██╗██╔════╝██╔══██╗██╔═══██╗    ██╔══██╗██╔════╝");  
-        mvwprintw(criacao_personagem_window, 5, largura_tela / 3, "██║     ██████╔╝██║███████║██║     ███████║██║   ██║    ██║  ██║█████╗"); 
-        mvwprintw(criacao_personagem_window, 6, largura_tela / 3, "██║     ██╔══██╗██║██╔══██║██║     ██╔══██║██║   ██║    ██║  ██║██╔══╝ ");    
-        mvwprintw(criacao_personagem_window, 7, largura_tela / 3, "╚██████╗██║  ██║██║██║  ██║╚██████╗██║  ██║╚██████╔╝    ██████╔╝███████╗");  
-        mvwprintw(criacao_personagem_window, 8, largura_tela / 3, " ╚═════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝     ╚═════╝ ╚══════╝");    
+        mvwprintw(criacao_personagem_window, 3, largura_tela / 3, "██████╗██████╗ ██╗ █████╗  ██████╗ █████╗  ██████╗     ██████╗ ███████╗");
+        mvwprintw(criacao_personagem_window, 4, largura_tela / 3, "██╔════╝██╔══██╗██║██╔══██╗██╔════╝██╔══██╗██╔═══██╗    ██╔══██╗██╔════╝");
+        mvwprintw(criacao_personagem_window, 5, largura_tela / 3, "██║     ██████╔╝██║███████║██║     ███████║██║   ██║    ██║  ██║█████╗");
+        mvwprintw(criacao_personagem_window, 6, largura_tela / 3, "██║     ██╔══██╗██║██╔══██║██║     ██╔══██║██║   ██║    ██║  ██║██╔══╝ ");
+        mvwprintw(criacao_personagem_window, 7, largura_tela / 3, "╚██████╗██║  ██║██║██║  ██║╚██████╗██║  ██║╚██████╔╝    ██████╔╝███████╗");
+        mvwprintw(criacao_personagem_window, 8, largura_tela / 3, " ╚═════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝     ╚═════╝ ╚══════╝");
 
         mvwprintw(criacao_personagem_window, 10, largura_box, "██████╗ ███████╗██████╗ ███████╗ ██████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗███╗   ███╗");
         mvwprintw(criacao_personagem_window, 11, largura_box, "██╔══██╗██╔════╝██╔══██╗██╔════╝██╔═══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝████╗ ████║");
@@ -356,7 +368,7 @@ Player* Tela_criacao()
                 mvwprintw(criacao_personagem_window, y, start_x, "|         %s ", opcoes[i]);
                 mvwprintw(criacao_personagem_window, y, start_x + 61, "|");
             }
-        }          
+        }
         mvwprintw(criacao_personagem_window, 28, start_x, "|                                                            |");
         mvwprintw(criacao_personagem_window, 29, start_x, "| Enter para confirmar                                       |");
         mvwprintw(criacao_personagem_window, 30, start_x, "|                                                            |");
@@ -376,7 +388,6 @@ Player* Tela_criacao()
         default:
             break;
         }
-
 
         wrefresh(criacao_personagem_window);
 
@@ -428,7 +439,6 @@ Player* Tela_criacao()
     return player;
 }
 
-
 // ================================================================================= //
 //                              Introdução da história                               //
 // ================================================================================= //
@@ -460,12 +470,9 @@ void Introducao()
     {
         werase(tela_apresentacao);
 
-
         wattron(tela_apresentacao, COLOR_PAIR(COR_DESTAQUE) | A_BOLD); // Ativa um atributo na janela passada, nesse caso, a cor e o negrito
-        mvwprintw(tela_apresentacao, base + 2, direita-30, "Pressione ENTER para pular");
+        mvwprintw(tela_apresentacao, base + 2, direita - 30, "Pressione ENTER para pular");
         wattroff(tela_apresentacao, COLOR_PAIR(COR_DESTAQUE) | A_BOLD); // Desativa um atributo na janela passada, nesse caso, a cor e o negrito
-
-            
 
         for (int x = esquerda + 1; x < direita; x++)
             mvwprintw(tela_apresentacao, topo, x, "-");
@@ -489,20 +496,18 @@ void Introducao()
         }
         wrefresh(tela_apresentacao);
 
-        int metade_box = esquerda + (direita - esquerda) / 2 - 5; //vide, o meio visual é meio logico - 5 pq sim
-        slow_mvwprintw(tela_apresentacao, texto[i], 2, metade_box - strlen(texto[i])/2, 50);
+        int metade_box = esquerda + (direita - esquerda) / 2 - 5; // vide, o meio visual é meio logico - 5 pq sim
+        slow_mvwprintw(tela_apresentacao, texto[i], 2, metade_box - strlen(texto[i]) / 2, 50);
 
         tecla = wgetch(tela_apresentacao);
         if (tecla == KEY_ENTER || tecla == 10)
             break;
         wrefresh(tela_apresentacao);
-        napms(2000); //espera 2 segundos
+        napms(2000); // espera 2 segundos
         tecla = wgetch(tela_apresentacao);
         if (tecla == KEY_ENTER || tecla == 10)
             break;
     }
-    
+
     delwin(tela_apresentacao);
-
-
 }

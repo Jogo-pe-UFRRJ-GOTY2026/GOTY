@@ -72,7 +72,7 @@ typedef struct Inimigo
     int numero_ataques;
     int tempo_por_rodada;
     char *dialogos_ataque[5];
-    char *dialogos_mercy[2];
+    char *dialogos_mercy[3];
     Lembrancas id;
     char *dialogo_reever_player;
     AtaqueInimigo ataques[10];

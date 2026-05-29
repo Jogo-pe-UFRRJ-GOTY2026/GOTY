@@ -134,7 +134,7 @@ EstadoRodada rodada(AtaqueInimigo ataque, Player *player,Inimigo* inimigo, Comba
         case MERCY:
             werase(ui->area_dialogos);
             box(ui->area_dialogos, 0, 0);
-            slow_mvwprintw(ui->area_dialogos, inimigo->dialogos_mercy[rand() % 2], 1, 2, 40);
+            slow_mvwprintw(ui->area_dialogos, inimigo->dialogos_mercy[rand() % 3], 1, 2, 40);
             napms(1000);
             wrefresh(ui->area_vida_boss);
             mercy_inimigo(player, inimigo);
