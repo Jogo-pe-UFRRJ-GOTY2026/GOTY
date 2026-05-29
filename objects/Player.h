@@ -31,7 +31,7 @@ typedef struct Player{
     int level;
     int vida_max;
     int vida;
-    int karma;
+    int karma; 
     int medidor_lembranca[8]; // respectivamente pro Hollow Knight, Centauro, Demonio, Cerberus, Dragao, Rei Caido, Vigia, Reaper
     Genero genero;
     Inventario inventario;

@@ -111,7 +111,7 @@ Player *Prologo_pt1()
     mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
     slow_mvwprintw(tela_encontro_vigia, "...", 19, inicio_texto_x, 40);
     slow_mvwprintw(tela_encontro_vigia, "Então outro finalmente acordou.", 20, inicio_texto_x, 40);
-    napms(1800);
+    napms(2000);
 
     werase(tela_encontro_vigia);
     box(tela_encontro_vigia, 0, 0);
@@ -120,7 +120,7 @@ Player *Prologo_pt1()
 
     slow_mvwprintw(tela_encontro_vigia, "Chegando na porta, você se depara com uma figura encapuzada", 19, inicio_texto_x, 20);
     slow_mvwprintw(tela_encontro_vigia, "Com medo, e um sentimento estranho de familiaridade, você interage com ele.", 20, inicio_texto_x, 20);
-    napms(1500);
+    napms(2000);
 
     int ja_realizou_pergunta[3] = {0};
     char *OpcoesDialogo[3] = {
@@ -163,10 +163,10 @@ Player *Prologo_pt1()
             desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
             box(tela_encontro_vigia, 0, 0);
             mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
-            slow_mvwprintw(tela_encontro_vigia, "Até logo, te vejo em breve...", 19, inicio_texto_x, 30);
+            slow_mvwprintw(tela_encontro_vigia, "Boa sorte... você vai precisar.", 19, inicio_texto_x, 30);
             wrefresh(tela_encontro_vigia);
 
-            napms(1800);
+            napms(2000);
 
             apagar_janela(tela_encontro_vigia);
             player->NumeroAndar = 0;
@@ -193,13 +193,13 @@ Player *Prologo_pt1()
                 mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[Vigia]");
                 wrefresh(tela_encontro_vigia);
                 slow_mvwprintw(tela_encontro_vigia, "Depende de quem pergunta.", 19, inicio_texto_x, 20);
-                napms(1000);
+                napms(2000);
                 slow_mvwprintw(tela_encontro_vigia, "Alguns me chamavam de sentinela.", 20, inicio_texto_x, 20);
-                napms(1000);
+                napms(2000);
                 slow_mvwprintw(tela_encontro_vigia, "Outros de observador.", 21, inicio_texto_x, 20);
-                napms(1000);
+                napms(2000);
                 slow_mvwprintw(tela_encontro_vigia, "Mas nomes não permanecem por muito tempo no Intervalo. E você, qual seu nome?", 22, inicio_texto_x, 20);
-                napms(1000);
+                napms(2000);
                 werase(tela_encontro_vigia);
                 desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
                 box(tela_encontro_vigia, 0, 0);
@@ -223,7 +223,7 @@ Player *Prologo_pt1()
                 mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[Vigia]");
                 wrefresh(tela_encontro_vigia);
                 slow_mvwprintw(tela_encontro_vigia, "...talvez.", 19, inicio_texto_x, 20);
-                napms(600);
+                napms(2000);
                 slow_mvwprintw(tela_encontro_vigia, "Depois de tantas almas, rostos começam a se misturar.", 20, inicio_texto_x, 20);
             }
             else if (opcao == 2) //            "3. Eu mal consigo lembrar quem sou… como as outras almas continuam existindo?"
@@ -268,7 +268,7 @@ Player *Prologo_pt1()
                                26, inicio_texto_x, 20);
             }
             wrefresh(tela_encontro_vigia);
-            napms(1500);
+            napms(3000);
         }
     }
 
@@ -279,12 +279,12 @@ Player *Prologo_pt1()
     mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
     wrefresh(tela_encontro_vigia);
     slow_mvwprintw(tela_encontro_vigia, "Boa sorte.", 20, inicio_texto_x, 30);
-    napms(600);
+    napms(2000);
     slow_mvwprintw(tela_encontro_vigia, "...você vai precisar.", 21, inicio_texto_x, 30);
 
     wrefresh(tela_encontro_vigia);
 
-    napms(1800);
+    napms(2000);
 
     apagar_janela(tela_encontro_vigia);
 

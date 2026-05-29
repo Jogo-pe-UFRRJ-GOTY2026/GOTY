@@ -19,7 +19,7 @@ void Prologo_pt2(Player *player)
     slow_mvwprintw(tela_prologopt2,"Você entra no térreo da torre, o ar gélido do lugar paira perante sua face,",10, 6, 20);
     slow_mvwprintw(tela_prologopt2,"aquecendo-se conforme flui para o exterior. O térreo comporta um breve jardim repleto de gérberas,",11, 6, 20);
     slow_mvwprintw(tela_prologopt2,"tingindo a paisagem em cores brancas e vermelhas.",12, 6, 20);
-    napms(1000);
+    napms(2000);
 
     werase(tela_prologopt2);
     box(tela_prologopt2, 0, 0);
@@ -28,7 +28,7 @@ void Prologo_pt2(Player *player)
 
     slow_mvwprintw(tela_prologopt2,"Nas escadas levando ao primeiro andar, sentado há um cavaleiro. Ao seu lado direito, um longo machado",32, 6, 20);
     slow_mvwprintw(tela_prologopt2,"e a seu lado esquerdo, um escudo.",33, 6, 20);
-    napms(800);
+    napms(2000);
 
     werase(tela_prologopt2);
     box(tela_prologopt2, 0, 0);
@@ -36,7 +36,7 @@ void Prologo_pt2(Player *player)
     wrefresh(tela_prologopt2);
 
     slow_mvwprintw(tela_prologopt2, "Silêncio absoluto.", 32, 6, 30);
-    napms(1400);
+    napms(2000);
 
     // --- Dialogo condicional ---
     if (player->medidor_lembranca[Hollow_Knight] < 1)
@@ -46,7 +46,7 @@ void Prologo_pt2(Player *player)
         desenhar_sprite(tela_prologopt2, "assets/sprites/buildings/terreo.txt", 1, 5);
         mvwprintw(tela_prologopt2, 32, 6, "[Cavaleiro]");
         slow_mvwprintw(tela_prologopt2, "...mais um.", 33, 6, 30);
-        napms(800);
+        napms(2000);
         slow_mvwprintw(tela_prologopt2,
                        "Você ainda tem esperança nos olhos, deve ser uma das suas primeiras vezes, não é?",
                        34, 6, 20);
@@ -99,7 +99,7 @@ void Prologo_pt2(Player *player)
                 wrefresh(tela_prologopt2);
                 // "Eu preciso passar."
                 slow_mvwprintw(tela_prologopt2, "O Cavaleiro lentamente pega seu machado e escudo.", 33, 6, 20);
-                napms(1000);
+                napms(2000);
 
                 werase(tela_prologopt2);
                 box(tela_prologopt2, 0, 0);
@@ -109,7 +109,7 @@ void Prologo_pt2(Player *player)
                 wrefresh(tela_prologopt2);
 
                 slow_mvwprintw(tela_prologopt2, "Não posso deixar que você suba…", 23, 6, 25);
-                napms(600);
+                napms(2000);
 
                 wattron(tela_prologopt2, A_BOLD);
                 slow_mvwprintw(tela_prologopt2, "Você NÃO É MELHOR do que EU!", 24, 6, 20);
@@ -131,11 +131,11 @@ void Prologo_pt2(Player *player)
                 {
                     // "Quem e voce? O que faz aqui?"
                     slow_mvwprintw(tela_prologopt2, "...", 33, 6, 60);
-                    napms(800);
+                    napms(2000);
                     slow_mvwprintw(tela_prologopt2,
                                    "Eu já tive algo que você poderia chamar de 'nome'.",
                                    34, 6, 20);
-                    napms(600);
+                    napms(2000);
                     slow_mvwprintw(tela_prologopt2,
                                    "Não me lembro mais de quem eu era. A torre me mantém vivo.",
                                    35, 6, 20);
@@ -144,9 +144,9 @@ void Prologo_pt2(Player *player)
                 {
                     // "Voce tentou subir a torre tambem?"
                     slow_mvwprintw(tela_prologopt2, "Tentei.", 33, 6, 30);
-                    napms(600);
+                    napms(2000);
                     slow_mvwprintw(tela_prologopt2, "Incontáveis vezes.", 34, 6, 30);
-                    napms(600);
+                    napms(2000);
                     slow_mvwprintw(tela_prologopt2, "E em todas eu fui derrotado.", 35, 6, 25);
                 }
                 else if (opcao == 2)
@@ -155,7 +155,7 @@ void Prologo_pt2(Player *player)
                     slow_mvwprintw(tela_prologopt2,
                                    "O Cavaleiro lentamente pega seu machado e escudo.",
                                    33, 6, 20);
-                    napms(1000);
+                    napms(2000);
 
                     werase(tela_prologopt2);
                     box(tela_prologopt2, 0, 0);
@@ -165,7 +165,7 @@ void Prologo_pt2(Player *player)
                     wrefresh(tela_prologopt2);
 
                     slow_mvwprintw(tela_prologopt2, "Não posso deixar que você suba…", 23, 6, 25);
-                    napms(600);
+                    napms(2000);
 
                     wattron(tela_prologopt2, A_BOLD);
                     slow_mvwprintw(tela_prologopt2,"Você NÃO É MELHOR do que EU!",24, 6, 20);
@@ -176,7 +176,7 @@ void Prologo_pt2(Player *player)
                 }
 
                 wrefresh(tela_prologopt2);
-                napms(1400);
+                napms(2000);;
             }
         }
     }
@@ -189,7 +189,7 @@ void Prologo_pt2(Player *player)
         mvwprintw(tela_prologopt2, 22, 6, "[Cavaleiro]");
         slow_mvwprintw(tela_prologopt2,"Você é estranhamente insistente, estranho…",23, 6, 25);
         wrefresh(tela_prologopt2);
-        napms(1600);
+        napms(2000);
     }
 
     // --- Combate ---
@@ -214,7 +214,7 @@ void Prologo_pt2(Player *player)
     hollow_knight->dialogos_ataque[0] = "Não fez nem cócegas...";
     hollow_knight->dialogos_ataque[1] = "Acha mesmo que pode me vencer?";
     hollow_knight->dialogos_ataque[2] = "Eu já enfrentei coisas muito piores que você.";
-    hollow_knight->dialogos_ataque[3] = "Impressionante... há quanto tempo ninguém me pressionava assim?";
+    hollow_knight->dialogos_ataque[3] = "Impressionante...";
     hollow_knight->dialogos_ataque[4] = "Não... você não pode chegar mais longe do que eu.";
 
     hollow_knight->numero_ataques = len(ataques);
@@ -237,13 +237,15 @@ void Prologo_pt2(Player *player)
         // Jogador matou o boss
         desenhar_sprite(tela_prologopt2, "assets/sprites/bosses/hollow_defeated.txt", 1, 5);
         mvwprintw(tela_prologopt2, 22, 6, "[Cavaleiro]");
-        slow_mvwprintw(tela_prologopt2, "...boa sorte, viajante.", 23, 6, 25);
-        napms(800);
+        slow_mvwprintw(tela_prologopt2, "Eu falhei diante da Torre.", 23, 6, 25);
+        slow_mvwprintw(tela_prologopt2, "Leve meu eco com você, e não cometa os mesmos erros.", 24, 6, 25);
+        napms(2000);
         werase(tela_prologopt2);
         box(tela_prologopt2,0,0);
         wrefresh(tela_prologopt2);
-        napms(800);
-        slow_mvwprintw(tela_prologopt2,"...talvez você chegue mais longe do que eu.",24, 6, 25);
+        napms(2000);
+        slow_mvwprintw(tela_prologopt2,"... talvez você chegue mais longe do que eu.",24, 6, 25);
+        // salvar_jogo(player);
     }
     else if (resultado_combate == VITORIA && hollow_knight->vida >= 0)
     {
@@ -251,17 +253,19 @@ void Prologo_pt2(Player *player)
         desenhar_sprite(tela_prologopt2, "assets/sprites/bosses/hollow_defeated.txt", 1, 5);
         mvwprintw(tela_prologopt2, 22, 6, "[Cavaleiro]");
         slow_mvwprintw(tela_prologopt2, "(ofegante) ...você venceu.", 23, 6, 20);
-        napms(800);
+        napms(2000);
         slow_mvwprintw(tela_prologopt2, "Talvez você realmente seja diferente dos outros.", 25, 6, 20);
-        napms(800);
+        napms(2000);
         slow_mvwprintw(tela_prologopt2,"Vá em frente, viajante... não deixe a torre apagar quem você é.",24, 6, 20);
         player->karma += 1;
+        // salvar_jogo(player);
     }
     else
     {
         desenhar_sprite(tela_prologopt2, "assets/sprites/bosses/hollow.txt", 1, 5);
         mvwprintw(tela_prologopt2, 22, 6, "[Cavaleiro]");
         slow_mvwprintw(tela_prologopt2, "Eu avisei... você ainda não é forte o bastante.", 23, 6, 20);
+        player->vida = vida_max_total(player);
         salvar_jogo(player);
     }
     wrefresh(tela_prologopt2);
