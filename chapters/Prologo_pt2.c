@@ -195,8 +195,8 @@ void Prologo_pt2(Player *player)
     // --- Combate ---
     AtaqueInimigo ataques[] = {
         criar_ataque(LINHA, 5, "█▙▔▔▔", 1, HORIZONTAL, DIREITA_ESQUERDA, 2, 30),
-        criar_ataque(BULLET, 2, "†", 1, VERTICAL, CIMA_BAIXO, 3, 30),
-        criar_ataque(BULLET, 3, "*", 1, HORIZONTAL, ESQUERDA_DIREITA, 5, 30)};
+        criar_ataque(BULLET, 2, "†", 1, VERTICAL, CIMA_BAIXO, 4, 30),
+        criar_ataque(BULLET, 3, "✱", 1, HORIZONTAL, ESQUERDA_DIREITA, 5, 30)};
 
     Sprite_size size;
     size.x = 33;

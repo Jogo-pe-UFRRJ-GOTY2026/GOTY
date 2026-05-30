@@ -6,7 +6,6 @@ typedef enum TipoAtaque
 {
     LINHA,
     AREA,//Retangulo
-    ESFERA,
     BULLET,
     PAREDE,
     LASER,

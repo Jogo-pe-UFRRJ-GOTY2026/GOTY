@@ -68,11 +68,23 @@ bool ataque_colidiu(Player *player, AtaqueInimigo *Ataque)
             if (Ataque->direcao == HORIZONTAL)
                 return abs(pl_y - atq_y) <= hitbox;
             break;
-        case ESFERA:
-            break;
-
-        case PAREDE:
-            break;
+                                                //  |
+                                                //  g
+        case PAREDE:                            //  a
+            if(Ataque->direcao==VERTICAL)       //  p
+            {                                   //  |
+                if(abs(pl_y-Ataque->y)<=hitbox) // está no gap
+                    return false;
+                if(Ataque->x==pl_x) // esta na mesma coluna
+                    return true;
+            }
+            else if(Ataque->direcao==HORIZONTAL) //  ----gap---- 
+            {
+                if ( abs(pl_x-Ataque->x)<=hitbox) // está no gap
+                    return false;
+                if(pl_y==Ataque->y)
+                    return true;
+            }
         default:
             break;
     }
@@ -189,6 +201,44 @@ void spawnar_ataque(AtaqueInimigo *atq, WINDOW *area_esquiva)
         atq->y = rand() % (max_y - 2 - altura) + 1;
         break;
     
+
+    case PAREDE:
+        // VERTICAL
+        if (atq->sentido == ESQUERDA_DIREITA)
+        {
+            atq->vel_horizontal = 1;
+            atq->vel_vertical = 0;
+            atq->x = 1;
+            atq->y = rand() % (max_y-2)+1;      //buraco na parede
+            break;
+        }
+        if (atq->sentido == DIREITA_ESQUERDA)
+        {
+            atq->vel_horizontal = -1;
+            atq->vel_vertical = 0;
+            atq->x = max_x-2;
+            atq->y = rand() % (max_y - 2) + 1;  // buraco na parede
+            break;
+        }
+        // HORIZONTAL
+        if (atq->sentido == CIMA_BAIXO)
+        {
+            atq->vel_horizontal = 0;
+            atq->vel_vertical = 1;
+            atq->x = rand() % (max_x - 2) + 1; // buraco na parede
+            atq->y = 1; 
+            break;
+        }
+        if (atq->sentido == BAIXO_CIMA)
+        {
+            atq->vel_horizontal = 0;
+            atq->vel_vertical = -1;
+            atq->y = max_y-2;
+            atq->x = rand() % (max_x - 2) + 1; // buraco na parede
+            break;
+        }
+        break;
+
     default:
         break;
     }
@@ -263,6 +313,8 @@ bool piscando_visivel(int tick, int intervalo)
 void desenhar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq)
 {
     int max_x = getmaxx(area_esquiva);
+    int max_y = getmaxy(area_esquiva);
+
     bool em_aviso;
     switch (atq->tipo_ataque)
     {
@@ -270,15 +322,13 @@ void desenhar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq)
             bool sprite_unitario = strlen(atq->ataque_sprite)<=4; //por causa dos caracteres unicode, se for so 1 caracter vai repetir até ter hitbox deles, ex: hitbox= 3, char=I => III
             if(atq->direcao == HORIZONTAL)
             {
-                
                 if(sprite_unitario)
                 {
                     for (int i = 0; i < atq->hit_box && atq->sentido==ESQUERDA_DIREITA; i++)
                         mvwprintw(area_esquiva, atq->y, atq->x + i, "%s", atq->ataque_sprite);
 
                     for (int i = 0; i < atq->hit_box && atq->sentido==DIREITA_ESQUERDA; i++)
-                            mvwprintw(area_esquiva, atq->y, atq->x - i, "%s", atq->ataque_sprite);
-                    
+                        mvwprintw(area_esquiva, atq->y, atq->x - i, "%s", atq->ataque_sprite);              
                 }
                 else
                     mvwprintw(area_esquiva, atq->y, atq->x, "%s", atq->ataque_sprite);
@@ -299,6 +349,7 @@ void desenhar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq)
                 break;
             }
             break;
+
 
         case AREA: // Retangulo
             int largura = atq->vel_horizontal;
@@ -333,11 +384,12 @@ void desenhar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq)
                 }
                 wattroff(area_esquiva, A_BOLD);
             }
-
             break;
+
+
+
+
         case LASER:
-            int max_x = getmaxx(area_esquiva);
-            int max_y = getmaxy(area_esquiva);
             em_aviso = atq->tick_vida < atq->velocidade;
             if (em_aviso)
             {   
@@ -364,14 +416,36 @@ void desenhar_ataque(WINDOW *area_esquiva, AtaqueInimigo *atq)
                 wattroff(area_esquiva, A_BOLD | COLOR_PAIR(COR_ATIVO));
             }
             break;
+
+
         case BULLET: 
             wattron(area_esquiva, A_BOLD);
             mvwprintw(area_esquiva, atq->y, atq->x, "%s", atq->ataque_sprite);
             wattroff(area_esquiva, A_BOLD);
             break;
 
-        case ESFERA:
         case PAREDE:
+            if(atq->direcao == HORIZONTAL)
+            {
+                for(int x=1;x<=max_x-2;x++)
+                {
+                    if (abs(x - atq->x) <= atq->hit_box)
+                        continue;
+                    mvwprintw(area_esquiva, atq->y, x, atq->ataque_sprite);
+                }
+            }
+            else if(atq->direcao == VERTICAL)
+            {
+                for (int y = 1; y <= max_y - 2; y++)
+                {
+                    if (abs(y-atq->y) <= atq->hit_box)
+                        continue;
+                    mvwprintw(area_esquiva, y, atq->x, atq->ataque_sprite);
+                }
+            }
+            break;
+
+
 
         default:
             break;

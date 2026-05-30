@@ -257,7 +257,7 @@ void renderizar_menu_combate(WINDOW *area_menu, Player* player, OpcoesMenuCombat
     for (int x = 11, i = 0; i < porcentagem_vida; i++, x++)
         mvwprintw(area_menu, 1, x, "█");
     wattroff(area_menu, COLOR_PAIR(COR_VIDA));
-    mvwprintw(area_menu, 1, 22, "]");
+    mvwprintw(area_menu, 1, 21, "]");
 
     mvwprintw(area_menu,1, 35, "Lv.%d", player->level);
 
