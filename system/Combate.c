@@ -187,7 +187,7 @@ EstadoRodada loop_esquiva(AtaqueInimigo ataque_atual, Player *player, CombateUI 
         box(ui->area_esquiva, 0, 0);
 
         // spawn dos tey twey shwiin,
-        if (spawn_ataques_habilitado && frame % 30 == 0)
+        if (spawn_ataques_habilitado && frame % ataque_atual.intervalo_frames_spawn == 0)
         {
             for (int i = 0; i < ataques_na_tela; i++)
             {

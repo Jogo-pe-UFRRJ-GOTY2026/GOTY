@@ -15,15 +15,15 @@ Inimigo *MockInimigo()
 {
     //exemplo da criação ataques
     AtaqueInimigo ataques[] = {
-        criar_ataque(LINHA, 10, "█▙▔▔▔", 1, HORIZONTAL, DIREITA_ESQUERDA, 2),
-        criar_ataque(BULLET, 2, "†", 1, VERTICAL, CIMA_BAIXO, 3),
-        criar_ataque(BULLET, 3, "*", 1, HORIZONTAL, ESQUERDA_DIREITA, 5)};
+        criar_ataque(LASER, 10, "🞕", 0, HORIZONTAL, NAO_IMPORTA, 90, 60),
+        criar_ataque_area(10, "^", 0, 0, 0, 90, 30)
+    };
 
     Sprite_size size;
-    size.x=33;
-    size.y=20;
+    size.x=19;
+    size.y=21;
 
-    Inimigo *inimigo = criar_inimigo(100, "Hollow Knight", "assets/sprites/bosses/hollow.txt",size, 40, 20, Hollow_Knight);
+    Inimigo *inimigo = criar_inimigo(100, "Demon", "assets/sprites/bosses/demon.txt",size, 40, 30, Demon);
 
     inimigo->numero_ataques=len(ataques);
     for(int i=0;i<inimigo->numero_ataques;i++)
@@ -46,7 +46,7 @@ Player *MockPlayer()
 
     player->NumeroAndar = 3;
 
-    player->inventario.arma = criar_arma(1, "Espada de Teste", "Mocking", 999, 0, CORTE);
+    player->inventario.arma = criar_arma(1, "Espada de Teste", "Mocking", 40, 0, CORTE);
     return player;
 }
 
@@ -54,7 +54,7 @@ void simular_combate()
 {
     Player *player=MockPlayer();
     Inimigo* inimigo=MockInimigo();
-    mostrar_tela_morte(player);
+    //mostrar_tela_morte(player);
     
     iniciar_combate(player, inimigo);
 }

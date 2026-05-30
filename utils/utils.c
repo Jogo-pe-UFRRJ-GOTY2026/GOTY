@@ -60,6 +60,7 @@ void iniciar_cores()
     init_pair(COR_NOME_BOSS, COLOR_WHITE, STANDARD_BACKGROUND);
     init_pair(COR_DESTAQUE, COLOR_CYAN, STANDARD_BACKGROUND);
     init_pair(COR_OPCAO_INVALIDA, COLOR_GREY, STANDARD_BACKGROUND);
+    init_pair(COR_ATIVO, COLOR_CYAN, STANDARD_BACKGROUND);
 }
 
 void desenhar_sprite(WINDOW *win, const char *nome_arquivo, int y_inicial, int x_inicial)
@@ -99,8 +100,6 @@ void slow_mvwprintw(WINDOW* win, char* fala, const int y, int x, int delay_ms)
 }
 
 void mostrar_tela_morte(Player* player)
-
-
 {
     WINDOW* tela_morte = newwin(getmaxy(stdscr), getmaxx(stdscr),0,0);
 

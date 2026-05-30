@@ -7,7 +7,14 @@
 
 #define equals(str1, str2) (strcmp(str1, str2) == 0)
 
-AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite, int hitbox, DirecaoAtaque direcao,SentidoAtaque sentido, int velocidade)
+// sabe oq ia ser foda? orientação a objeto, um lombok da vida 
+// e tacar uns
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Getter
+//@Setter
+//@Builder
+AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char *ataque_sprite, int hitbox, DirecaoAtaque direcao, SentidoAtaque sentido, int velocidade, int intervalo_frames_spawn)
 {
     AtaqueInimigo ataque;
 
@@ -19,12 +26,28 @@ AtaqueInimigo criar_ataque(TipoAtaque tipo, int dano, const char* ataque_sprite,
     ataque.direcao=direcao;
     ataque.sentido=sentido;
     ataque.ativo=false;
+    ataque.intervalo_frames_spawn = intervalo_frames_spawn;
     ataque.velocidade = velocidade;
     ataque.tick_movimento = 0;
     ataque.tick_vida = 0;
     return ataque;
 }
+AtaqueInimigo criar_ataque_area(int dano, const char *ataque_sprite, int hitbox, int largura, int altura, int velocidade, int intervalo_frames_spawn)
+{
+    AtaqueInimigo atq;
+    atq.dano=dano;
+    atq.tipo_ataque=AREA;
+    strncpy(atq.ataque_sprite, ataque_sprite, sizeof(atq.ataque_sprite) - 1);
+    atq.hit_box=hitbox;
+    atq.direcao=PONTO;
+    atq.sentido=NAO_IMPORTA;
+    atq.vel_horizontal=largura;
+    atq.vel_vertical=altura;
+    atq.velocidade=velocidade;
+    atq.intervalo_frames_spawn=intervalo_frames_spawn;
 
+    return atq;
+}
 Inimigo *criar_inimigo(int vida, char nome[], const char *sprite_location, Sprite_size size, int mercy, int tempo_por_rodada, Lembrancas Id)
 {
     Inimigo *inimigo = malloc(sizeof(Inimigo));

@@ -194,9 +194,9 @@ void Prologo_pt2(Player *player)
 
     // --- Combate ---
     AtaqueInimigo ataques[] = {
-        criar_ataque(LINHA, 5, "█▙▔▔▔", 1, HORIZONTAL, DIREITA_ESQUERDA, 2),
-        criar_ataque(BULLET, 2, "†", 1, VERTICAL, CIMA_BAIXO, 3),
-        criar_ataque(BULLET, 3, "*", 1, HORIZONTAL, ESQUERDA_DIREITA, 5)};
+        criar_ataque(LINHA, 5, "█▙▔▔▔", 1, HORIZONTAL, DIREITA_ESQUERDA, 2, 30),
+        criar_ataque(BULLET, 2, "†", 1, VERTICAL, CIMA_BAIXO, 3, 30),
+        criar_ataque(BULLET, 3, "*", 1, HORIZONTAL, ESQUERDA_DIREITA, 5, 30)};
 
     Sprite_size size;
     size.x = 33;
@@ -245,6 +245,7 @@ void Prologo_pt2(Player *player)
         wrefresh(tela_prologopt2);
         napms(2000);
         slow_mvwprintw(tela_prologopt2,"... talvez você chegue mais longe do que eu.",24, 6, 25);
+        player->NumeroAndar=Andar1;
         // salvar_jogo(player);
     }
     else if (resultado_combate == VITORIA && hollow_knight->vida >= 0)
@@ -258,6 +259,7 @@ void Prologo_pt2(Player *player)
         napms(2000);
         slow_mvwprintw(tela_prologopt2,"Vá em frente, viajante... não deixe a torre apagar quem você é.",25, 6, 20);
         player->karma += 1;
+        player->NumeroAndar=Andar1;
         // salvar_jogo(player);
     }
     else
@@ -267,6 +269,8 @@ void Prologo_pt2(Player *player)
         slow_mvwprintw(tela_prologopt2, "Eu avisei... você ainda não é forte o bastante.", 23, 6, 20);
         player->vida = vida_max_total(player);
         salvar_jogo(player);
+
+        mostrar_tela_morte(player);
     }
     wrefresh(tela_prologopt2);
     napms(2200);
