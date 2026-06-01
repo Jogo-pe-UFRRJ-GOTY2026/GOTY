@@ -136,8 +136,9 @@ void ponto_save(Player* player)
                     mvwprintw(ponto_save_window, getmaxy(ponto_save_window) - 3, 4, "Pressione ENTER para se despedir");
                     wattroff(ponto_save_window, COLOR_PAIR(COR_DESTAQUE));
                     wrefresh(ponto_save_window);
+                    opcao = wgetch(ponto_save_window);
 
-                    if (tecla == KEY_ENTER || tecla == '\n' || tecla == 10)
+                    if (opcao == KEY_ENTER || opcao == '\n' || opcao == 10)
                     {
                         conversando = false;
                         break;
@@ -149,12 +150,21 @@ void ponto_save(Player* player)
                         box(ponto_save_window, 0, 0);
                         desenhar_sprite(ponto_save_window, "assets/sprites/others/vigia.txt", 5, 5);
                         mvwprintw(ponto_save_window, 28, 6, "[Vigia]");
+                        wrefresh(ponto_save_window);
+
+
+
+                        if(opcao == KEY_ENTER || opcao == '\n' || opcao == 10)
+                        {
+                            conversando = false;
+                            break;
+                        }
                     }
                 }
                 break;
 
             case '4':
-                slow_mvwprintw(ponto_save_window, "Você levanta e volta à Torre", getmaxy(ponto_save_window)-3, 5, 30);
+                slow_mvwprintw(ponto_save_window, "Você levanta e volta a Torre", getmaxy(ponto_save_window)-3, 5, 30);
                 descansando = false;
                 break;
         }
