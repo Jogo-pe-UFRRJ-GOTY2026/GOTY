@@ -74,7 +74,7 @@ void ponto_save(Player* player)
     {
         werase(ponto_save_window);
         box(ponto_save_window, 0 , 0);
-        desenhar_sprite(ponto_save_window,"assets/buildings/save_point.txt",5,5);
+        desenhar_sprite(ponto_save_window,"assets/sprites/buildings/save_point.txt",5,5);
 
         tecla = wgetch(ponto_save_window);
 
@@ -82,10 +82,21 @@ void ponto_save(Player* player)
         {
             case '1':
                 salvar_jogo(player);
+                wattron(ponto_save_window, COLOR_PAIR(COR_DESTAQUE)| A_BOLD);
+                mvwprintw(ponto_save_window, getmaxy(ponto_save_window)-5, 5, "Progresso salvo com sucesso");
+                wattroff(ponto_save_window, COLOR_PAIR(COR_DESTAQUE) | A_BOLD);
+                wrefresh(ponto_save_window);
+                napms(1000);
+
                 break;
 
             case '2':
                 salvar_jogo(player);
+                wattron(ponto_save_window, COLOR_PAIR(COR_DESTAQUE)| A_BOLD);
+                mvwprintw(ponto_save_window, getmaxy(ponto_save_window)-3, 5, "Progresso salvo com sucesso. Fechando jogo...");
+                wattroff(ponto_save_window, COLOR_PAIR(COR_DESTAQUE) | A_BOLD);
+                wrefresh(ponto_save_window);
+                napms(1500);
                 apagar_janela(ponto_save_window);
                 endwin();
                 free(player);

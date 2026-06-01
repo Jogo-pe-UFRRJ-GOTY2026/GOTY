@@ -5,6 +5,7 @@
 #include <ncursesw/ncurses.h>
 #include "utils.h"
 #include "../objects/Player.h"
+#include "../objects/Inventario.h"
 #include <string.h>
 
 char* get_error_message(Exceptions ex)
@@ -194,4 +195,74 @@ void apagar_janela(WINDOW* win)
     wrefresh(win);
     delwin(win);
     win=NULL;
+}
+
+void gerar_loot(Player* player)
+{
+    int opcao='1';
+
+    Arma arma1 = gerar_arma_aleatoria(player->NumeroAndar);
+
+    Arma arma2;
+    do
+    {
+        arma2 = gerar_arma_aleatoria(player->NumeroAndar);
+    }
+    while(strcmp(arma1.nome, arma2.nome) == 0);
+
+    Arma arma3;
+    do
+    {
+        arma3 = gerar_arma_aleatoria(player->NumeroAndar);
+    }
+    while(strcmp(arma3.nome, arma1.nome) == 0 || strcmp(arma3.nome, arma2.nome) == 0);
+
+
+    Arma arma_selecionada;
+    WINDOW* tela_loot = newwin(getmaxx(stdscr), getmaxy(stdscr), 0, 0);
+    
+    while(true)
+    {
+        werase(tela_loot);
+
+        desenhar_sprite(tela_loot, "assets/sprites/loot/chest", 5,0);
+
+        if(opcao=='1')
+        {
+            wattron(tela_loot, COLOR_PAIR(COR_OPCAO_SELECIONADA));
+            arma_selecionada=arma1;
+        }
+        desenhar_sprite(tela_loot, arma1.sprite, 5, 17);
+        wattroff(tela_loot, COLOR_PAIR(COR_OPCAO_SELECIONADA));
+
+        if(opcao=='2')
+        {
+            wattron(tela_loot, COLOR_PAIR(COR_OPCAO_SELECIONADA));
+            arma_selecionada=arma2;
+        }
+        desenhar_sprite(tela_loot, arma2.sprite, 5, 48);
+        wattroff(tela_loot, COLOR_PAIR(COR_OPCAO_SELECIONADA));
+
+        if(opcao=='3')
+        {
+            wattron(tela_loot, COLOR_PAIR(COR_OPCAO_SELECIONADA));
+            arma_selecionada=arma3;
+        }
+        desenhar_sprite(tela_loot, arma3.sprite, 5, 79);
+
+        wattroff(tela_loot, COLOR_PAIR(COR_OPCAO_SELECIONADA));
+
+        if(opcao==KEY_ENTER || opcao == '\n' || opcao==10)
+        {
+            player->inventario.arma=arma_selecionada;
+            break;
+        }
+
+
+        opcao = wgetch(tela_loot);
+
+    }
+    werase(tela_loot);
+    delwin(tela_loot);
+    tela_loot=NULL;
 }

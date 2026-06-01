@@ -9,7 +9,6 @@
 #include "../utils/utils.h"
 #include "../system/Save.h"
 
-// 1 - 3
 
 
 bool Capitulo1(Player* player)
@@ -184,7 +183,7 @@ bool Capitulo1(Player* player)
     AtaqueInimigo ataques[] = {
         criar_ataque(LINHA, 5, "---------<⇶", 1, HORIZONTAL, ESQUERDA_DIREITA, 2, 30),
         criar_ataque(LINHA, 5, "⬱>---------", 1, HORIZONTAL, DIREITA_ESQUERDA, 2, 30),
-        criar_ataque(PAREDE, 8, "🔥", 1, HORIZONTAL, CIMA_BAIXO, 10, 180),
+        criar_ataque(PAREDE, 8, "V", 1, HORIZONTAL, CIMA_BAIXO, 10, 180), //o emoji de fogo quebra no linux
         criar_ataque_area(4, "◮", 1, 0, 0, 90, 60)
     };
 
@@ -192,7 +191,7 @@ bool Capitulo1(Player* player)
     size.x = 19;
     size.y = 21;
 
-    Inimigo *cruciator = criar_inimigo(140, "Cruciator","assets/sprites/bosses/demon.txt", size, 35, 23, Cruciator);
+    Inimigo *cruciator = criar_inimigo(120, "Cruciator","assets/sprites/bosses/demon.txt", size, 35, 23, Cruciator);
 
     cruciator->dialogo_reever_player = "Olha só, olha só...Acho que alguém gostou da diversão de antes! Hahaha";
 

@@ -202,8 +202,8 @@ void Prologo_pt2(Player *player)
     size.x = 33;
     size.y = 20;
 
-    Inimigo *hollow_knight = criar_inimigo(100, "Hollow Knight",
-                                           "assets/sprites/bosses/demon.txt", size, 40, 20, Hollow_Knight);
+    Inimigo *hollow_knight = criar_inimigo(90, "Hollow Knight",
+                                           "assets/sprites/bosses/hollow.txt", size, 40, 20, Hollow_Knight);
 
     hollow_knight->dialogo_reever_player = "Você é estranhamente insistente, estranho…";
 
@@ -261,6 +261,7 @@ void Prologo_pt2(Player *player)
         slow_mvwprintw(tela_prologopt2,"Vá em frente, viajante... não deixe a torre apagar quem você é.",25, 6, 20);
         player->karma += 1;
         player->NumeroAndar=Andar1;
+        
         // salvar_jogo(player);
     }
     else

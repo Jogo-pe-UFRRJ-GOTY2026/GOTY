@@ -51,6 +51,7 @@ void apagar_janela(WINDOW* win);
 void mostrar_tela_morte(Player* player);
 int calcular_largura_sprite(const char *caminho);
 void iniciar_cores();
+void gerar_loot(Player* player);
 
 #define len(arr) (sizeof(arr)/sizeof(arr[0]))
 

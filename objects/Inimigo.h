@@ -29,7 +29,7 @@ typedef enum SentidoAtaque
 typedef enum lembrancas_
 {
     Hollow_Knight,
-    Aphanos,
+    Alphanos,
     Cruciator,
     Cerberus,
     Iowa,

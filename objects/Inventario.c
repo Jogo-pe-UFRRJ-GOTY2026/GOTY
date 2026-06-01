@@ -2,6 +2,7 @@
 #include "../utils/utils.h"
 #include <stdlib.h>
 #include <string.h>
+#include <ncurses.h>
 #include "Atributos.h"
 
 Inventario init_inventario()
@@ -60,15 +61,152 @@ Inventario init_inventario()
     return inventario;
 }
 
+static const ArmaBase catalogo[] =
+{
+    // CORTE
+    {
+        "Espada Longa",
+        "Uma espada equilibrada usada por aventureiros.", 
+        CORTE, 6, 2, 
+        "assets/sprites/loot/sword2.txt"
+    },
+    {
+        "Espada Bastarda",
+        "Uma lâmina robusta para combate prolongado.",
+        CORTE, 7, 2,
+        "assets/sprites/loot/sword1.txt"
+    },
+
+    {
+        "Sabre Curvo",
+        "Leve e rápido, ideal para ataques sucessivos.",
+        CORTE, 5, 1,
+        "assets/sprites/loot/sabre.txt"
+    },
+    {
+        "Machado Real",
+        "Um machado pesado semelhante ao usado pelo Hollow Knight.",
+        CORTE, 8, 1,
+        "assets/sprites/loot/axe.txt"
+    },
+
+
+
+    // PERFURAÇÃO
+    {
+        "Lança de Ferro",
+        "Uma arma simples mas eficiente.",
+        PERFURACAO, 7, 2,
+        "assets/sprites/loot/spear.txt"
+    },
+    {
+        "Tridente Infernal",
+        "Três pontas capazes de atravessar armaduras.",
+        PERFURACAO, 8, 2,
+        "assets/sprites/loot/trident.txt"
+    },
+    {
+        "Arco Longo",
+        "Permite eliminar inimigos à distância.",
+        PERFURACAO, 6, 1,
+        "assets/sprites/loot/bow.txt"
+    },
+
+    {
+        "Besta de Caça",
+        "Dispara virotes com grande precisão.",
+        PERFURACAO, 7, 1,
+        "assets/sprites/loot/crossbow.txt"
+    },
+
+
+
+    // CONTUSÃO
+    {
+        "Martelo de Guerra",
+        "Capaz de esmagar armaduras pesadas.",
+        CONTUSAO,
+        9,
+        3,
+        "assets/sprites/loot/hammer.txt"
+    },
+    {
+        "Maça de Ferro",
+        "Um bloco de metal preso a um cabo.",
+        CONTUSAO, 10, 2,
+        "assets/sprites/loot/mace.txt"
+    },
+    {
+        "Escudo Torre",
+        "Mais pesado que uma arma comum, mas confiável. Ofere proteção e permite golpear inimigos.",
+        CONTUSAO, 5, 10, "assets/sprites/loot/shield1.txt"
+    },
+    {
+        "Escudo Real",
+        "Um grande escudo de aço semelhante ao usado pelo Hollow Knight. Ofere grande resistência ",
+        CONTUSAO, 4, 12,
+        "assets/sprites/loot/shield3.txt"
+    },
+
+
+
+    // MÁGICO
+    {
+        "Varinha Arcana",
+        "Canaliza pequenas quantidades de energia mágica.",
+        MAGICO, 6, 2,
+        "assets/sprites/loot/magic_wand.txt"
+    },
+    {
+        "Varinha Rúnica",
+        "Runas antigas brilham em sua superfície.",
+        MAGICO, 7, 3,
+        "assets/sprites/loot/magic_wand2.txt"
+    },
+
+    {
+        "Cajado Mítico",
+        "Um cajado com estrutura de aço engravado em runas máginas.",
+        MAGICO, 7, 3,
+        "assets/sprites/loot/magic_staff2.txt"
+    }
+};
+
+
+
+Arma gerar_arma_aleatoria(int capitulo)
+{
+    int indice = rand() % (sizeof(catalogo) / sizeof(catalogo[0]));
+
+    ArmaBase base = catalogo[indice];
+
+    Arma arma =
+        criar_arma(
+            capitulo,
+            base.nome,
+            base.descricao,
+            base.danoBase,
+            base.vidaBase,
+            base.tipo
+        );
+
+    strcpy(arma.sprite, base.sprite);
+
+    return arma;
+}
+
+
+
+
+
+
+
+
 Arma criar_arma(int capitulo, char nome[], char descricao[], int danoBase, int vidaBase, TipoDano tipo)
 {
-    Arma arma;
 
-    strcpy(arma.nome, nome);
-    strcpy(arma.descricao, descricao);
-
-    arma.tipo = tipo;
-
+    Arma arma = gerar_arma_aleatoria(capitulo);
+    
     int bonusDano = 0;
     int bonusForca = 0;
     int bonusDefesa = 0;

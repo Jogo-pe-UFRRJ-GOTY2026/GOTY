@@ -6,7 +6,7 @@
 #include <string.h>
 #include "objects/Player.h"
 #include "chapters/CAPITULO.h"
-#include "../system/Save.h"
+#include "system/Save.h"
 #include "utils/utils.h"
 #include <time.h>
 #include <stdlib.h>
