@@ -208,3 +208,5 @@ ParteArmadura criar_armadura(int capitulo, TipoArmadura tipo, char nome[],char d
 
     return armadura;
 }
+
+

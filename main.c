@@ -6,7 +6,7 @@
 #include <string.h>
 #include "objects/Player.h"
 #include "chapters/CAPITULO.h"
-#include "system/Save.h"
+#include "../system/Save.h"
 #include "utils/utils.h"
 #include <time.h>
 #include <stdlib.h>
@@ -41,26 +41,51 @@ int main()
     player = menu_inicial();
     if(player==NULL)
     {
+        endwin();
         perror("Jogo encerrado");
         return 1;
     }
-    switch(player->NumeroAndar)
-    {
-        case Andar0:
-            Prologo_pt2(player);
-        case Andar1:
-            Capitulo1(player);
-        case Andar2:
-            Capitulo2(player);
-        case Andar3:
-            Capitulo3(player);
-        case Andar4:
-            Capitulo4(player);
-        case Andar5:
-            Capitulo5(player);
-    }
 
-    getch();
+    while(player->NumeroAndar!=Epilogo)
+    {
+        Andar andar_anterior = player->NumeroAndar;
+
+        switch(player->NumeroAndar)
+        {
+            
+            case Andar0:
+                Prologo_pt2(player);
+                break;
+
+            case Andar1:
+                Capitulo1(player);
+                break;
+
+            case Andar2:
+                Capitulo2(player);
+                break;
+
+            case Andar3:
+                Capitulo3(player);
+                break;
+
+            case Andar4:
+                Capitulo4(player);
+                break;
+
+            case Andar5:
+                Capitulo5(player);
+                break;
+                
+            default:
+                break;
+        }
+        // se ele avançou de andar, ele desce e vai pro ponto de save descansar
+        // se não avançou, o capitulo faz save automatico e mostra a tela de morte
+        // o loop continua no mesmo capitulo
+        if(player->NumeroAndar > andar_anterior && player->NumeroAndar != Epilogo) 
+            ponto_save(player);
+    }
 
     endwin();
     return 0;

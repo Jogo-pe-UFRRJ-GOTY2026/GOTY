@@ -7,5 +7,6 @@
 
 Player* carregar_salvamento();
 bool salvar_jogo(Player* player);
+void ponto_save(Player *player);
 
 #endif

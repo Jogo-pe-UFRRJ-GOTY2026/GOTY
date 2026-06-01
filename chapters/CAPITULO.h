@@ -22,6 +22,7 @@ typedef enum Andar_
     Andar3,
     Andar4,
     Andar5,
+    Epilogo,
 } Andar;
 
 #endif

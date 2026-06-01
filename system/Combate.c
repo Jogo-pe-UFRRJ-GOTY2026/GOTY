@@ -37,7 +37,7 @@ EstadoRodada iniciar_combate(Player *player, Inimigo *inimigo)
     player->posicao.y=esquiva_max_y/2;
 
     // AREA DE DIALOGOS
-    ui.area_dialogos = newwin(3, 60, 19, inimigo->sprite_size.x + 20);
+    ui.area_dialogos = newwin(3, 110, 19, inimigo->sprite_size.x + 20);
 
     // MENU
     ui.area_menu = newwin(25,40, 24,inimigo->sprite_size.x+28);

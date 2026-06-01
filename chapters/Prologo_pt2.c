@@ -203,7 +203,7 @@ void Prologo_pt2(Player *player)
     size.y = 20;
 
     Inimigo *hollow_knight = criar_inimigo(100, "Hollow Knight",
-                                           "assets/sprites/bosses/hollow.txt", size, 40, 20, Hollow_Knight);
+                                           "assets/sprites/bosses/demon.txt", size, 40, 20, Hollow_Knight);
 
     hollow_knight->dialogo_reever_player = "Você é estranhamente insistente, estranho…";
 
@@ -246,7 +246,8 @@ void Prologo_pt2(Player *player)
         napms(2000);
         slow_mvwprintw(tela_prologopt2,"... talvez você chegue mais longe do que eu.",24, 6, 25);
         player->NumeroAndar=Andar1;
-        // salvar_jogo(player);
+
+        
     }
     else if (resultado_combate == VITORIA && hollow_knight->vida >= 0)
     {

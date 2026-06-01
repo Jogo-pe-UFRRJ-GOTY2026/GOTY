@@ -37,7 +37,8 @@ int main()
     
     //desenhar_sprite(stdscr, "assets/sprites/others/vigia.txt", 10,5);
     //getch();
-    simular_combate();
+    tela_salvamento();
+    //simular_combate();
 
     return 0;
 }

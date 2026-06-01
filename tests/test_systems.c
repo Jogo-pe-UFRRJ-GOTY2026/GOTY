@@ -24,7 +24,7 @@ Inimigo *MockInimigo()
     size.x=19;
     size.y=21;
 
-    Inimigo *inimigo = criar_inimigo(100, "Demon", "assets/sprites/bosses/demon.txt",size, 40, 30, Demon);
+    Inimigo *inimigo = criar_inimigo(100, "Demon", "assets/sprites/bosses/demon.txt",size, 40, 30, Cruciator);
 
     inimigo->numero_ataques=len(ataques);
     for(int i=0;i<inimigo->numero_ataques;i++)
@@ -59,6 +59,8 @@ void simular_combate()
     
     iniciar_combate(player, inimigo);
 }
+
+
 
 void salvar_jogo_test(Player *player)
 {
