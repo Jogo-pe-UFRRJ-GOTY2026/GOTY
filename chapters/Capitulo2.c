@@ -17,7 +17,7 @@ bool Capitulo2(Player* player)
 
     // -------------------------- Descrição do Cenário
     slow_mvwprintw(tela_capitulo2, "Você sobe as escadas, a composição delas passa de uma pedra suavemente queimada", 10, 6, 20);
-    slow_mvwprintw(tela_capitulo2, "para algo semelhante a mármore branco e puro...", 11, 6, 20);
+    slow_mvwprintw(tela_capitulo2, "para algo semelhante a mármore branco e puro…", 11, 6, 20);
     slow_mvwprintw(tela_capitulo2, "A temperatura se torna levemente mais agradável como se no meio de um bosque,", 12, 6, 20);
     slow_mvwprintw(tela_capitulo2, "e aos poucos você consegue perceber vinhas soltas e flores no chão.", 13, 6, 20);
     slow_mvwprintw(tela_capitulo2, "Você se depara com uma porta massiva de madeira lindamente esculpida…", 14, 6, 20);
@@ -27,21 +27,21 @@ bool Capitulo2(Player* player)
     werase(tela_capitulo2);
     box(tela_capitulo2, 0, 0);
 
-    // Renderiza o sprite do Centauro (Alphanos)
+    // Renderiza o sprite do Centauro (Aphanos)
     desenhar_sprite(tela_capitulo2, "assets/sprites/bosses/centaur_admiring_flowers.txt", 1, 5);
 
-    slow_mvwprintw(tela_capitulo2, "Você abre a porta, e se depara com outra criatura mística, um centauro...", 28, 6, 20);
+    slow_mvwprintw(tela_capitulo2, "Você abre a porta, e se depara com outra criatura mística, um centauro…", 28, 6, 20);
     slow_mvwprintw(tela_capitulo2, "Ele está parado com uma flor na mão enquanto olha para as flores no chão.", 29, 6, 20);
 
     napms(2000);
 
     // -------------------------- Diálogo Condicional
-    if (player->medidor_lembranca[Alphanos] < 1)
+    if (player->medidor_lembranca[Aphanos] < 1)
     {
         const char *opcoes_dialogo[3] = {
             "1. Quem é você? Como um Centauro veio parar aqui?",
             "2. Eu vou mudar o meu destino, eu vou voltar a ser lembrado.",
-            "3. Eu vou ir para o próximo andar, você querendo ou não?"
+            "3. Eu vou subir. Não importa o que esteja acima de mim."
         };
 
         int ja_realizou_pergunta[3] = {0};
@@ -89,20 +89,20 @@ bool Capitulo2(Player* player)
                 box(tela_capitulo2, 0, 0);
                 desenhar_sprite(tela_capitulo2, "assets/sprites/bosses/centaur.txt", 1, 5);
 
-                mvwprintw(tela_capitulo2, 29, 6, "[Alphanos]");
+                mvwprintw(tela_capitulo2, 29, 6, "[Aphanos]");
 
                 if (opcao == 0)
                 {
-                    slow_mvwprintw(tela_capitulo2, "Meu nome é Alphanos, eu fui apagado pelas Moiras e condenado ao Intervalo…", 30, 6, 20);
+                    slow_mvwprintw(tela_capitulo2, "Meu nome é Aphanos, eu fui apagado pelas Moiras e condenado ao Intervalo…", 30, 6, 20);
                 }
                 else if (opcao == 1)
                 {
-                    slow_mvwprintw(tela_capitulo2, "Ser lembrado??? Duvido fortemente no controle do próprio destino,", 30, 6, 20);
-                    slow_mvwprintw(tela_capitulo2, "o que tiver que acontecer com você, acontecerá.", 31, 6, 20);
+                    slow_mvwprintw(tela_capitulo2, "Ser lembrado? Eu lutei por isso! Eu perdi tudo por isso!", 30, 6, 20);
+                    slow_mvwprintw(tela_capitulo2, "E o mundo ainda me arrancou do tempo como se eu nunca tivesse existido!", 31, 6, 20);
                 }
                 else if (opcao == 2)
                 {
-                    slow_mvwprintw(tela_capitulo2, "Vamos ver se esse é o seu destino! Se prepare!", 30, 6, 20);
+                    slow_mvwprintw(tela_capitulo2, "Então vem! Sobe se quiser! Mas não pense que destino vai te deixar passar ileso só porque você quer!", 30, 6, 20);
                     wrefresh(tela_capitulo2);
                     napms(1500);
                     break; // Sai do loop para iniciar a luta
@@ -120,7 +120,7 @@ bool Capitulo2(Player* player)
         box(tela_capitulo2, 0, 0);
         desenhar_sprite(tela_capitulo2, "assets/sprites/bosses/centaur.txt", 1, 5);
 
-        mvwprintw(tela_capitulo2, 28, 6, "[Alphanos]");
+        mvwprintw(tela_capitulo2, 28, 6, "[Aphanos]");
         slow_mvwprintw(tela_capitulo2, "Você repete o mesmo erro novamente…", 29, 6, 20);
         slow_mvwprintw(tela_capitulo2, "Por algum acaso você realmente acha que suas escolhas fazem diferença?", 30, 6, 20);
 
@@ -141,61 +141,63 @@ bool Capitulo2(Player* player)
     size.x = 34; 
     size.y = 20;
 
-    Inimigo *alphanos = criar_inimigo(160, "Alphanos", "assets/sprites/bosses/centaur.txt", size, 35, 23, Alphanos);
+    Inimigo *aphanos = criar_inimigo(160, "Aphanos", "assets/sprites/bosses/centaur.txt", size, 35, 23, Aphanos);
 
     // Falas de Re-encontro e Mecânicas de Luta
-    alphanos->dialogo_reever_player = "Você repete o mesmo erro novamente… Por algum acaso você realmente acha que suas escolhas fazem diferença?";
+    aphanos->dialogo_reever_player = "Você repete o mesmo erro novamente… Por algum acaso você realmente acha que suas escolhas fazem diferença?";
 
     // Diálogos de Ataque recebido
-    alphanos->dialogos_ataque[0] = "Finalmente um oponente digno… Nossa batalha será lendária!";
-    alphanos->dialogos_ataque[1] = "Esse ataque fraco me fez lembrar da minha batalha contra Geras";
-    alphanos->dialogos_ataque[2] = "Ataque formidável… Digno de um deus";
-    alphanos->dialogos_ataque[3] = "Para quem já lutou contra Dionísio, isso parece brincadeira de criança.";
-    alphanos->dialogos_ataque[4] = "Você realmente mostra força… Continue!";
+    aphanos->dialogos_ataque[0] = "Finalmente um oponente digno… Nossa batalha será lendária!";
+    aphanos->dialogos_ataque[1] = "Esse ataque fraco me fez lembrar da minha batalha contra Geras";
+    aphanos->dialogos_ataque[2] = "Ataque formidável… Digno de um deus";
+    aphanos->dialogos_ataque[3] = "Para quem já lutou contra Dionísio, isso parece brincadeira de criança.";
+    aphanos->dialogos_ataque[4] = "Você realmente mostra força… Continue!";
 
     // Diálogos de Mercy (Piedade)
-    alphanos->dialogos_mercy[0] = "Eu implorei de joelhos por isso no Olimpo… Não há piedade de onde eu venho, mortal!";
-    alphanos->dialogos_mercy[1] = "Eu estava esperando um ataque implacável, não misericórdia.";
-    alphanos->dialogos_mercy[2] = "Bem que você poderia ser uma das Moiras com toda essa sua compaixão.";
+    aphanos->dialogos_mercy[0] = "Eu implorei por isso uma vez… de joelhos… e não recebi nada!";
+    aphanos->dialogos_mercy[1] = "Misericórdia não mudará o seu destino!";
+    aphanos->dialogos_mercy[2] = "Se vai lutar comigo, lute de verdade!";
 
-    alphanos->numero_ataques = len(ataques);
-    for (int i = 0; i < alphanos->numero_ataques; i++)
-        alphanos->ataques[i] = ataques[i];
+    aphanos->numero_ataques = len(ataques);
+    for (int i = 0; i < aphanos->numero_ataques; i++)
+        aphanos->ataques[i] = ataques[i];
 
     werase(tela_capitulo2);
     wrefresh(tela_capitulo2);
 
     // Execução da luta
-    EstadoRodada resultado_combate = iniciar_combate(player, alphanos);
-    player->medidor_lembranca[Alphanos] += 1;
+    EstadoRodada resultado_combate = iniciar_combate(player, aphanos);
+    player->medidor_lembranca[Aphanos] += 1;
 
     // -------------------------- Pós-Combate
     werase(tela_capitulo2);
     box(tela_capitulo2, 0, 0);
     wrefresh(tela_capitulo2);
 
-    if (resultado_combate == VITORIA && alphanos->vida <= 0)
+    if (resultado_combate == VITORIA && aphanos->vida <= 0)
     {
         // Roteiro: Derrotado por Ataque
         desenhar_sprite(tela_capitulo2, "assets/sprites/bosses/centaur_defeated.txt", 1, 5);
-        mvwprintw(tela_capitulo2, 24, 6, "[Alphanos]");
+        mvwprintw(tela_capitulo2, 24, 6, "[Aphanos]");
 
-        slow_mvwprintw(tela_capitulo2, "Vejo que talvez ...", 25, 6, 35);
+        slow_mvwprintw(tela_capitulo2, "Vejo que…", 25, 6, 35);
         napms(1500);
-        slow_mvwprintw(tela_capitulo2, "você tenha um grande destino a sua frente", 26, 6, 35);
+        slow_mvwprintw(tela_capitulo2, "talvez você realmente tenha um destino à sua frente…", 26, 6, 35);
         napms(1500);
-        slow_mvwprintw(tela_capitulo2, "que pena não poder...", 27, 6, 35);
+        slow_mvwprintw(tela_capitulo2, "um daqueles que eu nunca consegui alcançar…", 27, 6, 35);
         napms(1500);
-        slow_mvwprintw(tela_capitulo2, "presencia-lo", 28, 6, 45);
+        slow_mvwprintw(tela_capitulo2, "que pena… não poder…", 28, 6, 35);
+        napms(1500);
+        slow_mvwprintw(tela_capitulo2, "presenciá-lo", 29, 6, 45);
 
         player->NumeroAndar = Andar3;
         player->vida = vida_max_total(player);
     }
-    else if (resultado_combate == VITORIA && alphanos->vida >= 0)
+    else if (resultado_combate == VITORIA && aphanos->vida >= 0)
     {
         // Roteiro: Derrotado por Mercy
         desenhar_sprite(tela_capitulo2, "assets/sprites/bosses/centaur_defeated.txt", 1, 5);
-        mvwprintw(tela_capitulo2, 24, 6, "[Alphanos]");
+        mvwprintw(tela_capitulo2, 24, 6, "[Aphanos]");
 
         slow_mvwprintw(tela_capitulo2, "Você tem um destino grandioso pela frente, vá, você merece ser lembrado!", 25, 6, 20);
 
@@ -207,9 +209,9 @@ bool Capitulo2(Player* player)
     {
         // Derrota do Player
         desenhar_sprite(tela_capitulo2, "assets/sprites/bosses/centaur.txt", 1, 5);
-        mvwprintw(tela_capitulo2, 24, 6, "[Alphanos]");
+        mvwprintw(tela_capitulo2, 24, 6, "[Aphanos]");
         
-        slow_mvwprintw(tela_capitulo2, "O seu destino já estava traçado desde o início...", 25, 6, 20);
+        slow_mvwprintw(tela_capitulo2, "O seu destino já estava traçado desde o início…", 25, 6, 20);
 
         player->vida = vida_max_total(player);
         salvar_jogo(player);

@@ -45,7 +45,7 @@ void Prologo_pt2(Player *player)
         box(tela_prologopt2, 0, 0);
         desenhar_sprite(tela_prologopt2, "assets/sprites/buildings/terreo.txt", 1, 5);
         mvwprintw(tela_prologopt2, 32, 6, "[Cavaleiro]");
-        slow_mvwprintw(tela_prologopt2, "...mais um.", 33, 6, 30);
+        slow_mvwprintw(tela_prologopt2, "…mais um.", 33, 6, 30);
         napms(2000);
         slow_mvwprintw(tela_prologopt2,
                        "Você ainda tem esperança nos olhos, deve ser uma das suas primeiras vezes, não é?",
@@ -77,7 +77,7 @@ void Prologo_pt2(Player *player)
             }
 
             wattron(tela_prologopt2, COLOR_PAIR(COR_DESTAQUE));
-            mvwprintw(tela_prologopt2, getmaxy(tela_prologopt2) - 3, 4,
+            mvwprintw(tela_prologopt2, getmaxy(tela_prologopt2) - 2, 4,
                       "Pressione ENTER para iniciar o combate");
             wattroff(tela_prologopt2, COLOR_PAIR(COR_DESTAQUE));
             wrefresh(tela_prologopt2);
@@ -130,7 +130,7 @@ void Prologo_pt2(Player *player)
                 if (opcao == 0)
                 {
                     // "Quem e voce? O que faz aqui?"
-                    slow_mvwprintw(tela_prologopt2, "...", 33, 6, 60);
+                    slow_mvwprintw(tela_prologopt2, "…", 33, 6, 60);
                     napms(2000);
                     slow_mvwprintw(tela_prologopt2,
                                    "Eu já tive algo que você poderia chamar de 'nome'.",
@@ -202,20 +202,20 @@ void Prologo_pt2(Player *player)
     size.x = 33;
     size.y = 20;
 
-    Inimigo *hollow_knight = criar_inimigo(90, "Hollow Knight",
+    Inimigo *hollow_knight = criar_inimigo(5, "Hollow Knight",
                                            "assets/sprites/bosses/hollow.txt", size, 40, 20, Hollow_Knight);
 
     hollow_knight->dialogo_reever_player = "Você é estranhamente insistente, estranho…";
 
     hollow_knight->dialogos_mercy[0] = "Por que está hesitando?";
-    hollow_knight->dialogos_mercy[1] = "Misericórdia não vai te levar longe nesta torre...";
-    hollow_knight->dialogos_mercy[2] = "Não me olhe desse jeito... eu já fui como você.";
+    hollow_knight->dialogos_mercy[1] = "Misericórdia não vai te levar longe nesta torre…";
+    hollow_knight->dialogos_mercy[2] = "Não me olhe desse jeito… eu já fui como você.";
 
-    hollow_knight->dialogos_ataque[0] = "Não fez nem cócegas...";
+    hollow_knight->dialogos_ataque[0] = "Não fez nem cócegas…";
     hollow_knight->dialogos_ataque[1] = "Acha mesmo que pode me vencer?";
     hollow_knight->dialogos_ataque[2] = "Eu já enfrentei coisas muito piores que você.";
-    hollow_knight->dialogos_ataque[3] = "Impressionante...";
-    hollow_knight->dialogos_ataque[4] = "Não... você não pode chegar mais longe do que eu.";
+    hollow_knight->dialogos_ataque[3] = "Impressionante…";
+    hollow_knight->dialogos_ataque[4] = "Não… você não pode chegar mais longe do que eu.";
 
     hollow_knight->numero_ataques = len(ataques);
     for (int i = 0; i < hollow_knight->numero_ataques; i++)
@@ -244,31 +244,30 @@ void Prologo_pt2(Player *player)
         box(tela_prologopt2,0,0);
         wrefresh(tela_prologopt2);
         napms(2000);
-        slow_mvwprintw(tela_prologopt2,"... talvez você chegue mais longe do que eu.",24, 6, 25);
+        slow_mvwprintw(tela_prologopt2,"… talvez você chegue mais longe do que eu.",24, 6, 25);
         player->NumeroAndar=Andar1;
-
-        
+        gerar_loot(player);
     }
     else if (resultado_combate == VITORIA && hollow_knight->vida >= 0)
     {
         // Jogador deu misericordia
         desenhar_sprite(tela_prologopt2, "assets/sprites/bosses/hollow_defeated.txt", 1, 5);
         mvwprintw(tela_prologopt2, 22, 6, "[Cavaleiro]");
-        slow_mvwprintw(tela_prologopt2, "(ofegante) ...você venceu.", 23, 6, 20);
+        slow_mvwprintw(tela_prologopt2, "(ofegante) …você venceu.", 23, 6, 20);
         napms(2000);
         slow_mvwprintw(tela_prologopt2, "Talvez você realmente seja diferente dos outros.", 24, 6, 20);
         napms(2000);
-        slow_mvwprintw(tela_prologopt2,"Vá em frente, viajante... não deixe a torre apagar quem você é.",25, 6, 20);
+        slow_mvwprintw(tela_prologopt2,"Vá em frente, viajante… não deixe a torre apagar quem você é.",25, 6, 20);
         player->karma += 1;
         player->NumeroAndar=Andar1;
-        
+        gerar_loot(player);
         // salvar_jogo(player);
     }
     else
     {
         desenhar_sprite(tela_prologopt2, "assets/sprites/bosses/hollow.txt", 1, 5);
         mvwprintw(tela_prologopt2, 22, 6, "[Cavaleiro]");
-        slow_mvwprintw(tela_prologopt2, "Eu avisei... você ainda não é forte o bastante.", 23, 6, 20);
+        slow_mvwprintw(tela_prologopt2, "Eu avisei… você ainda não é forte o bastante.", 23, 6, 20);
         player->vida = vida_max_total(player);
         salvar_jogo(player);
 

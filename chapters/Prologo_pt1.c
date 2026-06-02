@@ -60,7 +60,7 @@ Player *Prologo_pt1()
     do
     {
         print_descricao(tela_descricao, player->nome, 1, 1, 30);
-        print_descricao(tela_descricao, "... Uma alma marcada pela determinação.", 1, 1 + strlen(player->nome), 30);
+        print_descricao(tela_descricao, "… Uma alma marcada pela determinação.", 1, 1 + strlen(player->nome), 30);
 
         print_descricao(tela_descricao, "Alguém que carregava ambições impossíveis…", 2, 1, 30);
         print_descricao(tela_descricao, "e um desejo tão profundo que se tornou a última parte intacta de sua existência:", 3, 1, 30);
@@ -109,7 +109,7 @@ Player *Prologo_pt1()
 
     // Dialogo de abertura
     mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
-    slow_mvwprintw(tela_encontro_vigia, "...", 19, inicio_texto_x, 40);
+    slow_mvwprintw(tela_encontro_vigia, "…", 19, inicio_texto_x, 40);
     slow_mvwprintw(tela_encontro_vigia, "Então outro finalmente acordou.", 20, inicio_texto_x, 40);
     napms(2000);
 
@@ -163,7 +163,7 @@ Player *Prologo_pt1()
             desenhar_sprite(tela_encontro_vigia, "assets/sprites/others/vigia.txt", 1, 1);
             box(tela_encontro_vigia, 0, 0);
             mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[O Vigia]");
-            slow_mvwprintw(tela_encontro_vigia, "Boa sorte... você vai precisar.", 19, inicio_texto_x, 30);
+            slow_mvwprintw(tela_encontro_vigia, "Boa sorte… você vai precisar.", 19, inicio_texto_x, 30);
             wrefresh(tela_encontro_vigia);
 
             napms(2000);
@@ -222,7 +222,7 @@ Player *Prologo_pt1()
                 slow_mvwprintw(tela_encontro_vigia, "-Você parece estranhamente familiar… A gente se conhece?", 17, inicio_texto_x, 40);
                 mvwprintw(tela_encontro_vigia, 18, inicio_texto_x, "[Vigia]");
                 wrefresh(tela_encontro_vigia);
-                slow_mvwprintw(tela_encontro_vigia, "...talvez.", 19, inicio_texto_x, 20);
+                slow_mvwprintw(tela_encontro_vigia, "…talvez.", 19, inicio_texto_x, 20);
                 napms(2000);
                 slow_mvwprintw(tela_encontro_vigia, "Depois de tantas almas, rostos começam a se misturar.", 20, inicio_texto_x, 20);
             }
@@ -244,11 +244,11 @@ Player *Prologo_pt1()
                                20, inicio_texto_x, 20);
                 napms(900);
                 slow_mvwprintw(tela_encontro_vigia,
-                               "Quando alguém desafia a torre, derrota um guardião ou realiza algo marcante...",
+                               "Quando alguém desafia a torre, derrota um guardião ou realiza algo marcante…",
                                21, inicio_texto_x, 20);
                 napms(700);
                 slow_mvwprintw(tela_encontro_vigia,
-                               "...esses Ecos se espalham pelo Intervalo.",
+                               "…esses Ecos se espalham pelo Intervalo.",
                                22, inicio_texto_x, 20);
                 napms(900);
                 slow_mvwprintw(tela_encontro_vigia,
@@ -256,7 +256,7 @@ Player *Prologo_pt1()
                                23, inicio_texto_x, 20);
                 napms(700);
                 slow_mvwprintw(tela_encontro_vigia,
-                               "E memória... é a única coisa que impede alguém de desaparecer aqui.",
+                               "E memória… é a única coisa que impede alguém de desaparecer aqui.",
                                24, inicio_texto_x, 20);
                 napms(1200);
                 slow_mvwprintw(tela_encontro_vigia,
@@ -280,7 +280,7 @@ Player *Prologo_pt1()
     wrefresh(tela_encontro_vigia);
     slow_mvwprintw(tela_encontro_vigia, "Boa sorte.", 20, inicio_texto_x, 30);
     napms(2000);
-    slow_mvwprintw(tela_encontro_vigia, "...você vai precisar.", 21, inicio_texto_x, 30);
+    slow_mvwprintw(tela_encontro_vigia, "…você vai precisar.", 21, inicio_texto_x, 30);
 
     wrefresh(tela_encontro_vigia);
 

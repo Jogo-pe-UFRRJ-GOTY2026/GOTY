@@ -121,17 +121,17 @@ void mostrar_tela_morte(Player* player)
     player->medidor_lembranca[Reaper]+=1;
 
     char *dialogos[] = {
-        "Mais um falhando... Terei de te levar de volta ao inicio.",
+        "Mais um falhando… Terei de te levar de volta ao inicio.",
         "Vejo que falhou de novo. Pretende continuar tentando?",
         "De novo? Você realmente não desiste.",
-        "Outra queda... A Torre deve gostar de você.",
+        "Outra queda… A Torre deve gostar de você.",
         "Você continua voltando. Interessante.",
         "Quantas vezes pretende cair antes de chegar ao topo?",
         "Você já parece diferente de quando chegou aqui.",
         "A maioria teria desistido.",
         "A Torre tira algo de você a cada retorno.",
         "Ainda consegue lembrar por que está subindo?",
-        "Olá de novo, %s... Voltando para baixo?"
+        "Olá de novo, %s… Voltando para baixo?"
     };
 
     if (medida_lembrancas == 0)

@@ -129,8 +129,10 @@ EstadoRodada rodada(AtaqueInimigo ataque, Player *player,Inimigo* inimigo, Comba
             renderizar_vida_boss(ui->area_vida_boss, inimigo);
             wrefresh(ui->area_dialogos);
             break;
+            
         case ITENS:
             break;
+
         case MERCY:
             werase(ui->area_dialogos);
             box(ui->area_dialogos, 0, 0);
@@ -222,7 +224,7 @@ EstadoRodada loop_esquiva(AtaqueInimigo ataque_atual, Player *player, CombateUI 
         }
         if(player->vida<=0) return DERROTA;
         desenhar_jogador(ui->area_esquiva, player);
-        mover_player(player, get_delta_direcao(ui->area_esquiva), 1, esquiva_max_x - 2, 1, esquiva_max_y - 2);
+        mover_player(player, get_delta_direcao(ui->area_esquiva), 1, esquiva_max_x - 3, 1, esquiva_max_y - 2);
         wrefresh(ui->area_esquiva);
     }
     return CONTINUA;
@@ -248,11 +250,11 @@ void renderizar_menu_combate(WINDOW *area_menu, Player* player, OpcoesMenuCombat
 {
     werase(area_menu);
 
-    mvwprintw(area_menu, 1, 0, "HP:%d/%d", player->vida, player->vida_max);
+    mvwprintw(area_menu, 1, 0, "HP:%d/%d", player->vida, vida_max_total(player));
 
     // Desenha a barra de vida
     mvwprintw(area_menu,1,10,"[");
-    int porcentagem_vida=(player->vida*10/player->vida_max);
+    int porcentagem_vida = (player->vida * 10 / vida_max_total(player));
     wattron(area_menu, COLOR_PAIR(COR_VIDA));
     for (int x = 11, i = 0; i < porcentagem_vida; i++, x++)
         mvwprintw(area_menu, 1, x, "█");

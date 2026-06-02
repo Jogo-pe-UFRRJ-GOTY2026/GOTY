@@ -151,12 +151,12 @@ Player* criar_player(const char* nome, Genero genero)
     player->genero = genero;
     player->inventario = init_inventario();
     player->karma = 0;
-    player->NumeroAndar = 0;
+    player->NumeroAndar = 0; 
     player->level = 1;
 
     // ATRIBUTOS BASE
 
-    player->vida_max = 20;
+    player->vida_max = 80;//para testes mais faceis
     player->atributos.defesa = 5;
     player->atributos.forca = 5;
     player->atributos.sorte = 5;

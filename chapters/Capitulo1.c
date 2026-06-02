@@ -32,7 +32,7 @@ bool Capitulo1(Player* player)
     desenhar_sprite(tela_capitulo1, "assets/sprites/bosses/demon_dancing.txt", 1, 5);
 
     slow_mvwprintw(tela_capitulo1, "Longos chifres crescem sobre sua cabeça e seus olhos brilham em vermelho carmesim.", 28, 6, 20);
-    slow_mvwprintw(tela_capitulo1, "Você se aproxima...", 29, 6, 30);
+    slow_mvwprintw(tela_capitulo1, "Você se aproxima…", 29, 6, 30);
 
     napms(2000);
 
@@ -58,7 +58,7 @@ bool Capitulo1(Player* player)
 
         const char *opcoes_dialogo[3] = {
             "1. E você é?",
-            "2. Você não parece querer sair da torre...",
+            "2. Você não parece querer sair da torre…",
             "3. Me deixa passar!"};
 
         int ja_realizou_pergunta[3] = {0};
@@ -142,13 +142,13 @@ bool Capitulo1(Player* player)
                 }
                 else if (opcao == 2)
                 {
-                    slow_mvwprintw(tela_capitulo1, "Não tao facil assim, jovem!", 29, 6, 20);
+                    slow_mvwprintw(tela_capitulo1, "Não tão fácil assim, jovem!", 29, 6, 20);
                     napms(2000);
 
-                    slow_mvwprintw(tela_capitulo1, "Vamos la, divirta-me!", 30, 6, 20);
+                    slow_mvwprintw(tela_capitulo1, "Vamos lá, divirta-me!", 30, 6, 20);
                     napms(2000);
 
-                    slow_mvwprintw(tela_capitulo1, "(Ele aponta o tridente para voce.)", 31, 6, 25);
+                    slow_mvwprintw(tela_capitulo1, "(Ele aponta o tridente para você.)", 31, 6, 25);
 
                     break;
                 }
@@ -167,7 +167,7 @@ bool Capitulo1(Player* player)
 
         mvwprintw(tela_capitulo1, 28, 6, "[Cruciator]");
 
-        slow_mvwprintw(tela_capitulo1, "Vou acabar com isso rapido desta vez.", 29, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "Vou acabar com isso rápido desta vez.", 29, 6, 20);
 
         napms(2000);
     }
@@ -181,9 +181,9 @@ bool Capitulo1(Player* player)
 
     //  --- Combate ---
     AtaqueInimigo ataques[] = {
-        criar_ataque(LINHA, 5, "---------<⇶", 1, HORIZONTAL, ESQUERDA_DIREITA, 2, 30),
-        criar_ataque(LINHA, 5, "⬱>---------", 1, HORIZONTAL, DIREITA_ESQUERDA, 2, 30),
-        criar_ataque(PAREDE, 8, "V", 1, HORIZONTAL, CIMA_BAIXO, 10, 180), //o emoji de fogo quebra no linux
+        criar_ataque(LINHA, 5, "-------<⇶", 1, HORIZONTAL, ESQUERDA_DIREITA, 2, 30),
+        criar_ataque(LINHA, 5, "⬱>-------", 1, HORIZONTAL, DIREITA_ESQUERDA, 2, 30),
+        criar_ataque(PAREDE, 4, "V", 1, HORIZONTAL, CIMA_BAIXO, 10, 180), //o emoji de fogo quebra no linux
         criar_ataque_area(4, "◮", 1, 0, 0, 90, 60)
     };
 
@@ -191,19 +191,19 @@ bool Capitulo1(Player* player)
     size.x = 19;
     size.y = 21;
 
-    Inimigo *cruciator = criar_inimigo(120, "Cruciator","assets/sprites/bosses/demon.txt", size, 35, 23, Cruciator);
+    Inimigo *cruciator = criar_inimigo(5, "Cruciator","assets/sprites/bosses/demon.txt", size, 35, 23, Cruciator);
 
-    cruciator->dialogo_reever_player = "Olha só, olha só...Acho que alguém gostou da diversão de antes! Hahaha";
+    cruciator->dialogo_reever_player = "Olha só, olha só…Acho que alguém gostou da diversão de antes! Hahaha";
 
-    cruciator->dialogos_mercy[0] = "Misericórdia? HAHAHAHAHA, muitas almas imploram por isso de onde eu vim.";
+    cruciator->dialogos_mercy[0] = "Misericórdia? HAHAHAHAHA! Muitas almas já imploraram por isso… de onde eu vim.";
     cruciator->dialogos_mercy[1] = "In quolibet proelio, misericordes pereunt, dum immisericordes supervivent propter ironiam misericordiae.";
-    cruciator->dialogos_mercy[2] = "Não, não, não... NÃO! Sem misericórdia AQUI!";
+    cruciator->dialogos_mercy[2] = "Não… não, não! SEM misericórdia aqui!";
 
-    cruciator->dialogos_ataque[0] = "HAHAHA, algo assim não é capaz de ferir nem uma mosca!";
+    cruciator->dialogos_ataque[0] = "HAHAHA! Algo assim não é capaz de ferir nem uma mosca!";
     cruciator->dialogos_ataque[1] = "Você acha que conseguirá passar?";
-    cruciator->dialogos_ataque[2] = "Uma formiga determinada ainda é uma formiga!";
-    cruciator->dialogos_ataque[3] = "URghh, dor??? Em MIM????";
-    cruciator->dialogos_ataque[4] = "Não vou perder fácil assim para um mero humano qualquer como você!";
+    cruciator->dialogos_ataque[2] = "HAHAHAHA! Tenta de novo! Isso não arranha nem o meu orgulho!";
+    cruciator->dialogos_ataque[3] = "Urgh… dor? Em MIM?!?!?";
+    cruciator->dialogos_ataque[4] = "Não vou perder para um mero humano qualquer!";
 
     cruciator->numero_ataques = len(ataques);
     for (int i = 0; i < cruciator->numero_ataques; i++)
@@ -227,16 +227,16 @@ bool Capitulo1(Player* player)
 
         mvwprintw(tela_capitulo1, 22, 6, "[Cruciator]");
 
-        slow_mvwprintw(tela_capitulo1, "Desgracado...", 23, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "Desgraçado… eu… depois de tanto tempo…", 23, 6, 20);
         napms(1500);
 
-        slow_mvwprintw(tela_capitulo1, "Eu, em muito tempo, nao consigo...", 24, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "Não… não pode ser…", 24, 6, 20);
         napms(1500);
 
-        slow_mvwprintw(tela_capitulo1, "mais...", 25, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "Eu não posso simplesmente…", 25, 6, 20);
         napms(1500);
 
-        slow_mvwprintw(tela_capitulo1, "lutar...", 26, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "apagar assim…", 26, 6, 20);
 
         player->NumeroAndar = Andar2;
         player->vida = vida_max_total(player);
@@ -247,16 +247,23 @@ bool Capitulo1(Player* player)
 
         mvwprintw(tela_capitulo1, 22, 6, "[Cruciator]");
 
-        slow_mvwprintw(tela_capitulo1, "Vai ser assim entao?", 23, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "Misericórdia…? HAHAHAHAHA!", 23, 6, 20);
         napms(2000);
 
-        slow_mvwprintw(tela_capitulo1, "Mostrando virtude e superioridade ate para um demonio?", 24, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "Que ironia deliciosa…", 24, 6, 20);
         napms(2000);
 
-        slow_mvwprintw(tela_capitulo1, "Sai daqui...", 25, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "Depois de tudo que vi e fiz…", 25, 6, 20);
         napms(1500);
 
-        slow_mvwprintw(tela_capitulo1, "e nao volta mais!", 26, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "você ainda tenta me poupar?", 26, 6, 20);
+        napms(1500);
+
+        slow_mvwprintw(tela_capitulo1, "SAIA DAQUI!", 27, 6, 20);
+        napms(1500);
+
+        slow_mvwprintw(tela_capitulo1, "E não ouse voltar a me entreter de novo!", 28, 6, 20);
+        napms(1500);
 
         player->karma += 1;
         player->NumeroAndar = Andar2;
@@ -267,7 +274,7 @@ bool Capitulo1(Player* player)
 
         mvwprintw(tela_capitulo1, 22, 6, "[Cruciator]");
 
-        slow_mvwprintw(tela_capitulo1, "HAHAHA alguém está perdendo a consciência HAHA!", 23, 6, 20);
+        slow_mvwprintw(tela_capitulo1, "HAHAHAHA! Já acabou? Tão pouco… eu queria mais!", 23, 6, 20);
 
         player->vida = vida_max_total(player);
 
